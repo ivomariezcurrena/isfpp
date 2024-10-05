@@ -10,21 +10,21 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 import com.example.red.dao.GenericDAO;
-import com.example.red.modelo.Ubicacion;
+import com.example.red.modelo.TipoCable;
 
-public class UbicacionesSecuencialDAO implements GenericDAO<Ubicacion> {
-    private TreeMap<String, Ubicacion> map;
+public class TipoCableSecuencialDAO implements GenericDAO<TipoCable, String> {
+    private TreeMap<String, TipoCable> map;
     private String name;
     private boolean actualizar;
 
-    public UbicacionesSecuencialDAO() {
+    public TipoCableSecuencialDAO() {
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
-        name = rb.getString("ubicacion");
+        name = rb.getString("tipoCable");
         actualizar = true;
     }
 
-    private TreeMap<String, Ubicacion> readFromFile(String file) {
-        TreeMap<String, Ubicacion> map = new TreeMap<>();
+    private TreeMap<String, TipoCable> readFromFile(String file) {
+        TreeMap<String, TipoCable> map = new TreeMap<>();
         Scanner inFile = null;
         try {
             inFile = new Scanner(new File(file));
@@ -32,7 +32,8 @@ public class UbicacionesSecuencialDAO implements GenericDAO<Ubicacion> {
             while (inFile.hasNext()) {
                 String codigo = inFile.next();
                 String descripcion = inFile.next();
-                map.put(codigo, new Ubicacion(codigo, descripcion));
+                int velocidad = inFile.nextInt();
+                map.put(codigo, new TipoCable(codigo, descripcion, velocidad));
             }
         } catch (FileNotFoundException fileNotFoundException) {
             System.err.println("Error opening file.");
@@ -50,12 +51,12 @@ public class UbicacionesSecuencialDAO implements GenericDAO<Ubicacion> {
         return map;
     }
 
-    private void writeToFile(TreeMap<String, Ubicacion> map, String file) {
+    private void writeToFile(TreeMap<String, TipoCable> map, String file) {
         Formatter outFile = null;
         try {
             outFile = new Formatter(name);
-            for (Ubicacion e : map.values()) {
-                outFile.format("%s;%s;\n", e.getCodigo(), e.getDescripcion());
+            for (TipoCable e : map.values()) {
+                outFile.format("%s;%s;\n", e.getCodigo(), e.getDescripcion(), e.getVelocidad());
             }
         } catch (FileNotFoundException fileNotFoundException) {
             System.err.println("Error creating file.");
@@ -68,32 +69,32 @@ public class UbicacionesSecuencialDAO implements GenericDAO<Ubicacion> {
     }
 
     @Override
-    public void insertar(Ubicacion ubicacion) {
-        map.put(ubicacion.getCodigo(), ubicacion);
+    public void insertar(TipoCable tipoCable) {
+        map.put(tipoCable.getCodigo(), tipoCable);
         writeToFile(map, name);
         actualizar = true;
     }
 
     @Override
-    public void actualizar(Ubicacion ubicacion) {
-        if (map.containsKey(ubicacion.getCodigo())) {
-            map.put(ubicacion.getCodigo(), ubicacion);
+    public void actualizar(TipoCable tipoCable) {
+        if (map.containsKey(tipoCable.getCodigo())) {
+            map.put(tipoCable.getCodigo(), tipoCable);
             writeToFile(map, name);
             actualizar = true;
         } else {
-            System.out.println("Ubicación no encontrada: " + ubicacion.getCodigo());
+            System.out.println("Ubicación no encontrada: " + tipoCable.getCodigo());
         }
     }
 
     @Override
-    public void borrar(Ubicacion ubicacion) {
-        map.remove(ubicacion.getCodigo());
+    public void borrar(TipoCable tipoCable) {
+        map.remove(tipoCable.getCodigo());
         writeToFile(map, name);
         actualizar = true;
     }
 
     @Override
-    public TreeMap<String, Ubicacion> buscarTodos() {
+    public TreeMap<String, TipoCable> buscarTodos() {
         if (actualizar) {
             map = readFromFile(name);
             actualizar = false;

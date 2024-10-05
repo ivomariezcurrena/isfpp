@@ -1,16 +1,13 @@
 package com.example.red.dao;
 
-import java.util.List;
 import java.util.TreeMap;
 
-import com.example.red.modelo.Ubicacion;
+public interface GenericDAO<T, K> {
+    void insertar(T entidad); // Inserta una entidad
 
-public interface GenericDAO<Ubicacion> {
-    void insertar(Ubicacion ubicacion);
+    void actualizar(T entidad); // Actualiza una entidad
 
-    void actualizar(Ubicacion ubicacion);
+    void borrar(T entidad); // Borra una entidad
 
-    void borrar(Ubicacion ubicacion);
-
-    TreeMap<String, Ubicacion> buscarTodos();
+    TreeMap<K, T> buscarTodos(); // Busca y devuelve todas las entidades en un TreeMap
 }
