@@ -8,13 +8,17 @@ public class Red {
 	private List<Ubicacion> ubicaciones;
 	private List<Equipo> equipos;
 	private List<Conexion> conexiones;
-	
-	public Red (String nombre ) {
+
+	public Red() {
+
+	}
+
+	public Red(String nombre) {
 		this.nombre = nombre;
 		ubicaciones = new ArrayList<Ubicacion>();
 		equipos = new ArrayList<Equipo>();
 		conexiones = new ArrayList<Conexion>();
-		
+
 	}
 
 	public String getNombre() {
@@ -24,8 +28,6 @@ public class Red {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	
 
 	public List<Ubicacion> getUbicaciones() {
 		return ubicaciones;
@@ -43,6 +45,5 @@ public class Red {
 	public String toString() {
 		return "Red [nombre=" + nombre + "]";
 	}
-
 
 }

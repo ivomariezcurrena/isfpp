@@ -4,10 +4,14 @@ import java.util.Objects;
 
 public class TipoCable {
 	private String codigo;
-	private String descripcion; 
+	private String descripcion;
 	private int velocidad;
-	
-	public TipoCable (String codigo, String descripcion, int velocidad) {
+
+	public TipoCable() {
+
+	}
+
+	public TipoCable(String codigo, String descripcion, int velocidad) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.velocidad = velocidad;

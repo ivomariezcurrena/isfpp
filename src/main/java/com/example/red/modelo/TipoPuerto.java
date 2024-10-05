@@ -6,8 +6,12 @@ public class TipoPuerto {
 	private String codigo;
 	private String descripcion;
 	private int velocidad;
-	
-	public TipoPuerto (String codigo, String descripcion, int velocidad) {
+
+	public TipoPuerto() {
+
+	}
+
+	public TipoPuerto(String codigo, String descripcion, int velocidad) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 		this.velocidad = velocidad;
@@ -54,6 +58,5 @@ public class TipoPuerto {
 	public String toString() {
 		return "TipoPuerto [codigo=" + codigo + ", descripcion=" + descripcion + ", velocidad=" + velocidad + "]";
 	}
-	
 
 }

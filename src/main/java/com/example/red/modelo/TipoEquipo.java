@@ -5,8 +5,12 @@ import java.util.Objects;
 public class TipoEquipo {
 	private String codigo;
 	private String descripcion;
-	
-	public TipoEquipo (String codigo, String descripcion){
+
+	public TipoEquipo() {
+
+	}
+
+	public TipoEquipo(String codigo, String descripcion) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
 	}
@@ -44,6 +48,5 @@ public class TipoEquipo {
 	public String toString() {
 		return "TipoEquipo [codigo=" + codigo + ", descripcion=" + descripcion + "]";
 	}
-	
-	
+
 }

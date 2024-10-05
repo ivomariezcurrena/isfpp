@@ -6,8 +6,12 @@ public class Conexion {
 	private Equipo equipo1;
 	private Equipo equipo2;
 	private TipoCable tipocable;
-	
-	public Conexion(Equipo equipo1,Equipo equipo2,TipoCable tipocable) {
+
+	public Conexion() {
+
+	}
+
+	public Conexion(Equipo equipo1, Equipo equipo2, TipoCable tipocable) {
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 		this.tipocable = tipocable;
@@ -50,7 +54,5 @@ public class Conexion {
 	public String toString() {
 		return "Conexion [equipo1=" + equipo1 + ", equipo2=" + equipo2 + ", tipocable=" + tipocable + "]";
 	}
-	
 
-	
 }

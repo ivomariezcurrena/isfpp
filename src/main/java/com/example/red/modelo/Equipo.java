@@ -15,6 +15,10 @@ public class Equipo {
 	private List<String> direccionesIP;
 	private boolean activo;
 
+	public Equipo() {
+
+	}
+
 	public Equipo(String codigo, String descripcion, String marca, String modelo, TipoEquipo tipoEquipo,
 			Ubicacion ubicacion, boolean activo) {
 		this.codigo = codigo;
@@ -120,14 +124,17 @@ public class Equipo {
 			this.tipoPuerto = tipoPuerto;
 		}
 
+		@SuppressWarnings("unused")
 		public TipoPuerto getTipoPuerto() {
 			return tipoPuerto;
 		}
 
+		@SuppressWarnings("unused")
 		public void setTipoPuerto(TipoPuerto tipoPuerto) {
 			this.tipoPuerto = tipoPuerto;
 		}
 
+		@SuppressWarnings("unused")
 		public int getCantidad() {
 			return cantidad;
 		}
