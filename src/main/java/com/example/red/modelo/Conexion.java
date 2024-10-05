@@ -33,6 +33,14 @@ public class Conexion {
 		return equipo2;
 	}
 
+	public void setEquipo1(Equipo equipo1) {
+		this.equipo1 = equipo1;
+	}
+
+	public void setEquipo2(Equipo equipo2) {
+		this.equipo2 = equipo2;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(equipo1, equipo2);
