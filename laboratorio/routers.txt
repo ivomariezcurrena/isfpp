@@ -1,0 +1,7 @@
+Router1;176.543.0.1;00:1A:2B:3C:4D:5E;Cisco;1;true;360;Sala de servidores;
+Router2;176.987.0.2;01:23:45:67:89;Cisco;4;true;100;Sala de servidores;
+Router3;176.765.0.3;12:34:56:78:9A;Cisco;15;true;360;Sala de servidores;
+Router4;176.873.0.4;23:45:67:89:AB;Cisco;46;true;100;Sala de servidores;
+Router5;176.701.0.5;34:56:78:9A:BC;Cisco;2;false;100;Sala de servidores;
+Router6;176.650.0.6;45:67:89:AB:CD;Cisco;65;true;360;Sala de servidores;
+Router7;176.971.0.7;56:78:9A:BC:DE;Cisco;12;true;100;Sala de servidores;
