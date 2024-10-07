@@ -6,15 +6,36 @@ public class Conexion {
 	private Equipo equipo1;
 	private Equipo equipo2;
 	private TipoCable tipocable;
+	private TipoPuerto tipoPuerto1;
+	private TipoPuerto tipoPuerto2;
+	
 
 	public Conexion() {
 
 	}
 
-	public Conexion(Equipo equipo1, Equipo equipo2, TipoCable tipocable) {
+	public Conexion(Equipo equipo1, Equipo equipo2, TipoCable tipocable,TipoPuerto tipoPuerto1, TipoPuerto tipoPuerto2) {
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 		this.tipocable = tipocable;
+		this.tipoPuerto1=tipoPuerto1;
+		this.tipoPuerto2=tipoPuerto2;
+	}
+	
+	public TipoPuerto getTipoPuerto1() {
+		return tipoPuerto1;
+	}
+
+	public void setTipoPuerto1(TipoPuerto tipoPuerto1) {
+		this.tipoPuerto1 = tipoPuerto1;
+	}
+
+	public TipoPuerto getTipoPuerto2() {
+		return tipoPuerto2;
+	}
+
+	public void setTipoPuerto2(TipoPuerto tipoPuerto2) {
+		this.tipoPuerto2 = tipoPuerto2;
 	}
 
 	public TipoCable getTipocable() {

@@ -11,5 +11,5 @@ public interface EquipoService {
 
     void borrar(Equipo equipo);
 
-    TreeMap<String, Equipo> buscarTodos();
+    TreeMap<String, Object> buscarTodos();
 }

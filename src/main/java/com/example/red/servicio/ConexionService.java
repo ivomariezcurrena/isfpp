@@ -11,5 +11,5 @@ public interface ConexionService {
 
     void borrar(Conexion conexion);
 
-    TreeMap<String, Conexion> buscarTodos();
+    TreeMap<String, Object> buscarTodos();
 }

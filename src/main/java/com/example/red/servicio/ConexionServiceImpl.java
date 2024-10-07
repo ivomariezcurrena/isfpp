@@ -2,15 +2,15 @@ package com.example.red.servicio;
 
 import java.util.TreeMap;
 
+import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
-import com.example.red.dao.secuencial.ConexionSecuancialDAO;
 import com.example.red.modelo.Conexion;
 
 public class ConexionServiceImpl implements ConexionService {
-    private GenericDAO<String, Conexion> conexionDAO;
+    private GenericDAO<String, Object> conexionDAO;
 
     public ConexionServiceImpl() {
-        conexionDAO = new ConexionSecuancialDAO();
+        conexionDAO = (GenericDAO<String, Object>) Factory.getInstancia("CONEXION");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ConexionServiceImpl implements ConexionService {
     }
 
     @Override
-    public TreeMap<String, Conexion> buscarTodos() {
+    public TreeMap<String, Object> buscarTodos() {
         return conexionDAO.buscarTodos();
     }
 

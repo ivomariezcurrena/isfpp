@@ -37,20 +37,17 @@ public class Red {
 		// ubis
 		ubicaciones = new ArrayList<Ubicacion>();
 		ubicacionService = new UbicacionServiceImpl();
-		TreeMap<String, Ubicacion> ubicacionMap = ubicacionService.buscarTodos();
-		ubicaciones.addAll(ubicacionMap.values());
+		ubicaciones.addAll(((TreeMap<String, Ubicacion>) ubicacionService).values());
 
 		// Equipos
 		equipos = new ArrayList<Equipo>();
 		equipoService = new EquipoServiceImpl();
-		TreeMap<String, Equipo> equipomap = equipoService.buscarTodos();
-		equipos.addAll(equipomap.values());
+		equipos.addAll(((TreeMap<String, Equipo>) equipoService).values());
 
 		// Conexiones
 		conexiones = new ArrayList<Conexion>();
 		conexionService = new ConexionServiceImpl();
-		TreeMap<String, Conexion> conexionmap = conexionService.buscarTodos();
-		conexiones.addAll(conexionmap.values());
+		conexiones.addAll(((TreeMap<String, Conexion>) conexionService).values());
 	}
 
 	public void agregarEquipo(Equipo equipo) throws EquipoExistenteExeption {

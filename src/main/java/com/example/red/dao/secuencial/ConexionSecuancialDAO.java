@@ -15,21 +15,25 @@ import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoCable;
+import com.example.red.modelo.TipoPuerto;
 
 public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
     private List<Conexion> list;
     private String name;
     private TreeMap<String, Equipo> equipos;
     private TreeMap<String, TipoCable> cables;
+    private TreeMap<String, TipoPuerto> puertos;
     private boolean actualizar;
 
     public ConexionSecuancialDAO() {
         equipos = cargarEquipos();
         cables = cargarCables();
+        puertos= cargarPuertos();
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
         name = rb.getString("conexion");
         actualizar = true;
     }
+
 
     private List<Conexion> readFromFile(String file) {
         List<Conexion> list = new ArrayList<>();
@@ -40,8 +44,10 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
             while (inFile.hasNext()) {
                 Conexion e = new Conexion();
                 e.setEquipo1(equipos.get(inFile.next()));
+                e.setTipoPuerto1(puertos.get(inFile.next()));
                 e.setEquipo2(equipos.get(inFile.next()));
-                e.setTipocable(cables.get(inFile.next()));
+                e.setTipoPuerto2(puertos.get(inFile.next()));
+                e.setTipocable(cables.get(inFile.next()));    
                 list.add(e);
             }
         } catch (FileNotFoundException fileNotFoundException) {
@@ -65,7 +71,7 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
         try {
             outFile = new Formatter(name);
             for (Conexion e : list) {
-                outFile.format("%s;%s;\n", e.getEquipo1(), e.getEquipo2(), e.getTipocable());
+                outFile.format("%s;%s;\n", e.getEquipo1(), e.getEquipo2(), e.getTipocable(), e.getTipoPuerto1(),e.getTipoPuerto2());
             }
         } catch (FileNotFoundException fileNotFoundException) {
             System.err.println("Error creating file.");
@@ -107,9 +113,8 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
         }
         TreeMap<String, Conexion> map = new TreeMap<>();
         for (Conexion e : list) {
-            // Crear una clave única combinando los identificadores de los equipos
+            // Crear una clave
             String key = e.getEquipo1().getCodigo() + "-" + e.getEquipo2().getCodigo();
-            // Agregar la conexión al mapa
             map.put(key, e);
         }
         return map;
@@ -124,6 +129,13 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
     private TreeMap<String, TipoCable> cargarCables() {
         TipoCableSecuencialDAO cableDAO = new TipoCableSecuencialDAO();
         TreeMap<String, TipoCable> ds = cableDAO.buscarTodos();
+        return ds;
+    }
+
+    
+    private TreeMap<String, TipoPuerto> cargarPuertos() {
+        TipoPuertoSecuencialDAO puertoDAO = new TipoPuertoSecuencialDAO();
+        TreeMap<String, TipoPuerto> ds = puertoDAO.buscarTodos();
         return ds;
     }
 

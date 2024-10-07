@@ -2,15 +2,15 @@ package com.example.red.servicio;
 
 import java.util.TreeMap;
 
+import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
-import com.example.red.dao.secuencial.TipoCableSecuencialDAO;
 import com.example.red.modelo.TipoCable;
 
 public class TipoCableServiceImpl implements TipoCableService {
-    private GenericDAO<String, TipoCable> tipoCableDAO;
+    private GenericDAO<String, Object> tipoCableDAO;
 
     public TipoCableServiceImpl() {
-        tipoCableDAO = new TipoCableSecuencialDAO();
+        tipoCableDAO = (GenericDAO<String, Object>) Factory.getInstancia("TIPOCABLE");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class TipoCableServiceImpl implements TipoCableService {
     }
 
     @Override
-    public TreeMap<String, TipoCable> buscarTodos() {
+    public TreeMap<String, Object> buscarTodos() {
         return tipoCableDAO.buscarTodos();
     }
 
