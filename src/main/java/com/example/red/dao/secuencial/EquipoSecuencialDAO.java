@@ -18,7 +18,7 @@ import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
 
-public class EquipoSecuencialDAO implements GenericDAO<Equipo, String> {
+public class EquipoSecuencialDAO implements GenericDAO<String, Equipo> {
     private List<Equipo> list;
     private String name;
     private TreeMap<String, TipoPuerto> puertos;

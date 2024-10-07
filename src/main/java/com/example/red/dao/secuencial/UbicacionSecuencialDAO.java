@@ -13,7 +13,7 @@ import com.example.red.dao.GenericDAO;
 
 import com.example.red.modelo.Ubicacion;
 
-public class UbicacionSecuencialDAO implements GenericDAO<Ubicacion, String> {
+public class UbicacionSecuencialDAO implements GenericDAO<String, Ubicacion> {
     private TreeMap<String, Ubicacion> map;
     private String name;
     private boolean actualizar;

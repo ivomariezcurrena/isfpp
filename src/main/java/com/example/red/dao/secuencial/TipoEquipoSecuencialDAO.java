@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoEquipo;
 
-public class TipoEquipoSecuencialDAO implements GenericDAO<TipoEquipo, String> {
+public class TipoEquipoSecuencialDAO implements GenericDAO<String, TipoEquipo> {
     private TreeMap<String, TipoEquipo> map;
     private String name;
     private boolean actualizar;

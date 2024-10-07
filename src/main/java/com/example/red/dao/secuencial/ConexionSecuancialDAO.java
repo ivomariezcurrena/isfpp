@@ -16,7 +16,7 @@ import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoCable;
 
-public class ConexionSecuancialDAO implements GenericDAO<Conexion, String> {
+public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
     private List<Conexion> list;
     private String name;
     private TreeMap<String, Equipo> equipos;

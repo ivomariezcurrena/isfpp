@@ -3,11 +3,11 @@ package com.example.red.dao;
 import java.util.TreeMap;
 
 public interface GenericDAO<T, K> {
-    void insertar(T entidad); // Inserta una entidad
+    void insertar(K entidad); // Inserta una entidad
 
-    void actualizar(T entidad); // Actualiza una entidad
+    void actualizar(K entidad); // Actualiza una entidad
 
-    void borrar(T entidad); // Borra una entidad
+    void borrar(K entidad); // Borra una entidad
 
-    TreeMap<K, T> buscarTodos(); // Busca y devuelve todas las entidades en un TreeMap
+    TreeMap<T, K> buscarTodos(); // Busca y devuelve todas las entidades en un TreeMap
 }
