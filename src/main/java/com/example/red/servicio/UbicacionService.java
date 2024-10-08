@@ -12,5 +12,5 @@ public interface UbicacionService {
 
 	void borrar(Ubicacion ubicacion);
 
-	TreeMap<String, Object> buscarTodos();
+	TreeMap<String, Ubicacion> buscarTodos();
 }

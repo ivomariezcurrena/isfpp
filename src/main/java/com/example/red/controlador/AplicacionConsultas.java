@@ -14,9 +14,9 @@ public class AplicacionConsultas {
     // controlador
     private Coordinador coordinador;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws EquipoExistenteExeption {
         AplicacionConsultas app = new AplicacionConsultas();
-
+        app.iniciar();
     }
 
     private void iniciar() throws EquipoExistenteExeption {
@@ -25,6 +25,6 @@ public class AplicacionConsultas {
         calculo = new Calculo();
         coordinador = new Coordinador();
         interfaz = new Interfaz();
-
+        System.out.println();
     }
 }

@@ -11,5 +11,5 @@ public interface TipoEquipoService {
 
     void borrar(TipoEquipo tipoEquipo);
 
-    TreeMap<String, Object> buscarTodos();
+    TreeMap<String, TipoEquipo> buscarTodos();
 }

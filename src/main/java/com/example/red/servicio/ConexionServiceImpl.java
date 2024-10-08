@@ -7,10 +7,10 @@ import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Conexion;
 
 public class ConexionServiceImpl implements ConexionService {
-    private GenericDAO<String, Object> conexionDAO;
+    private GenericDAO<String, Conexion> conexionDAO;
 
     public ConexionServiceImpl() {
-        conexionDAO = (GenericDAO<String, Object>) Factory.getInstancia("CONEXION");
+        conexionDAO = Factory.getInstancia("CONEXION");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class ConexionServiceImpl implements ConexionService {
     }
 
     @Override
-    public TreeMap<String, Object> buscarTodos() {
+    public TreeMap<String, Conexion> buscarTodos() {
         return conexionDAO.buscarTodos();
     }
 

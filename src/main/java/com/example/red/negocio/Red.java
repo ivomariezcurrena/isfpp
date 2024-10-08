@@ -2,7 +2,6 @@ package com.example.red.negocio;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
@@ -32,22 +31,23 @@ public class Red {
 		return red;
 	}
 
+
 	private Red() {
 		super();
 		// ubis
 		ubicaciones = new ArrayList<Ubicacion>();
 		ubicacionService = new UbicacionServiceImpl();
-		ubicaciones.addAll(((TreeMap<String, Ubicacion>) ubicacionService).values());
+		ubicaciones.addAll(ubicacionService.buscarTodos().values());
 
 		// Equipos
 		equipos = new ArrayList<Equipo>();
 		equipoService = new EquipoServiceImpl();
-		equipos.addAll(((TreeMap<String, Equipo>) equipoService).values());
+		equipos.addAll(equipoService.buscarTodos().values());
 
 		// Conexiones
 		conexiones = new ArrayList<Conexion>();
 		conexionService = new ConexionServiceImpl();
-		conexiones.addAll(((TreeMap<String, Conexion>) conexionService).values());
+		conexiones.addAll(conexionService.buscarTodos().values());
 	}
 
 	public void agregarEquipo(Equipo equipo) throws EquipoExistenteExeption {
