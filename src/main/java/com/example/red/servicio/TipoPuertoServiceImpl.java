@@ -7,10 +7,10 @@ import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoPuerto;
 
 public class TipoPuertoServiceImpl implements TipoPuertoService {
-    private GenericDAO<String, Object> tipoPuertoDAO;
+    private GenericDAO<String, TipoPuerto> tipoPuertoDAO;
 
     public TipoPuertoServiceImpl() {
-        tipoPuertoDAO = (GenericDAO<String, Object>) Factory.getInstancia("TIPOPUERTO");
+        tipoPuertoDAO =Factory.getInstancia("TIPOPUERTO");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class TipoPuertoServiceImpl implements TipoPuertoService {
     }
 
     @Override
-    public TreeMap<String, Object> buscarTodos() {
+    public TreeMap<String, TipoPuerto> buscarTodos() {
         return tipoPuertoDAO.buscarTodos();
     }
 

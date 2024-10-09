@@ -7,10 +7,10 @@ import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoCable;
 
 public class TipoCableServiceImpl implements TipoCableService {
-    private GenericDAO<String, Object> tipoCableDAO;
+    private GenericDAO<String, TipoCable> tipoCableDAO;
 
     public TipoCableServiceImpl() {
-        tipoCableDAO = (GenericDAO<String, Object>) Factory.getInstancia("TIPOCABLE");
+        tipoCableDAO =Factory.getInstancia("TIPOCABLE");
     }
 
     @Override
@@ -29,7 +29,7 @@ public class TipoCableServiceImpl implements TipoCableService {
     }
 
     @Override
-    public TreeMap<String, Object> buscarTodos() {
+    public TreeMap<String, TipoCable> buscarTodos() {
         return tipoCableDAO.buscarTodos();
     }
 

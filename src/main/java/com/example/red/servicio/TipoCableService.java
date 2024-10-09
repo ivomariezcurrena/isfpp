@@ -11,5 +11,5 @@ public interface TipoCableService {
 
     void borrar(TipoCable tipoCable);
 
-    TreeMap<String, Object> buscarTodos();
+    TreeMap<String, TipoCable> buscarTodos();
 }

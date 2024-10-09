@@ -114,6 +114,14 @@ public class Equipo {
 		puertos.add(nuevoPuerto);
 	}
 
+	public int getVelocidadPuerto(int numeroPuerto) {
+		// Si un equipo no tiene puerto retorna -1
+		if (puertos.isEmpty())
+			return -1;
+
+		return puertos.get(numeroPuerto).getTipoPuerto().getVelocidad();
+	}
+
 	private class Puerto {
 		private int cantidad;
 		private TipoPuerto tipoPuerto;

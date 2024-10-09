@@ -12,5 +12,5 @@ public interface TipoPuertoService {
 
     void borrar(TipoPuerto tipoPuerto);
 
-    TreeMap<String, Object> buscarTodos();
+    TreeMap<String, TipoPuerto> buscarTodos();
 }

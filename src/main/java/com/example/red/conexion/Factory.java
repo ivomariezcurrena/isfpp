@@ -3,12 +3,9 @@ package com.example.red.conexion;
 import java.util.Hashtable;
 import java.util.ResourceBundle;
 
-import com.example.red.dao.GenericDAO;
-
 public class Factory {
 	private static Hashtable<String, GenericDAO<String, Object>> instancias = new Hashtable<String, GenericDAO<String, Object>>();
 
-	@SuppressWarnings({ "deprecation", "unchecked" })
 	public static GenericDAO<String, Object> getInstancia(String objName) {
 		try {
 			// verifico si existe un objeto relacionado a objName
