@@ -4,21 +4,26 @@ import java.util.Hashtable;
 import java.util.ResourceBundle;
 
 public class Factory {
-	private static Hashtable<String, GenericDAO<String, Object>> instancias = new Hashtable<String, GenericDAO<String, Object>>();
+	private static Hashtable<String, Object> instancias = new Hashtable<>();
 
-	public static GenericDAO<String, Object> getInstancia(String objName) {
+	public static <T> T getInstancia(String objName) {
 		try {
-			// verifico si existe un objeto relacionado a objName
-			// en la hashtable
-			GenericDAO<String, Object> obj = instancias.get(objName);
-			// si no existe entonces lo instancio y lo agrego
+			// Verifico si existe un objeto relacionado a objName en la hashtable
+			T obj = (T) instancias.get(objName);
+
+			// Si no existe, lo instancio y lo agrego
 			if (obj == null) {
+				// Obtengo el nombre de la clase desde un archivo de recursos
 				ResourceBundle rb = ResourceBundle.getBundle("factory");
 				String sClassname = rb.getString(objName);
-				obj = (GenericDAO<String, Object>) Class.forName(sClassname).newInstance();
-				// agrego el objeto a la hashtable
+
+				// Instancio la clase usando el constructor sin parámetros
+				obj = (T) Class.forName(sClassname).getDeclaredConstructor().newInstance();
+
+				// Agrego el objeto a la hashtable
 				instancias.put(objName, obj);
 			}
+
 			return obj;
 		} catch (Exception ex) {
 			ex.printStackTrace();

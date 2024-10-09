@@ -31,11 +31,7 @@ public class Red {
 		return red;
 	}
 
-<<<<<<< HEAD
 	@SuppressWarnings("unchecked")
-=======
-
->>>>>>> f839cc6c8423015d0843a4b37a89245a68433867
 	private Red() {
 		super();
 		// ubis
