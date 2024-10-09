@@ -1,5 +1,8 @@
 package com.example.red.negocio;
 
+import java.util.List;
+import java.util.TreeMap;
+
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -9,8 +12,6 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 import com.example.red.controlador.Coordinador;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
-
-import java.util.*;
 
 public class Calculo {
     private Coordinador coordinador;
@@ -136,4 +137,19 @@ public class Calculo {
 		return mensaje + (equipo.isActivo()? "activo":"inactivo");
 	}
 
+	public String rangoPing(String rango){
+		int i=0;
+		String mensaje = "Estado de los equipos: \n";
+		
+		for (Equipo e : tablaEquipos.values()) {
+			List<String> equipos =e.getDireccionesIP();
+			String ip =equipos.get(i);
+
+			if (ip.startsWith(rango)) {
+				mensaje += e.getCodigo()+" " +ip +" "+(e.isActivo()? "activo\n":"inactivo\n");
+			}
+		}
+		return mensaje;
+
+	}
 }

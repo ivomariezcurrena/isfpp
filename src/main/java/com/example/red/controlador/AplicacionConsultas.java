@@ -65,7 +65,10 @@ public class AplicacionConsultas {
                 interfaz.mostrar(calculo.ping(parametro1));
             else if (comando.equals("traceroute") && !parametro1.equals("") && !parametro2.equals("")) // traceroute
                 interfaz.mostrar(calculo.traceRoute(parametro1, parametro2));
-    		else
+    		else if (comando.equals("rango") && !parametro1.equals(""))
+                interfaz.mostrar(calculo.rangoPing(parametro1));
+
+            else
 	    		interfaz.mostrarError("Error de sintaxis\nPara más información por favor ingrese 'help'"); // error de sintaxis
         }
         interfaz.cerrar();

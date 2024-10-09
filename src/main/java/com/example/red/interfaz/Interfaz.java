@@ -2,7 +2,6 @@ package com.example.red.interfaz;
 
 import java.util.Scanner;
 
-import com.example.red.controlador.Constantes;
 import com.example.red.controlador.Coordinador;
 
 public class Interfaz {
@@ -82,6 +81,9 @@ public class Interfaz {
 				+ "|----------------------------------------------------------------|\n"
 				+ "| ping <IP/ID>                                                   |\n"
 				+ "|     Verifica si un equipo está activo dado su IP o ID          |\n"
+				+ "|----------------------------------------------------------------|\n"
+				+ "| rango <IP (primeros digitos)>                                  |\n"
+				+ "|     Devuelve el estado de todas las ip en un rango determinado |\n"
 				+ "|----------------------------------------------------------------|\n"
 				+ "| traceroute <IP/ID Origen> <IP/ID Destino>                      |\n"
 				+ "|     Indica los equipos por donde circulan los paquetes desde   |\n"
