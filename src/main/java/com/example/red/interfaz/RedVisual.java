@@ -9,6 +9,9 @@ import com.mxgraph.view.mxGraph;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Conexion;
 import javax.swing.*;
+
+import org.apfloat.spi.ArrayAccess;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -22,23 +25,33 @@ public class RedVisual extends JFrame {
     private mxGraph redVisual = new mxGraph() {
         // Deshabilitar la edición de todos los labels
         @Override
-        public boolean isCellEditable(Object cell) { return false; }
+        public boolean isCellEditable(Object cell) {
+            return false;
+        }
 
         // Permitir solo el movimiento de nodos y arcos
         @Override
-        public boolean isCellsMovable() { return true; }
+        public boolean isCellsMovable() {
+            return true;
+        }
 
         // No permitir desconectar aristas de nodos
         @Override
-        public boolean isCellDisconnectable(Object cell, Object terminal, boolean source) { return false; }
+        public boolean isCellDisconnectable(Object cell, Object terminal, boolean source) {
+            return false;
+        }
 
         // No permitir doblar las aristas (mover sus puntos de control)
         @Override
-        public boolean isCellBendable(Object cell) { return false; }
+        public boolean isCellBendable(Object cell) {
+            return false;
+        }
 
         // Habilitar el redimensionamiento de los nodos
         @Override
-        public boolean isCellResizable(Object cell) { return true; };
+        public boolean isCellResizable(Object cell) {
+            return true;
+        };
     };
     private mxGraphComponent graphComponent = new mxGraphComponent(redVisual);
     private Object parent = redVisual.getDefaultParent();
@@ -58,13 +71,13 @@ public class RedVisual extends JFrame {
     private String blanco = "#F5F5F5";
     private String fuente = "Sans serif";
     private int fondo = 0xFDFDFD;
-    private int tamanioFuente = 16; //px
-    private int tamanioFuente2 = 12; //px
-    private int altoNodo = 50; //px
-    private int anchoNodo = 100; //px
-    private int espacioEntreNodos = 120; //px
+    private int tamanioFuente = 16; // px
+    private int tamanioFuente2 = 12; // px
+    private int altoNodo = 50; // px
+    private int anchoNodo = 100; // px
+    private int espacioEntreNodos = 120; // px
 
-    // Estilos 
+    // Estilos
     Map<String, Object> estiloAccessPointActivo = new TreeMap<>();
     Map<String, Object> estiloAccessPointInactivo = new TreeMap<>();
     Map<String, Object> estiloAccessPointHighlight = new TreeMap<>();
@@ -80,34 +93,34 @@ public class RedVisual extends JFrame {
     Map<String, Object> estiloConexionActivo = new TreeMap<>();
     Map<String, Object> estiloConexionInactivo = new TreeMap<>();
     Map<String, Object> estiloConexionHighlight = new TreeMap<>();
-    
-    public RedVisual(){
+
+    public RedVisual() {
 
     }
-
+    
+    /*
+     * Carga los equipos a los atributos de la instancia
+     */
     public void cargarDatos(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
         // Iniciar cambios en la red
         redVisual.getModel().beginUpdate();
-        
+
         // Generar los estilos basados en las configuraciones globales de estilos
         inicializarEstilos();
 
         // Cargar tablas de equipos y conexiones
         this.tablaEquipos = tablaEquipos;
         this.tablaConexiones = tablaConexiones;
-
-        // Renderizar red
-        renderizarRed();
-
-        // Renderizar botones
-        renderizarBotones();
     }
 
-    public void renderizarRed(){
+    /*
+     * Renderiza la red en un JFrame
+     */
+    public void renderizarRed() {
         try {
             // Renderizar equipos
             // Mapear los nodos en una tabla "ID"->Nodo
-            for (Equipo equipo : tablaEquipos.values()){
+            for (Equipo equipo : tablaEquipos.values()) {
                 String id = equipo.getCodigo();
                 String estilo = getEstiloNodo(id, "default");
                 Object nodo = redVisual.insertVertex(parent, null, id, 0, 0, anchoNodo, altoNodo, estilo);
@@ -117,24 +130,24 @@ public class RedVisual extends JFrame {
 
             // Renderizar conexiones
             // Mapear los arcos en una tabla ["ID","ID"]->Arco
-		    for (Conexion conexion : tablaConexiones.values()) {
-			    Equipo equipo1 = conexion.getEquipo1();
-			    Equipo equipo2 = conexion.getEquipo2();
+            for (Conexion conexion : tablaConexiones.values()) {
+                Equipo equipo1 = conexion.getEquipo1();
+                Equipo equipo2 = conexion.getEquipo2();
 
-    			if (equipo1 != null || equipo2 != null) {
+                if (equipo1 != null || equipo2 != null) {
                     String id1 = equipo1.getCodigo();
                     String id2 = equipo2.getCodigo();
                     String estilo = getEstiloArco(id1, id2, "default");
                     String clave = id1 + " " + id2;
                     Object nodo1 = tablaNodos.get(id1);
                     Object nodo2 = tablaNodos.get(id2);
-                    String label = conexion.getTipocable().getVelocidad()+" Mbps";
+                    String label = conexion.getTipocable().getVelocidad() + " Mbps";
 
                     Object arco = redVisual.insertEdge(parent, null, label, nodo1, nodo2, estilo);
                     tablaArcos.put(clave, arco);
                 }
 
-		    }
+            }
         } finally {
             redVisual.getModel().endUpdate();
         }
@@ -147,11 +160,11 @@ public class RedVisual extends JFrame {
         setVisible(true);
 
         // Color de fondo
-        graphComponent.getViewport().setBackground(new Color(fondo)); 
+        graphComponent.getViewport().setBackground(new Color(fondo));
 
         // Layout
         mxFastOrganicLayout layoutParent = new mxFastOrganicLayout(redVisual);
-        layoutParent.setForceConstant(espacioEntreNodos);  // Espacio entre nodos
+        layoutParent.setForceConstant(espacioEntreNodos); // Espacio entre nodos
         layoutParent.execute(parent); // Aplicar layout
 
         // Deshabilitar edición
@@ -160,25 +173,28 @@ public class RedVisual extends JFrame {
 
     }
 
-    public void renderizarBotones(){
+    /*
+     * Muestra los botones dentro del JFrame de la red
+     */
+    public void renderizarBotones() {
         // Crear botones de zoom
         JButton zoomInButton = new JButton("Zoom In");
         JButton zoomOutButton = new JButton("Zoom Out");
 
         // Agregar listeners a los botones
-                zoomInButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        graphComponent.zoomIn(); // Zoom In
-                    }
-                });
-        
-                zoomOutButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        graphComponent.zoomOut(); // Zoom Out
-                    }
-                });
+        zoomInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                graphComponent.zoomIn(); // Zoom In
+            }
+        });
+
+        zoomOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                graphComponent.zoomOut(); // Zoom Out
+            }
+        });
 
         // Crear un panel para los botones
         JPanel buttonPanel = new JPanel();
@@ -211,34 +227,39 @@ public class RedVisual extends JFrame {
                         graphComponent.zoomIn(); // Zoom In
                     } else if (e.getKeyCode() == KeyEvent.VK_MINUS) {
                         graphComponent.zoomOut(); // Zoom Out
-                    } 
+                    }
                 }
             }
         });
     }
 
-
     /*
-     * Obtiene el estilo correspondiente a un nodo, segun el tipo de equipo y el tipo de estilo que se desea
+     * Obtiene el estilo correcto para un nodo
+     * 
+     * @param ID del equipo
+     * 
+     * @param tipo de estilo
+     * 
+     * @return estilo según el equipo y el tipo de estilo deseado
      */
-    private String getEstiloNodo(String id, String tipoEstilo){
+    private String getEstiloNodo(String id, String tipoEstilo) {
         String estilo = "";
         Equipo equipo = tablaEquipos.get(id);
 
         if (equipo == null)
             return estilo;
 
-        if (tipoEstilo.equals("default")){
+        if (tipoEstilo.equals("default")) {
             if (equipo.getTipoEquipo().getCodigo().equals("AP"))
                 estilo = equipo.isActivo() ? "Access point activo" : "Access point inactivo";
-            else if (equipo.getTipoEquipo().getCodigo().equals("COM"))          
+            else if (equipo.getTipoEquipo().getCodigo().equals("COM"))
                 estilo = equipo.isActivo() ? "Computadora activo" : "Computadora inactivo";
             else if (equipo.getTipoEquipo().getCodigo().equals("RT"))
                 estilo = equipo.isActivo() ? "Router activo" : "Router inactivo";
             else if (equipo.getTipoEquipo().getCodigo().equals("SW"))
-                estilo = equipo.isActivo() ? "Switch activo" : "Switch inactivo";   
+                estilo = equipo.isActivo() ? "Switch activo" : "Switch inactivo";
 
-        } else if (tipoEstilo.equals("highlight")){
+        } else if (tipoEstilo.equals("highlight")) {
             if (equipo.getTipoEquipo().getCodigo().equals("AP"))
                 estilo = "Access point highlight";
             else if (equipo.getTipoEquipo().getCodigo().equals("COM"))
@@ -252,12 +273,21 @@ public class RedVisual extends JFrame {
         return estilo;
     }
 
-    private String getEstiloArco(String id1, String id2, String tipoEstilo){
+    /*
+     * Obtiene el estilo correcto para un arco
+     * 
+     * @param IDs de los equipos extremos del arco
+     * 
+     * @param tipo de estilo
+     * 
+     * @return estilo según los extremos del arco y el tipo de estilo deseado
+     */
+    private String getEstiloArco(String id1, String id2, String tipoEstilo) {
         String estilo = "";
-        
+
         if (tipoEstilo.equals("highlight"))
             estilo = "Conexion highlight";
-        else if (tipoEstilo.equals("default")){
+        else if (tipoEstilo.equals("default")) {
             Equipo equipo1 = tablaEquipos.get(id1);
             Equipo equipo2 = tablaEquipos.get(id2);
             estilo = (equipo1.isActivo() && equipo2.isActivo()) ? "Conexion activo" : "Conexion inactivo";
@@ -266,7 +296,14 @@ public class RedVisual extends JFrame {
         return estilo;
     }
 
-    public void setEstiloNodo(String id, String tipoEstilo){
+    /*
+     * Aplica un estilo a un nodo
+     * 
+     * @param ID del equipo
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloNodo(String id, String tipoEstilo) {
         redVisual.getModel().beginUpdate();
         try {
             String estilo = getEstiloNodo(id, tipoEstilo); // Obtiene el estilo correcto
@@ -279,52 +316,110 @@ public class RedVisual extends JFrame {
         }
     }
 
-    public void setEstiloNodos(List<String> ids, String tipoEstilo){
+    /*
+     * Aplica un estilo a un arco
+     * 
+     * @param IDs de los 2 equipos extremos
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloArco(String id1, String id2, String tipoEstilo) {
         redVisual.getModel().beginUpdate();
         try {
-            for (int i = 0; i < ids.size()-1; i++){
-                String id1 = ids.get(i);
-                String id2 = ids.get(i+1);
-                String estilo = getEstiloNodo(id1, tipoEstilo); // Obtiene el estilo correcto para el nodo 1
-                mxCell cell = (mxCell) tablaNodos.get(id1); // Obtiene el nodo 1 renderizado
-                if (cell != null)
-                    cell.setStyle(estilo); // Aplica el cambio 
-
-                estilo = getEstiloArco(id1, id2, tipoEstilo); // Obtiene el estilo correcto para el arco
-                cell = (mxCell) tablaArcos.get(id1+" "+id2); // Obtiene el arco renderizado
-                if (cell == null)
-                    cell = (mxCell) tablaArcos.get(id2+" "+id1);
-                if (cell != null)
-                    cell.setStyle(estilo); // Aplica el cambio 
-                
-            }
-            String id = ids.get(ids.size()-1); 
-            String estilo = getEstiloNodo(id, tipoEstilo); // Obtiene el estilo correcto para el ultimo nodo
-            mxCell cell = (mxCell) tablaNodos.get(id); // Obtiene el ultimo nodo
+            String estilo = getEstiloArco(id1, id2, tipoEstilo); // Obtiene el estilo correcto para el arco
+            mxCell cell = (mxCell) tablaArcos.get(id1 + " " + id2); // Obtiene el arco renderizado
+            if (cell == null)
+                cell = (mxCell) tablaArcos.get(id2 + " " + id1);
             if (cell != null)
-                cell.setStyle(estilo); // Aplica el cambio 
-
+                cell.setStyle(estilo); // Aplica el cambio
+            
             redVisual.refresh();
         } finally {
             redVisual.getModel().endUpdate();
         }
     }
 
-    public void setEstiloNodoTodos(String tipoEstilo){
+    /*
+     * Aplica un estilo a varios nodos
+     * 
+     * @param lista de IDs de los equipos
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloNodos(List<String> ids, String tipoEstilo) {
+        for (String id : ids)
+            setEstiloNodo(id, tipoEstilo);
+    }
+
+    /*
+     * Aplica un estilo a varios arcos
+     * 
+     * @param pares de IDs de los equipos extremos de los arcos
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloArcos(List<String[]> ids, String tipoEstilo){
+        for (String[] parIds : ids){
+            String id1 = parIds[0];
+            String id2 = parIds[1];
+            setEstiloArco(id1, id2, tipoEstilo);
+        }
+    }
+
+    /*
+     * Aplica un estilo a un camino de arcos
+     * 
+     * @param lista de IDs de la secuencia de equipos. Deben estar conectados entre
+     * si, de lo contrario pueden quedar algunos arcos sin el estilo deseado. En ese
+     * caso primero divida la lista original entre varias listas de equipos consecutivos,
+     * luego use este método para cada una de esas listas
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloCaminoArcos(List<String> ids, String tipoEstilo) {
+        for (int i = 0; i < ids.size()-1; i++){
+            String id1 = ids.get(i);
+            String id2 = ids.get(i+1);
+            setEstiloArco(id1, id2, tipoEstilo);
+        }
+    }
+
+    /*
+     * Aplica un estilo a todos los nodos
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloNodosTodos(String tipoEstilo) {
         List<String> ids = new ArrayList<>();
-        ids.addAll(tablaEquipos.keySet());
+        ids.addAll(tablaEquipos.keySet()); // Todos los "ID"
         setEstiloNodos(ids, tipoEstilo);
     }
 
-    public void inicializarEstilos(){
-        estiloAccessPointActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CLOUD); // Forma 
+    /*
+     * Aplica un estilo a todos los arcos
+     * 
+     * @param tipo de estilo
+     */
+    public void setEstiloArcosTodos(String tipoEstilo) {
+        List<String[]> paresIds = new ArrayList<>();
+        for (String parIds : tablaArcos.keySet()) // Todos los pares "ID ID"
+            paresIds.add(parIds.split(" "));
+        setEstiloArcos(paresIds, tipoEstilo);
+    }
+
+    /*
+     * Inicializa los estilos, usando las configuraciones globales establecidas
+     */
+    public void inicializarEstilos() {
+        estiloAccessPointActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_CLOUD); // Forma
         estiloAccessPointActivo.put(mxConstants.STYLE_STROKECOLOR, verdeClaro); // Color linea
         estiloAccessPointActivo.put(mxConstants.STYLE_FILLCOLOR, verdeClaro); // Fondo
         estiloAccessPointActivo.put(mxConstants.STYLE_FONTFAMILY, fuente); // Familia fuente
         estiloAccessPointActivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloAccessPointActivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloAccessPointActivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloAccessPointActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloAccessPointActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                          // vertical
         estiloAccessPointActivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Access point activo", estiloAccessPointActivo);
 
@@ -335,7 +430,8 @@ public class RedVisual extends JFrame {
         estiloAccessPointInactivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloAccessPointInactivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloAccessPointInactivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloAccessPointInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloAccessPointInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                            // vertical
         estiloAccessPointInactivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Access point inactivo", estiloAccessPointInactivo);
 
@@ -346,18 +442,20 @@ public class RedVisual extends JFrame {
         estiloAccessPointHighlight.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloAccessPointHighlight.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloAccessPointHighlight.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloAccessPointHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloAccessPointHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                             // vertical
         estiloAccessPointHighlight.put(mxConstants.STYLE_SHADOW, false); // Sombra
         redVisual.getStylesheet().putCellStyle("Access point highlight", estiloAccessPointHighlight);
 
-        estiloRouterActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE); // Forma 
+        estiloRouterActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE); // Forma
         estiloRouterActivo.put(mxConstants.STYLE_STROKECOLOR, verdeClaro); // Color linea
         estiloRouterActivo.put(mxConstants.STYLE_FILLCOLOR, verdeClaro); // Fondo
         estiloRouterActivo.put(mxConstants.STYLE_FONTFAMILY, fuente); // Familia fuente
         estiloRouterActivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloRouterActivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloRouterActivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloRouterActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloRouterActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                     // vertical
         estiloRouterActivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Router activo", estiloRouterActivo);
 
@@ -368,7 +466,8 @@ public class RedVisual extends JFrame {
         estiloRouterInactivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloRouterInactivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloRouterInactivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloRouterInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloRouterInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                       // vertical
         estiloRouterInactivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Router inactivo", estiloRouterInactivo);
 
@@ -379,18 +478,20 @@ public class RedVisual extends JFrame {
         estiloRouterHighlight.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloRouterHighlight.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloRouterHighlight.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloRouterHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloRouterHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                        // vertical
         estiloRouterHighlight.put(mxConstants.STYLE_SHADOW, false); // Sombra
         redVisual.getStylesheet().putCellStyle("Router highlight", estiloRouterHighlight);
 
-        estiloComputadoraActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE); // Forma 
+        estiloComputadoraActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RECTANGLE); // Forma
         estiloComputadoraActivo.put(mxConstants.STYLE_STROKECOLOR, verdeClaro); // Color linea
         estiloComputadoraActivo.put(mxConstants.STYLE_FILLCOLOR, verdeClaro); // Fondo
         estiloComputadoraActivo.put(mxConstants.STYLE_FONTFAMILY, fuente); // Familia fuente
         estiloComputadoraActivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloComputadoraActivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloComputadoraActivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloComputadoraActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloComputadoraActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                          // vertical
         estiloComputadoraActivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Computadora activo", estiloComputadoraActivo);
 
@@ -401,7 +502,8 @@ public class RedVisual extends JFrame {
         estiloComputadoraInactivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloComputadoraInactivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloComputadoraInactivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloComputadoraInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloComputadoraInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                            // vertical
         estiloComputadoraInactivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Computadora inactivo", estiloComputadoraInactivo);
 
@@ -412,32 +514,35 @@ public class RedVisual extends JFrame {
         estiloComputadoraHighlight.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloComputadoraHighlight.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloComputadoraHighlight.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloComputadoraHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloComputadoraHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                             // vertical
         estiloComputadoraHighlight.put(mxConstants.STYLE_SHADOW, false); // Sombra
         redVisual.getStylesheet().putCellStyle("Computadora highlight", estiloComputadoraHighlight);
 
-        estiloSwitchActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RHOMBUS); // Forma 
+        estiloSwitchActivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RHOMBUS); // Forma
         estiloSwitchActivo.put(mxConstants.STYLE_STROKECOLOR, verdeClaro); // Color linea
         estiloSwitchActivo.put(mxConstants.STYLE_FILLCOLOR, verdeClaro); // Fondo
         estiloSwitchActivo.put(mxConstants.STYLE_FONTFAMILY, fuente); // Familia fuente
         estiloSwitchActivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloSwitchActivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloSwitchActivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloSwitchActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloSwitchActivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                     // vertical
         estiloSwitchActivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Switch activo", estiloSwitchActivo);
 
-        estiloSwitchInactivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RHOMBUS); // Forma 
+        estiloSwitchInactivo.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RHOMBUS); // Forma
         estiloSwitchInactivo.put(mxConstants.STYLE_STROKECOLOR, grisOscuro); // Color linea
         estiloSwitchInactivo.put(mxConstants.STYLE_FILLCOLOR, grisOscuro); // Fondo
         estiloSwitchInactivo.put(mxConstants.STYLE_FONTFAMILY, fuente); // Familia fuente
         estiloSwitchInactivo.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloSwitchInactivo.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloSwitchInactivo.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloSwitchInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloSwitchInactivo.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                       // vertical
         estiloSwitchInactivo.put(mxConstants.STYLE_SHADOW, true); // Sombra
         redVisual.getStylesheet().putCellStyle("Switch inactivo", estiloSwitchInactivo);
-        
+
         estiloSwitchHighlight.put(mxConstants.STYLE_SHAPE, mxConstants.SHAPE_RHOMBUS); // Forma
         estiloSwitchHighlight.put(mxConstants.STYLE_STROKECOLOR, highlight); // Color linea
         estiloSwitchHighlight.put(mxConstants.STYLE_FILLCOLOR, highlight); // Fondo
@@ -445,7 +550,8 @@ public class RedVisual extends JFrame {
         estiloSwitchHighlight.put(mxConstants.STYLE_FONTCOLOR, blanco); // Color fuente
         estiloSwitchHighlight.put(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_BOLD); // Estilo fuente
         estiloSwitchHighlight.put(mxConstants.STYLE_FONTSIZE, tamanioFuente); // Tamaño fuente px
-        estiloSwitchHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado vertical
+        estiloSwitchHighlight.put(mxConstants.STYLE_VERTICAL_LABEL_POSITION, mxConstants.ALIGN_MIDDLE); // Centrado
+                                                                                                        // vertical
         estiloSwitchHighlight.put(mxConstants.STYLE_SHADOW, false); // Sombra
         redVisual.getStylesheet().putCellStyle("Switch highlight", estiloSwitchHighlight);
 

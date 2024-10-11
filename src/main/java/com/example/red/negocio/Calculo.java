@@ -19,7 +19,6 @@ public class Calculo {
     private Coordinador coordinador;
 	private Graph<Equipo, DefaultWeightedEdge> red; // red para hacer los cálculos
 	private Map<String, Equipo> tablaEquipos; // "ID" -> Equipo
-	private Map<String, String> localDns; // IP -> ID
 
     public void setCoordinador(Coordinador coordinador){
         this.coordinador = coordinador;
@@ -28,20 +27,11 @@ public class Calculo {
 	// Se cargan los equipos y conexiones a una red que se usará para los cálculos
 	public void cargarDatos(Map<String, Equipo> tablaEquipos, List<Conexion> conexiones) {
 		red = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
-		localDns = new TreeMap<>();
 		this.tablaEquipos = tablaEquipos;
 
-		// Se carga la lista de equipos al grafo "red"
-		// se genera el "localDns"
-		for (Equipo equipo : tablaEquipos.values()) {
-			// red
+		// Se cargan los equipos al grafo "red"
+		for (Equipo equipo : tablaEquipos.values()) 
 			red.addVertex(equipo);
-
-			// localDns
-			String id = equipo.getCodigo();
-			for (String ip : equipo.getDireccionesIP())
-				localDns.put(ip, id);
-		}
 
 		// Se cargan las conexiones
 		for (Conexion conexion : conexiones) {
@@ -60,75 +50,70 @@ public class Calculo {
 		}
 	}
 
-	// retorna null si no se encontró el equipo
-	public Equipo validarEquipo(String identificador) {	
-        // obtener por id
-		Equipo equipo = tablaEquipos.get(identificador);
-		if (equipo != null) 
-            return equipo;
- 
-        //obtener por ip
-        String id = localDns.get(identificador);
-        if (id != null)
-            equipo = tablaEquipos.get(id);
-        return equipo;
-	}
-
 	/*
-	 * 1. Dado dos equipos mostrar todos los equipos intermedios y sus conexiones.
+	 * Dado dos equipos mostrar todos los equipos intermedios y sus conexiones.
 	 * Calcular la velocidad máxima de acuerdo al tipo de puerto y cables por donde
 	 * se transmiten los datos.
-	 */	
+	 * 
+	 * @param ID del equipo origen
+	 * @param ID del equipo destino
+	 * @return lista de IDs de los equipos que forman el camino, null si no existe camino
+	 */
 	public List<String> traceRoute(String origen, String destino) {		
 		List<String> resultado = new ArrayList<String>();
 		// Obtener los equipos
-		Equipo equipoOrigen = validarEquipo(origen);
-		Equipo equipoDestino = validarEquipo(destino);
+		Equipo equipoOrigen = tablaEquipos.get(origen);
+		Equipo equipoDestino = tablaEquipos.get(destino);
 		
 		// Si al menos uno no se encontró se termina el método
 		if (!red.containsVertex(equipoOrigen) || !red.containsVertex(equipoDestino)) {
 			return null;
 		}
 
+		// Hallar el camino, sin importar la inactividad de los equipos
 		DijkstraShortestPath<Equipo, DefaultWeightedEdge> copia = new DijkstraShortestPath<Equipo, DefaultWeightedEdge>(red);
 		GraphPath<Equipo,DefaultWeightedEdge> camino = copia.getPath(equipoOrigen, equipoDestino);
 		if (camino == null) //no existe camino
 			return null;
-;
-		// Se descartan los equipos inactivos
-		// Se retorna la lista de codigos
+
+		// Cortar el camino ante el primer equipo inactivo
+		// Se retorna la lista de codigos de equipos
 		for (Equipo equipo : camino.getVertexList()){
 			if (equipo.isActivo())
 				resultado.add(equipo.getCodigo());
-			else // corta el camino ante el primer inactivo
+			else 
 				break;
 		}
 		return resultado;
 	}
 
 	/*
-	 * 2. Realizar un ping a un equipo.
+	 * Realizar un ping a un equipo
+	 * 
+	 * @param ID del equipo
+	 * @return true si está activo, false si está inactivo
 	 */
 	public boolean ping(String destino) {
-		Equipo equipo = validarEquipo(destino);
+		Equipo equipo = tablaEquipos.get(destino);
 		if (equipo != null)
 			return equipo.isActivo();
 		return false;
 	}
 
-	public Map<String, Boolean> rangoPing(String rango){
-		int i=0;
+	/*
+	 * Realizar un ping a una lista de equipos
+	 * 
+	 * @param lista de "ID" de equipos
+	 * @return Mapa con entries "ID" -> true/false segun su actividad
+	 */
+	public Map<String, Boolean> rangoPing(List<String> ids){
 		Map<String, Boolean> resultado = new TreeMap<>();
 
-		for (Equipo e : tablaEquipos.values()) {
-			List<String> equipos = e.getDireccionesIP();
-			String ip = equipos.get(i);
-			
-			if (ip.startsWith(rango)) {
-				resultado.put(e.getCodigo(), e.isActivo());
-			}
+		for (String id : ids){
+			Equipo equipo = tablaEquipos.get(id);
+			resultado.put(id, equipo.isActivo());
 		}
+
 		return resultado;
 	}
-
 }

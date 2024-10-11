@@ -57,34 +57,12 @@ public class CalculoTest {
     public void testCargarDatos() {
         calculo.cargarDatos(equipos, conexiones);
 
-        // Verificar que los equipos se han cargado correctamente
-        assertNotNull(calculo.validarEquipo("E1"));
-        assertNotNull(calculo.validarEquipo("E2"));
-
         // Verificar que las conexiones se han establecido
         List<String> resultado = calculo.traceRoute("E1", "E2");
         List<String> resultadoEsperado = new ArrayList<>();
         resultadoEsperado.add("E1");
         resultadoEsperado.add("E2");
         assertEquals(resultado, resultadoEsperado);
-    }
-
-    @Test
-    public void testValidarEquipoPorId() {
-        calculo.cargarDatos(equipos, conexiones);
-
-        Equipo equipo = calculo.validarEquipo("E1");
-        assertNotNull(equipo);
-        assertEquals("E1", equipo.getCodigo());
-    }
-
-    @Test
-    public void testValidarEquipoPorIP() {
-        calculo.cargarDatos(equipos, conexiones);
-
-        Equipo equipo = calculo.validarEquipo("192.168.0.1");
-        assertNotNull(equipo);
-        assertEquals("E1", equipo.getCodigo());
     }
 
     @Test

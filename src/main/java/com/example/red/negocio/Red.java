@@ -5,7 +5,6 @@ import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 
-
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Ubicacion;
@@ -34,7 +33,6 @@ public class Red {
 		return red;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Red() {
 		super();
 		// ubis
@@ -99,24 +97,79 @@ public class Red {
 		return conexiones;
 	}
 
-	public Map<String, Equipo> getTablaEquipos(){
+	public Map<String, Equipo> getTablaEquipos() {
 		Map<String, Equipo> tablaEquipos = new TreeMap<>(); // Tabla "ID" -> Equipo
 		for (Equipo equipo : equipos)
-            tablaEquipos.put(equipo.getCodigo(), equipo);
+			tablaEquipos.put(equipo.getCodigo(), equipo);
 		return tablaEquipos;
 	}
 
-	public Map<String, Conexion> getTablaConexiones(){
+	public Map<String, Conexion> getTablaConexiones() {
 		Map<String, Conexion> tablaConexiones = new TreeMap<>(); // Tabla "ID ID" -> Conexion
-		for (Conexion conexion : conexiones){
+		for (Conexion conexion : conexiones) {
 			Equipo source = conexion.getEquipo1();
 			Equipo target = conexion.getEquipo2();
 			if (source != null || target != null) {
-				String clave = source.getCodigo()+" "+target.getCodigo();
+				String clave = source.getCodigo() + " " + target.getCodigo();
 				tablaConexiones.put(clave, conexion);
 			}
 		}
 		return tablaConexiones;
+	}
+
+	public Map<String, String> getLocalDns() {
+		Map<String, String> localDns = new TreeMap<>();
+		for (Equipo equipo : equipos) {
+			String id = equipo.getCodigo();
+			for (String ip : equipo.getDireccionesIP())
+				localDns.put(ip, id);
+		}
+		return localDns;
+	}
+
+	/*
+	 * Valida si un equipo existe
+	 * 
+	 * @param Identificador (ID o IP) del equipo
+	 * @return ID del equipo, o null si no se encontró
+	 */
+	public String validarEquipo(String identificador) {
+		Map<String, String> localDns = getLocalDns();
+		Map<String, Equipo> tablaEquipos = getTablaEquipos();
+
+		// obtener por id
+		if (tablaEquipos.get(identificador) != null) // Se encontró, existe
+			return identificador;
+
+		// obtener por ip
+		String id = localDns.get(identificador);
+		if (id != null)
+			return id;
+
+		return null;
+	}
+
+	/*
+	 * Valida un rango de equipos por sus IP
+	 * 
+	 * @param IP para un rango de equipos
+	 * @return lista de IDs de equipos, lista vacia si no hay ninguno
+	 */
+	public List<String> rangoEquiposIP(String rango) {
+		int i=0;
+		List<String> resultado = new ArrayList<>();
+		Map<String, Equipo> tablaEquipos = getTablaEquipos();
+		
+		for (Equipo e : tablaEquipos.values()) {
+			List<String> equipos = e.getDireccionesIP();
+			String ip = equipos.get(i);
+			
+			if (ip.startsWith(rango)) {
+				resultado.add(e.getCodigo());
+			}
+		}
+
+		return resultado;
 	}
 
 	@Override

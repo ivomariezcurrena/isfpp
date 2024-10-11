@@ -30,24 +30,18 @@ public class Interfaz {
     }
 
     /**
-	 * Muestra un mensaje
-	 */
-    public void mostrar(String mensaje){
-        System.out.println(mensaje);
-    }
-
-	/**
-	 * Muestra un mensaje de error
-	 */
-	public void mostrarError(String mensaje) {
-		System.err.println(mensaje);
-	}
-
-    /**
      * Inicia el canal de entrada por consola
 	 */
     public void iniciarConsola() {
 		input = new Scanner(System.in);
+	}
+
+	/*
+	 * Inicia la interfaz grafica
+	 */
+	public void iniciarInterfaz(){
+		ventana.renderizarRed();
+		ventana.renderizarBotones();
 	}
 
     /**
@@ -57,7 +51,10 @@ public class Interfaz {
 		input.close();
 	}
 
-	public void cerrar(){
+	/*
+	 * Cierra la interfaz gráfica
+	 */
+	public void cerrarInterfaz(){
 		ventana.dispose();
 	}
 
@@ -79,7 +76,7 @@ public class Interfaz {
 		return instruccion;
 	}
 
-/**
+	/**
 	 * Muestra el menú de comandos por consola
 	 */
 	public void mostrarMenu() {
@@ -112,6 +109,20 @@ public class Interfaz {
 				+ "==================================================================");
 	}
 
+	/**
+	 * Muestra un mensaje
+	 */
+    public void mostrar(String mensaje){
+        System.out.println(mensaje);
+    }
+
+	/**
+	 * Muestra un mensaje de error
+	 */
+	public void mostrarError(String mensaje) {
+		System.err.println(mensaje);
+	}
+
 	public void cargarDatos(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones){
 		ventana = new RedVisual();
 		ventana.cargarDatos(tablaEquipos, tablaConexiones);
@@ -121,11 +132,27 @@ public class Interfaz {
 		ventana.setEstiloNodo(id, tipoEstilo);
 	}
 
+	public void setEstiloArco(String id1, String id2, String tipoEstilo){
+		ventana.setEstiloArco(id1, id2, tipoEstilo);
+	}
+
 	public void setEstiloNodos(List<String> ids, String tipoEstilo){
 		ventana.setEstiloNodos(ids, tipoEstilo);
 	}
 
-	public void setEstiloNodoTodos(String tipoEstilo){
-		ventana.setEstiloNodoTodos(tipoEstilo);
+	public void setEstiloArcos(List<String[]> paresIds, String tipoEstilo){
+		ventana.setEstiloArcos(paresIds, tipoEstilo);
+	}
+
+	public void setEstiloCaminoArcos(List<String> ids, String tipoEstilo){
+		ventana.setEstiloCaminoArcos(ids, tipoEstilo);
+	}
+
+	public void setEstiloNodosTodos(String tipoEstilo){
+		ventana.setEstiloNodosTodos(tipoEstilo);
+	}
+
+	public void setEstiloArcosTodos(String tipoEstilo){
+		ventana.setEstiloArcosTodos(tipoEstilo);
 	}
 }
