@@ -84,7 +84,7 @@ public class AplicacionConsultas {
                 if (resultado.isEmpty())
                     interfaz.mostrar("No se ha encontrado un camino de equipos activos");
                 else 
-                    interfaz.setEstiloCaminoNodos(resultado, "highlight");
+                    interfaz.setEstiloNodos(resultado, "highlight");
                 
             } 
             else if (comando.equals("rango") && !parametro1.equals("")) {

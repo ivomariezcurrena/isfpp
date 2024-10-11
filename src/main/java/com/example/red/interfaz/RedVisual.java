@@ -11,6 +11,7 @@ import com.example.red.modelo.Conexion;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -278,7 +279,7 @@ public class RedVisual extends JFrame {
         }
     }
 
-    public void setEstiloCaminoNodos(List<String> ids, String tipoEstilo){
+    public void setEstiloNodos(List<String> ids, String tipoEstilo){
         redVisual.getModel().beginUpdate();
         try {
             for (int i = 0; i < ids.size()-1; i++){
@@ -310,19 +311,9 @@ public class RedVisual extends JFrame {
     }
 
     public void setEstiloNodoTodos(String tipoEstilo){
-        redVisual.getModel().beginUpdate();
-        try {
-            for (Equipo equipo : tablaEquipos.values()){
-                String id = equipo.getCodigo();
-                String estilo = getEstiloNodo(id, tipoEstilo); // Obtiene el estilo correcto
-                mxCell cell = (mxCell) tablaNodos.get(id); // Obtiene el nodo renderizado
-                if (cell != null)
-                    cell.setStyle(estilo);
-            }
-            redVisual.refresh();
-        } finally {
-            redVisual.getModel().endUpdate();
-        }
+        List<String> ids = new ArrayList<>();
+        ids.addAll(tablaEquipos.keySet());
+        setEstiloNodos(ids, tipoEstilo);
     }
 
     public void inicializarEstilos(){

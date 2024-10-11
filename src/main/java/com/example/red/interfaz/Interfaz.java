@@ -121,8 +121,8 @@ public class Interfaz {
 		ventana.setEstiloNodo(id, tipoEstilo);
 	}
 
-	public void setEstiloCaminoNodos(List<String> ids, String tipoEstilo){
-		ventana.setEstiloCaminoNodos(ids, tipoEstilo);
+	public void setEstiloNodos(List<String> ids, String tipoEstilo){
+		ventana.setEstiloNodos(ids, tipoEstilo);
 	}
 
 	public void setEstiloNodoTodos(String tipoEstilo){
