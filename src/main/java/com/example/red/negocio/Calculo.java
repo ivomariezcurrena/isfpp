@@ -1,5 +1,8 @@
 package com.example.red.negocio;
 
+import java.util.List;
+import java.util.TreeMap;
+
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -9,8 +12,6 @@ import org.jgrapht.graph.SimpleWeightedGraph;
 import com.example.red.controlador.Coordinador;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
-
-import java.util.*;
 
 public class Calculo {
     private Coordinador coordinador;
