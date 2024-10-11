@@ -58,6 +58,11 @@
             <artifactId>jgrapht-core</artifactId>
             <version>1.5.3-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.mxgraph</groupId>
+            <artifactId>jgraphx</artifactId>
+            <version>4.2.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

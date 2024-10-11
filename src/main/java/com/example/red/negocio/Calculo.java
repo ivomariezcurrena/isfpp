@@ -15,37 +15,32 @@ import java.util.*;
 public class Calculo {
     private Coordinador coordinador;
 	private Graph<Equipo, DefaultWeightedEdge> red; // red para hacer los cálculos
-	private TreeMap<String, Equipo> tablaEquipos; // ID -> Equipo
-	private TreeMap<String, String> localDns; // IP -> ID
+	private Map<String, Equipo> tablaEquipos; // "ID" -> Equipo
+	private Map<String, String> localDns; // IP -> ID
 
     public void setCoordinador(Coordinador coordinador){
         this.coordinador = coordinador;
     }
 
 	// Se cargan los equipos y conexiones a una red que se usará para los cálculos
-	public void cargarDatos(List<Equipo> equipos, List<Conexion> conexiones) {
+	public void cargarDatos(Map<String, Equipo> tablaEquipos, List<Conexion> conexiones) {
 		red = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
-		tablaEquipos = new TreeMap<>();
 		localDns = new TreeMap<>();
+		this.tablaEquipos = tablaEquipos;
 
-		// Se carga la lista de equipos al grafo "red", al treemap "tablaEquipos" y se
-		// genera el "localDns"
-		for (Equipo equipo : equipos) {
+		// Se carga la lista de equipos al grafo "red"
+		// se genera el "localDns"
+		for (Equipo equipo : tablaEquipos.values()) {
 			// red
 			red.addVertex(equipo);
 
-			// equipos
-			String id = equipo.getCodigo();
-			tablaEquipos.put(id, equipo);
-
 			// localDns
+			String id = equipo.getCodigo();
 			for (String ip : equipo.getDireccionesIP())
 				localDns.put(ip, id);
-
-			System.out.println("Insertar vértice con Id: " + id);
 		}
 
-		// Se carga la lista de conexiones al grafo "red"
+		// Se cargan las conexiones
 		for (Conexion conexion : conexiones) {
 			Equipo source = conexion.getEquipo1();
 			Equipo target = conexion.getEquipo2();
@@ -58,11 +53,6 @@ public class Calculo {
 				velocidadMaxima = Math.min(velocidadMaxima, conexion.getTipocable().getVelocidad());
 				double peso = (1/ (double) velocidadMaxima);
 				red.setEdgeWeight(edge, peso);
-				
-				System.out.println(
-						"Insertar arista entre: " + source.getCodigo() + " y "
-								+ target.getCodigo());
-				System.out.printf("Velocidad cable en s/Mb: %.5f\n ",peso);
 			}
 		}
 	}
@@ -86,54 +76,56 @@ public class Calculo {
 	 * Calcular la velocidad máxima de acuerdo al tipo de puerto y cables por donde
 	 * se transmiten los datos.
 	 */	
-	public String traceRoute(String origen, String destino) {		
-		
+	public List<String> traceRoute(String origen, String destino) {		
+		List<String> resultado = new ArrayList<String>();
 		// Obtener los equipos
 		Equipo equipoOrigen = validarEquipo(origen);
 		Equipo equipoDestino = validarEquipo(destino);
 		
 		// Si al menos uno no se encontró se termina el método
 		if (!red.containsVertex(equipoOrigen) || !red.containsVertex(equipoDestino)) {
-			return "Al menos un equipo no se ha encontrado en la red (Origen: " + equipoOrigen + ", Destino: " + equipoDestino
-					+ ")";
+			return null;
 		}
-
-		// Camino mas corto
-		String mensaje = "";
 
 		DijkstraShortestPath<Equipo, DefaultWeightedEdge> copia = new DijkstraShortestPath<Equipo, DefaultWeightedEdge>(red);
 		GraphPath<Equipo,DefaultWeightedEdge> camino = copia.getPath(equipoOrigen, equipoDestino);
-		
 		if (camino == null) //no existe camino
-			return "No se ha encontrado un camino";
-		
-		List<DefaultWeightedEdge> conexiones = camino.getEdgeList();
-		List<Equipo> equipos = camino.getVertexList();
-					
-		// Se retorna la información en un mensaje
-		mensaje += "Recorrido de " + equipoOrigen.getCodigo() + " a " + equipoDestino.getCodigo() +"\n";
-		for (int i = 0; i < equipos.size() - 1; i++) {
-			Equipo equipo1 = equipos.get(i);
-			Equipo equipo2 = equipos.get(i+1);
-			double peso = red.getEdgeWeight(conexiones.get(i));
-			mensaje += "- " + equipo1.getCodigo() + " -> " + equipo2.getCodigo(); // origen y destino 
-			mensaje += " | Velocidad: " + 1/peso + " Mbps\n"; // velocidad de conexion
+			return null;
+;
+		// Se descartan los equipos inactivos
+		// Se retorna la lista de codigos
+		for (Equipo equipo : camino.getVertexList()){
+			if (equipo.isActivo())
+				resultado.add(equipo.getCodigo());
+			else // corta el camino ante el primer inactivo
+				break;
 		}
-		
-		return mensaje;
+		return resultado;
 	}
 
 	/*
 	 * 2. Realizar un ping a un equipo.
 	 */
-	public String ping(String destino) {
+	public boolean ping(String destino) {
 		Equipo equipo = validarEquipo(destino);
-		String mensaje = "Equipo '" + destino + "' ";
+		if (equipo != null)
+			return equipo.isActivo();
+		return false;
+	}
 
-		if (equipo == null)
-			return mensaje + "no encontrado";
-					
-		return mensaje + (equipo.isActivo()? "activo":"inactivo");
+	public Map<String, Boolean> rangoPing(String rango){
+		int i=0;
+		Map<String, Boolean> resultado = new TreeMap<>();
+
+		for (Equipo e : tablaEquipos.values()) {
+			List<String> equipos = e.getDireccionesIP();
+			String ip = equipos.get(i);
+			
+			if (ip.startsWith(rango)) {
+				resultado.put(e.getCodigo(), e.isActivo());
+			}
+		}
+		return resultado;
 	}
 
 }

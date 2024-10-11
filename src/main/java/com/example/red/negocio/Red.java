@@ -1,7 +1,10 @@
 package com.example.red.negocio;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 import java.util.List;
+import java.util.Map;
+
 
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
@@ -94,6 +97,26 @@ public class Red {
 
 	public List<Conexion> getConexiones() {
 		return conexiones;
+	}
+
+	public Map<String, Equipo> getTablaEquipos(){
+		Map<String, Equipo> tablaEquipos = new TreeMap<>(); // Tabla "ID" -> Equipo
+		for (Equipo equipo : equipos)
+            tablaEquipos.put(equipo.getCodigo(), equipo);
+		return tablaEquipos;
+	}
+
+	public Map<String, Conexion> getTablaConexiones(){
+		Map<String, Conexion> tablaConexiones = new TreeMap<>(); // Tabla "ID ID" -> Conexion
+		for (Conexion conexion : conexiones){
+			Equipo source = conexion.getEquipo1();
+			Equipo target = conexion.getEquipo2();
+			if (source != null || target != null) {
+				String clave = source.getCodigo()+" "+target.getCodigo();
+				tablaConexiones.put(clave, conexion);
+			}
+		}
+		return tablaConexiones;
 	}
 
 	@Override
