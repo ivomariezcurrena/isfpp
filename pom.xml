@@ -59,9 +59,19 @@
             <version>1.5.3-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>com.mxgraph</groupId>
+            <groupId>com.github.vlsi.mxgraph</groupId>
             <artifactId>jgraphx</artifactId>
             <version>4.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jdesktop</groupId>
+            <artifactId>TimmingFramework</artifactId>
+            <version>0.55</version>
+        </dependency>
+        <dependency>
+            <groupId>net.miginfocom</groupId>
+            <artifactId>miglayout</artifactId>
+            <version>4.0</version>
         </dependency>
     </dependencies>
     <build>
