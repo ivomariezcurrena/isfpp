@@ -10,7 +10,7 @@ public class UbicacionServiceImpl implements UbicacionService {
     private GenericDAO<String, Ubicacion> UbicacionDAO;
 
     public UbicacionServiceImpl() {
-        UbicacionDAO = Factory.getInstancia("EQUIPO");
+        UbicacionDAO = Factory.getInstancia("UBICACION");
     }
 
     @Override

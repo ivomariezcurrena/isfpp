@@ -12,10 +12,12 @@ import com.example.red.negocio.Calculo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class CalculoTest {
     private Calculo calculo;
-    private List<Equipo> equipos;
+    private Map<String, Equipo> equipos;
     private List<Conexion> conexiones;
 
     @Before
@@ -24,7 +26,7 @@ public class CalculoTest {
         calculo = new Calculo();
 
         // Crear algunos equipos de ejemplo
-        equipos = new ArrayList<>();
+        equipos = new TreeMap<>();
         TipoEquipo tipoEquipo = new TipoEquipo("TE1", "Router");
         Ubicacion ubicacion = new Ubicacion("U1", "Sala de servidores");
 
@@ -35,8 +37,8 @@ public class CalculoTest {
         equipo2.getDireccionesIP().add("192.168.0.2");
 
         // Agregar equipos a la lista
-        equipos.add(equipo1);
-        equipos.add(equipo2);
+        equipos.put(equipo1.getCodigo(), equipo1);
+        equipos.put(equipo2.getCodigo(), equipo2);
 
         // Crear algunas conexiones
         conexiones = new ArrayList<>();
@@ -55,39 +57,20 @@ public class CalculoTest {
     public void testCargarDatos() {
         calculo.cargarDatos(equipos, conexiones);
 
-        // Verificar que los equipos se han cargado correctamente
-        assertNotNull(calculo.validarEquipo("E1"));
-        assertNotNull(calculo.validarEquipo("E2"));
-
         // Verificar que las conexiones se han establecido
-        String resultado = calculo.traceRoute("E1", "E2");
-        assertTrue(resultado.contains("Recorrido de E1 a E2"));
-    }
-
-    @Test
-    public void testValidarEquipoPorId() {
-        calculo.cargarDatos(equipos, conexiones);
-
-        Equipo equipo = calculo.validarEquipo("E1");
-        assertNotNull(equipo);
-        assertEquals("E1", equipo.getCodigo());
-    }
-
-    @Test
-    public void testValidarEquipoPorIP() {
-        calculo.cargarDatos(equipos, conexiones);
-
-        Equipo equipo = calculo.validarEquipo("192.168.0.1");
-        assertNotNull(equipo);
-        assertEquals("E1", equipo.getCodigo());
+        List<String> resultado = calculo.traceRoute("E1", "E2");
+        List<String> resultadoEsperado = new ArrayList<>();
+        resultadoEsperado.add("E1");
+        resultadoEsperado.add("E2");
+        assertEquals(resultado, resultadoEsperado);
     }
 
     @Test
     public void testPingEquipoActivo() {
         calculo.cargarDatos(equipos, conexiones);
 
-        String resultado = calculo.ping("E1");
-        assertTrue(resultado.contains("activo"));
+        boolean resultado = calculo.ping("E1");
+        assertTrue(resultado);
     }
 
     @Test
@@ -96,20 +79,20 @@ public class CalculoTest {
         Ubicacion ubicacion = new Ubicacion("U2", "Oficina");
         Equipo equipoInactivo = new Equipo("E3", "Router Inactivo", "Cisco", "RV340", new TipoEquipo("TE1", "Router"),
                 ubicacion, false);
-        equipos.add(equipoInactivo);
+        equipos.put(equipoInactivo.getCodigo(), equipoInactivo);
 
         calculo.cargarDatos(equipos, conexiones);
 
-        String resultado = calculo.ping("E3");
-        assertTrue(resultado.contains("inactivo"));
+        boolean resultado = calculo.ping("E3");
+        assertFalse(resultado);
     }
 
     @Test
     public void testTraceRouteNoExistente() {
         calculo.cargarDatos(equipos, conexiones);
 
-        String resultado = calculo.traceRoute("E1", "E3"); // E3 no existe
-        assertTrue(resultado.contains("Al menos un equipo no se ha encontrado en la red"));
+        List<String> resultado = calculo.traceRoute("E1", "E3"); // E3 no existe
+        assertNull(resultado);
     }
 
     @Test
@@ -118,11 +101,11 @@ public class CalculoTest {
         Ubicacion ubicacion = new Ubicacion("U3", "Sala de conferencias");
         Equipo equipo3 = new Equipo("E3", "Router Aislado", "Cisco", "RV340", new TipoEquipo("TE1", "Router"),
                 ubicacion, true);
-        equipos.add(equipo3);
+        equipos.put(equipo3.getCodigo(), equipo3);
 
         calculo.cargarDatos(equipos, conexiones);
 
-        String resultado = calculo.traceRoute("E1", "E3"); // E3 no tiene conexión con E1
-        assertTrue(resultado.contains("No se ha encontrado un camino"));
+        List<String> resultado = calculo.traceRoute("E1", "E3"); // E3 no tiene conexión con E1
+        assertNull(resultado);
     }
 }
