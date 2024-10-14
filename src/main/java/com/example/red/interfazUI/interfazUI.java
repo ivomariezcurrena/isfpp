@@ -4,10 +4,11 @@
  */
 package com.example.red.interfazUI;
 
-import com.example.red.controlador.Coordinador;
+import com.example.red.controladorUI.CoordinadorUI;
 import java.util.List;
 
 import com.example.red.interfaz.Interfaz;
+import com.example.red.controladorUI.AplicacionUI;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Ubicacion;
@@ -18,46 +19,31 @@ import java.util.Map;
  *
  * @author Lautaro
  */
-public class interfazUI extends javax.swing.JFrame {
+public class InterfazUI extends javax.swing.JFrame {
     private Red red;
     private Calculo calculo;
+    
 
-    // vista
-    private Interfaz interfaz;
-    // controlador
-    private Coordinador coordinador;
     /**
      * Creates new form interfazUI
      */
-    public interfazUI() {
-        initComponents();
+    public InterfazUI() {
+        initComponents();      
         red = Red.getRed();
         calculo = new Calculo();
-        coordinador = new Coordinador();
-        interfaz = new Interfaz();
+        calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones()); 
 
-        calculo.setCoordinador(coordinador);
-        interfaz.setCoordinador(coordinador);
+       
+        //for(Map.Entry<String, Equipo> sus : red.getTablaEquipos()){ 
+         //    private String id = sus.getCodigo;
 
-        coordinador.setCalculo(calculo);
-        coordinador.setInterfaz(interfaz);
-        coordinador.setRed(red);
-        
-        
-    }
-    private void consultar() {
-        calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
-        interfaz.cargarDatos(red.getTablaEquipos(), red.getTablaConexiones());
-
-        interfaz.iniciarConsola();
-        interfaz.iniciarInterfaz();
-        interfaz.mostrarMenu();
-     
-        interfaz.cerrarConsola();
-        interfaz.cerrarInterfaz();
-        
-    }
-    
+             PingBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP01"}));
+             TraceBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP01"})); 
+             TraceBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP09"}));
+             jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
+       // } 
+    } 
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,6 +63,7 @@ public class interfazUI extends javax.swing.JFrame {
         TraceBox1 = new javax.swing.JComboBox<>();
         TraceBox2 = new javax.swing.JComboBox<>();
         TraceBoton = new javax.swing.JButton();
+        DecorLabel = new javax.swing.JLabel();
         RangoPanel = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
         RangoBoton = new javax.swing.JButton();
@@ -87,10 +74,11 @@ public class interfazUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 133, 132));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+      
 
         PingPanel.setBackground(new java.awt.Color(233, 233, 233));
 
-        PingBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AP01", "Item 2", "Item 3", "Item 4" }));
+       
         PingBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PingBoxMouseEntered(evt);
@@ -105,6 +93,7 @@ public class interfazUI extends javax.swing.JFrame {
             }
         });
 
+        PingBoton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         PingBoton.setText("Realizar Ping");
         PingBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -146,7 +135,7 @@ public class interfazUI extends javax.swing.JFrame {
 
         TracePanel.setBackground(new java.awt.Color(233, 233, 233));
 
-        TraceBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AP01", "Item 2", "Item 3", "Item 4" }));
+        TraceBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         TraceBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 TraceBox1MouseEntered(evt);
@@ -155,8 +144,9 @@ public class interfazUI extends javax.swing.JFrame {
                 TraceBox1MouseExited(evt);
             }
         });
+        
 
-        TraceBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AP03", "Item 2", "Item 3", "Item 4" }));
+        TraceBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         TraceBox2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 TraceBox2MouseEntered(evt);
@@ -166,6 +156,7 @@ public class interfazUI extends javax.swing.JFrame {
             }
         });
 
+        TraceBoton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         TraceBoton.setText("Trazar Ruta");
         TraceBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -178,11 +169,11 @@ public class interfazUI extends javax.swing.JFrame {
                 TraceBotonMouseExited(evt);
             }
         });
-        TraceBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TraceBotonActionPerformed(evt);
-            }
-        });
+       
+
+        DecorLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        DecorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        DecorLabel.setText(" < - - - - - ? ? ? - - - - - >");
 
         javax.swing.GroupLayout TracePanelLayout = new javax.swing.GroupLayout(TracePanel);
         TracePanel.setLayout(TracePanelLayout);
@@ -191,13 +182,15 @@ public class interfazUI extends javax.swing.JFrame {
             .addGroup(TracePanelLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(TraceBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(DecorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(TraceBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(TracePanelLayout.createSequentialGroup()
                 .addGap(240, 240, 240)
                 .addComponent(TraceBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         TracePanelLayout.setVerticalGroup(
             TracePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +198,8 @@ public class interfazUI extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addGroup(TracePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TraceBox2, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                    .addComponent(TraceBox1))
+                    .addComponent(TraceBox1)
+                    .addComponent(DecorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(TraceBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -215,8 +209,9 @@ public class interfazUI extends javax.swing.JFrame {
 
         RangoPanel.setBackground(new java.awt.Color(233, 233, 233));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        
 
+        RangoBoton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
         RangoBoton.setText("jButton1");
         RangoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -253,6 +248,8 @@ public class interfazUI extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -288,10 +285,6 @@ public class interfazUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TraceBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TraceBotonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TraceBotonActionPerformed
-
     private void PingBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PingBotonMouseEntered
         PingBoton.setBackground(new java.awt.Color(0, 133, 132));
     }//GEN-LAST:event_PingBotonMouseEntered
@@ -309,11 +302,11 @@ public class interfazUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TraceBotonMouseExited
 
     private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PingBotonMouseClicked
-        String id = red.validarEquipo((String)PingBox.getSelectedItem());
+        String id = red.validarEquipo((String)PingBox.getSelectedItem());      
         if (id != null){
             jLabel1.setText("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));         
         } else {
-            jLabel1.setText("El equipo '" + (String)PingBox.getSelectedItem()+"' no se ha encontrado en la red");
+           jLabel1.setText("El equipo '" + (String)PingBox.getSelectedItem()+"' no se ha encontrado en la red");
         }       
         
     }//GEN-LAST:event_PingBotonMouseClicked
@@ -383,6 +376,7 @@ public class interfazUI extends javax.swing.JFrame {
         TraceBox2.setBackground(new java.awt.Color(225, 225, 225));
     }//GEN-LAST:event_TraceBox2MouseExited
 
+
     /**
      * @param args the command line arguments
      */
@@ -400,25 +394,27 @@ public class interfazUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(interfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(interfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(interfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(interfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfazUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+       
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new interfazUI().setVisible(true);
+                new InterfazUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DecorLabel;
     private javax.swing.JButton PingBoton;
     private javax.swing.JComboBox<String> PingBox;
     private javax.swing.JPanel PingPanel;
