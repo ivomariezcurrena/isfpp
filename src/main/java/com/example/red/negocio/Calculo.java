@@ -137,13 +137,18 @@ public class Calculo {
 		return mensaje + (equipo.isActivo()? "activo":"inactivo");
 	}
 
+	/**
+	 * @param rango espera un rango de ip como por ej 192.234.
+	 * @return mensaje con todos los equipos en ese rango y su estado.
+	 * 
+	 */
 	public String rangoPing(String rango){
-		int i=0;
+		final int IP_PRINCIPAL=0;
 		String mensaje = "Estado de los equipos: \n";
-		
+
 		for (Equipo e : tablaEquipos.values()) {
 			List<String> equipos =e.getDireccionesIP();
-			String ip =equipos.get(i);
+			String ip =equipos.get(IP_PRINCIPAL);
 
 			if (ip.startsWith(rango)) {
 				mensaje += e.getCodigo()+" " +ip +" "+(e.isActivo()? "activo\n":"inactivo\n");
