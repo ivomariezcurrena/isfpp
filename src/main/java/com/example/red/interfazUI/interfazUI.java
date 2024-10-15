@@ -5,6 +5,8 @@
 package com.example.red.interfazUI;
 
 import com.example.red.controladorUI.CoordinadorUI;
+
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.red.interfaz.Interfaz;
@@ -15,6 +17,7 @@ import com.example.red.modelo.Ubicacion;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
 import java.util.Map;
+
 /**
  *
  * @author Lautaro
@@ -32,16 +35,20 @@ public class InterfazUI extends javax.swing.JFrame {
         red = Red.getRed();
         calculo = new Calculo();
         calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones()); 
-
-       
-        //for(Map.Entry<String, Equipo> sus : red.getTablaEquipos()){ 
-         //    private String id = sus.getCodigo;
-
-             PingBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP01"}));
-             TraceBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP01"})); 
-             TraceBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"AP09"}));
-             jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1" }));
-       // } 
+        
+        RangoBox1.addItem("192.168.16");       
+        PingBoton.setBackground(new java.awt.Color(225, 225, 225));
+        TraceBoton.setBackground(new java.awt.Color(225, 225, 225));
+        RangoBoton.setBackground(new java.awt.Color(225,225,225));
+        
+        for (Equipo equipo : red.getEquipos()){ 
+            String displayText = equipo.getCodigo();
+            
+            PingBox.addItem(displayText);
+            TraceBox1.addItem(displayText); 
+            TraceBox2.addItem(displayText);
+            
+       } 
     } 
    
 
@@ -65,20 +72,25 @@ public class InterfazUI extends javax.swing.JFrame {
         TraceBoton = new javax.swing.JButton();
         DecorLabel = new javax.swing.JLabel();
         RangoPanel = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        RangoBox1 = new javax.swing.JComboBox<>();
         RangoBoton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 133, 132));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-      
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseEntered(evt);
+            }
+        });
 
         PingPanel.setBackground(new java.awt.Color(233, 233, 233));
 
-       
         PingBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 PingBoxMouseEntered(evt);
@@ -119,7 +131,7 @@ public class InterfazUI extends javax.swing.JFrame {
                     .addGroup(PingPanelLayout.createSequentialGroup()
                         .addGap(240, 240, 240)
                         .addComponent(PingBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         PingPanelLayout.setVerticalGroup(
             PingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,7 +147,6 @@ public class InterfazUI extends javax.swing.JFrame {
 
         TracePanel.setBackground(new java.awt.Color(233, 233, 233));
 
-        TraceBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         TraceBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 TraceBox1MouseEntered(evt);
@@ -144,9 +155,12 @@ public class InterfazUI extends javax.swing.JFrame {
                 TraceBox1MouseExited(evt);
             }
         });
-        
+        TraceBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TraceBox1ActionPerformed(evt);
+            }
+        });
 
-        TraceBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
         TraceBox2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 TraceBox2MouseEntered(evt);
@@ -169,7 +183,11 @@ public class InterfazUI extends javax.swing.JFrame {
                 TraceBotonMouseExited(evt);
             }
         });
-       
+        TraceBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TraceBotonActionPerformed(evt);
+            }
+        });
 
         DecorLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         DecorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -186,11 +204,11 @@ public class InterfazUI extends javax.swing.JFrame {
                 .addComponent(DecorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(TraceBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(TracePanelLayout.createSequentialGroup()
                 .addGap(240, 240, 240)
                 .addComponent(TraceBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(280, Short.MAX_VALUE))
         );
         TracePanelLayout.setVerticalGroup(
             TracePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,13 +227,33 @@ public class InterfazUI extends javax.swing.JFrame {
 
         RangoPanel.setBackground(new java.awt.Color(233, 233, 233));
 
-        
+        RangoBox1.setEditable(true);
+        RangoBox1.setSelectedIndex(-1);
+        RangoBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                RangoBox1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                RangoBox1MouseExited(evt);
+            }
+        });
 
         RangoBoton.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        RangoBoton.setText("jButton1");
+        RangoBoton.setText("Ver equipos");
         RangoBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 RangoBotonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                RangoBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                RangoBotonMouseExited(evt);
+            }
+        });
+        RangoBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RangoBotonActionPerformed(evt);
             }
         });
 
@@ -224,8 +262,8 @@ public class InterfazUI extends javax.swing.JFrame {
         RangoPanelLayout.setHorizontalGroup(
             RangoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RangoPanelLayout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(237, Short.MAX_VALUE)
+                .addComponent(RangoBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(253, 253, 253))
             .addGroup(RangoPanelLayout.createSequentialGroup()
                 .addGap(240, 240, 240)
@@ -236,7 +274,7 @@ public class InterfazUI extends javax.swing.JFrame {
             RangoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RangoPanelLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RangoBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(RangoBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
@@ -244,42 +282,36 @@ public class InterfazUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Rango", RangoPanel);
 
-        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 260));
+        jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 640, 260));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Bienvenido");
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 628, 80));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 630, 21));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 580, 200));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 640, 200));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 665, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -302,7 +334,8 @@ public class InterfazUI extends javax.swing.JFrame {
     }//GEN-LAST:event_TraceBotonMouseExited
 
     private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PingBotonMouseClicked
-        String id = red.validarEquipo((String)PingBox.getSelectedItem());      
+        String id = red.validarEquipo((String)PingBox.getSelectedItem()); 
+        jLabel2.setText("");
         if (id != null){
             jLabel1.setText("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));         
         } else {
@@ -316,24 +349,30 @@ public class InterfazUI extends javax.swing.JFrame {
     }//GEN-LAST:event_PingBoxActionPerformed
 
     private void TraceBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TraceBotonMouseClicked
-        String id1 = red.validarEquipo((String)TraceBox1.getSelectedItem());
-        String id2 = red.validarEquipo((String)TraceBox2.getSelectedItem());
+        String id1 = (String)TraceBox1.getSelectedItem();
+        String id2 = (String)TraceBox2.getSelectedItem();
         List<String> resultado = null;
+        String msj = "";
         if (id1 != null && id2 != null)
             resultado = calculo.traceRoute(id1, id2);
-        if (resultado == null)
+        if (resultado == null){
             jLabel1.setText("Al menos un equipo no se ha encontrado en la red");
-        else if (resultado.isEmpty())
-            jLabel1.setText("No se ha encontrado un camino de equipos activos");
-        else if (!resultado.get(0).equals(id1) || !resultado.get(resultado.size() - 1).equals(id2))
-            jLabel1.setText("No se ha encontrado un camino de equipos activos");
-        else {
-            jLabel1.setText("Camino encontrado:");
+            jLabel2.setText(":c");
+        }
+         else if (resultado.isEmpty()){
+             jLabel1.setText("No se ha encontrado un camino de equipos activos");
+             jLabel2.setText(":c");}
+         //else if (!resultado.get(0).equals(id1) || !resultado.get(resultado.size() - 1).equals(id2)){   ESTE DA FALSO POSITIVO
+        //    jLabel1.setText("No se ha encontrado un camino de equipos activos");
+         //    jLabel2.setText(":c");}
+        else{
+            jLabel2.setText("Camino encontrado:");
             for (int i = 0; i < resultado.size() - 1; i++) {
                 id1 = resultado.get(i);
                 id2 = resultado.get(i + 1);
-                jLabel1.setText("- " + id1 + " -> " + id2);
-            }                       
+                msj = msj + ("- " + id1 + " -> " + id2);
+            } 
+            jLabel1.setText(msj);
         }
     }//GEN-LAST:event_TraceBotonMouseClicked
 
@@ -346,20 +385,26 @@ public class InterfazUI extends javax.swing.JFrame {
     }//GEN-LAST:event_PingBoxMouseExited
 
     private void RangoBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBotonMouseClicked
-        List<String> equiposConEsaIP = red.rangoEquiposIP((String)jComboBox1.getSelectedItem());
-        if (equiposConEsaIP.isEmpty())
+        List<String> equiposConEsaIP = red.rangoEquiposIP((String)RangoBox1.getSelectedItem());
+        String msj = "";
+        if (equiposConEsaIP.isEmpty()){
             jLabel1.setText("Ningun equipo encontrado");
+            jLabel2.setText("F");}
         else {
             Map<String, Boolean> resultado = calculo.rangoPing(equiposConEsaIP);
-            jLabel1.setText("Estado de los equipos: \n");
+            jLabel2.setText("Estado de los equipos:");
             for (Map.Entry<String, Boolean> entry : resultado.entrySet()) {
-                String id = entry.getKey();
+                String id = entry.getKey();              
                 boolean isActivo = entry.getValue();
-                jLabel1.setText(id + " " + (isActivo ? "activo" : "inactivo"));               
+                msj = msj + (id + " " + (isActivo ? "activo \n" : "inactivo \n"));
+                               
             }
+            jLabel1.setText(msj);
         }
     }//GEN-LAST:event_RangoBotonMouseClicked
-
+    private void TraceBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }
     private void TraceBox1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TraceBox1MouseEntered
         TraceBox1.setBackground(new java.awt.Color(0, 133, 132));
     }//GEN-LAST:event_TraceBox1MouseEntered
@@ -367,7 +412,9 @@ public class InterfazUI extends javax.swing.JFrame {
     private void TraceBox1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TraceBox1MouseExited
         TraceBox1.setBackground(new java.awt.Color(225, 225, 225));
     }//GEN-LAST:event_TraceBox1MouseExited
-
+    private void jTabbedPane1MouseEntered(java.awt.event.MouseEvent evt) {                                           
+        // TODO add your handling code here:
+    }
     private void TraceBox2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TraceBox2MouseEntered
         TraceBox2.setBackground(new java.awt.Color(0, 133, 132));
     }//GEN-LAST:event_TraceBox2MouseEntered
@@ -376,6 +423,28 @@ public class InterfazUI extends javax.swing.JFrame {
         TraceBox2.setBackground(new java.awt.Color(225, 225, 225));
     }//GEN-LAST:event_TraceBox2MouseExited
 
+    private void RangoBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RangoBotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RangoBotonActionPerformed
+
+    private void RangoBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBotonMouseExited
+        RangoBoton.setBackground(new java.awt.Color(225,225,225));
+    }//GEN-LAST:event_RangoBotonMouseExited
+
+    private void RangoBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBotonMouseEntered
+        RangoBoton.setBackground(new java.awt.Color(0, 133, 132));
+    }//GEN-LAST:event_RangoBotonMouseEntered
+
+    private void RangoBox1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBox1MouseEntered
+        RangoBox1.setBackground(new java.awt.Color(0, 133, 132));
+    }//GEN-LAST:event_RangoBox1MouseEntered
+
+    private void RangoBox1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBox1MouseExited
+        RangoBox1.setBackground(new java.awt.Color(225,225,225));
+    }//GEN-LAST:event_RangoBox1MouseExited
+    private void TraceBotonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        // TODO add your handling code here:
+    }
 
     /**
      * @param args the command line arguments
@@ -419,13 +488,14 @@ public class InterfazUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> PingBox;
     private javax.swing.JPanel PingPanel;
     private javax.swing.JButton RangoBoton;
+    private javax.swing.JComboBox<String> RangoBox1;
     private javax.swing.JPanel RangoPanel;
     private javax.swing.JButton TraceBoton;
     private javax.swing.JComboBox<String> TraceBox1;
     private javax.swing.JComboBox<String> TraceBox2;
     private javax.swing.JPanel TracePanel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;

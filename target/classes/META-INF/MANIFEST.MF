@@ -1,0 +1,34 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1728953561686
+Build-Jdk-Spec: 23
+Bundle-Description: A Java class library for graph-theory data structure
+ s and algorithms.
+Bundle-License: http://jgrapht.sourceforge.net/LGPL.html, http://www.ecl
+ ipse.org/legal/epl-v20.html
+Bundle-ManifestVersion: 2
+Bundle-Name: JGraphT - Core
+Bundle-SymbolicName: org.jgrapht.core
+Bundle-Version: 1.5.2
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Export-Package: com.example.red.conexion;version="1.5.2",com.example.red
+ .controlador;version="1.5.2";uses:="com.example.red.interfaz,com.exampl
+ e.red.modelo,com.example.red.negocio",com.example.red.controladorUI;ver
+ sion="1.5.2";uses:="com.example.red.modelo,com.example.red.negocio",com
+ .example.red.dao;version="1.5.2",com.example.red.dao.secuencial;version
+ ="1.5.2";uses:="com.example.red.dao,com.example.red.modelo",com.example
+ .red.interfaz;version="1.5.2";uses:="com.example.red.controlador,com.ex
+ ample.red.modelo,javax.swing",com.example.red.interfazUI;version="1.5.2
+ ";uses:="javax.swing",com.example.red.modelo;version="1.5.2",com.exampl
+ e.red.negocio;version="1.5.2";uses:="com.example.red.controlador,com.ex
+ ample.red.modelo",com.example.red.servicio;version="1.5.2";uses:="com.e
+ xample.red.modelo"
+Import-Package: com.mxgraph.layout;version="[4.2,5)",com.mxgraph.model;v
+ ersion="[4.2,5)",com.mxgraph.swing;version="[4.2,5)",com.mxgraph.util;v
+ ersion="[4.2,5)",com.mxgraph.view;version="[4.2,5)",java.awt,java.awt.e
+ vent,java.io,java.lang,java.lang.invoke,java.lang.reflect,java.util,jav
+ a.util.logging,javax.swing,org.jgrapht;version="[1.5,2)",org.jgrapht.al
+ g.shortestpath;version="[1.5,2)",org.jgrapht.graph;version="[1.5,2)",or
+ g.netbeans.lib.awtextra
+Originally-Created-By: Apache Maven Bundle Plugin 5.1.8
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316
