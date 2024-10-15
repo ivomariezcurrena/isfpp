@@ -8,43 +8,42 @@ import com.example.red.controlador.Coordinador;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 
-
 public class Interfaz {
-    private Coordinador coordinador;
+	private Coordinador coordinador;
 	private RedVisual ventana;
-    
+
 	/**
-     * La instancia para utilizar la entrada por consola "System.in". Es necesario
-     * utilizar solo una, ya que al llamar al método input.close() se cerrará
-     * definitivamente el canal "System.in" (verificable viendo el status de
-     * System.in.available())
+	 * La instancia para utilizar la entrada por consola "System.in". Es necesario
+	 * utilizar solo una, ya que al llamar al método input.close() se cerrará
+	 * definitivamente el canal "System.in" (verificable viendo el status de
+	 * System.in.available())
 	 */
-    private static Scanner input;
-    
-    public Interfaz() {
-        
-    }
+	private static Scanner input;
 
-    public void setCoordinador(Coordinador coordinador){
-        this.coordinador = coordinador;
-    }
+	public Interfaz() {
 
-    /**
-     * Inicia el canal de entrada por consola
+	}
+
+	public void setCoordinador(Coordinador coordinador) {
+		this.coordinador = coordinador;
+	}
+
+	/**
+	 * Inicia el canal de entrada por consola
 	 */
-    public void iniciarConsola() {
+	public void iniciarConsola() {
 		input = new Scanner(System.in);
 	}
 
 	/*
 	 * Inicia la interfaz grafica
 	 */
-	public void iniciarInterfaz(){
+	public void iniciarInterfaz() {
 		ventana.renderizarRed();
 		ventana.renderizarBotones();
 	}
 
-    /**
+	/**
 	 * Cierra el canal de entrada por consola
 	 */
 	public void cerrarConsola() {
@@ -54,12 +53,12 @@ public class Interfaz {
 	/*
 	 * Cierra la interfaz gráfica
 	 */
-	public void cerrarInterfaz(){
+	public void cerrarInterfaz() {
 		ventana.dispose();
 	}
 
-    /**
-	 * Permite ingresar comandos por consola 
+	/**
+	 * Permite ingresar comandos por consola
 	 * 
 	 * @return arreglo donde el indice [0] es el comando elegido, [1] el
 	 *         primer parámetro y [2] el segundo parámetro, si existen
@@ -109,9 +108,9 @@ public class Interfaz {
 	/**
 	 * Muestra un mensaje
 	 */
-    public void mostrar(String mensaje){
-        System.out.println(mensaje);
-    }
+	public void mostrar(String mensaje) {
+		System.out.println(mensaje);
+	}
 
 	/**
 	 * Muestra un mensaje de error
@@ -120,36 +119,36 @@ public class Interfaz {
 		System.err.println(mensaje);
 	}
 
-	public void cargarDatos(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones){
+	public void cargarDatos(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
 		ventana = new RedVisual();
 		ventana.cargarDatos(tablaEquipos, tablaConexiones);
 	}
 
-	public void setEstiloNodo(String id, String tipoEstilo){
+	public void setEstiloNodo(String id, String tipoEstilo) {
 		ventana.setEstiloNodo(id, tipoEstilo);
 	}
 
-	public void setEstiloArco(String id1, String id2, String tipoEstilo){
+	public void setEstiloArco(String id1, String id2, String tipoEstilo) {
 		ventana.setEstiloArco(id1, id2, tipoEstilo);
 	}
 
-	public void setEstiloNodos(List<String> ids, String tipoEstilo){
+	public void setEstiloNodos(List<String> ids, String tipoEstilo) {
 		ventana.setEstiloNodos(ids, tipoEstilo);
 	}
 
-	public void setEstiloArcos(List<String[]> paresIds, String tipoEstilo){
+	public void setEstiloArcos(List<String[]> paresIds, String tipoEstilo) {
 		ventana.setEstiloArcos(paresIds, tipoEstilo);
 	}
 
-	public void setEstiloCaminoArcos(List<String> ids, String tipoEstilo){
+	public void setEstiloCaminoArcos(List<String> ids, String tipoEstilo) {
 		ventana.setEstiloCaminoArcos(ids, tipoEstilo);
 	}
 
-	public void setEstiloNodosTodos(String tipoEstilo){
+	public void setEstiloNodosTodos(String tipoEstilo) {
 		ventana.setEstiloNodosTodos(tipoEstilo);
 	}
 
-	public void setEstiloArcosTodos(String tipoEstilo){
+	public void setEstiloArcosTodos(String tipoEstilo) {
 		ventana.setEstiloArcosTodos(tipoEstilo);
 	}
 }

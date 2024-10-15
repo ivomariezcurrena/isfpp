@@ -1,9 +1,13 @@
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\UbicacionService.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\swing\Button.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\modelo\Equipo.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\negocio\Red.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfazUI\InterfazUI.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\modelo\Ubicacion.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\component\PanelLoginAndRegister.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\modelo\TipoCable.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\swing\MyTextField.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\swing\MyPasswordField.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\TipoCableServiceImpl.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\TipoEquipoServiceImpl.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\secuencial\UbicacionSecuencialDAO.java
@@ -19,8 +23,9 @@ C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\TipoPuertoSe
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\secuencial\TipoPuertoSecuencialDAO.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\controladorUI\AplicacionUI.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\secuencial\EquipoSecuencialDAO.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\login\Main.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\secuencial\TipoEquipoSecuencialDAO.java
-C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfazUI\ModernLogin.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\swing\ButtonOutLine.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\modelo\TipoEquipo.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\EquipoServiceImpl.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\negocio\Calculo.java
@@ -33,6 +38,8 @@ C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\controlador\Constante
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\controlador\AplicacionConsultas.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\ConexionService.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\GenericDAO.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\InterfazUI.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\servicio\TipoCableService.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\dao\secuencial\ConexionSecuancialDAO.java
+C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz_ui\component\PanelCover.java
 C:\Users\rytux\Desktop\isfpp\src\main\java\com\example\red\interfaz\Interfaz.java
