@@ -1,12 +1,12 @@
 package com.example.red.interfaz;
 
-import java.util.Scanner;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
-import com.example.red.modelo.Equipo;
-import com.example.red.modelo.Conexion;
 import com.example.red.controlador.Coordinador;
+import com.example.red.modelo.Conexion;
+import com.example.red.modelo.Equipo;
 
 
 public class Interfaz {
@@ -88,9 +88,6 @@ public class Interfaz {
 				+ "|----------------------------------------------------------------|\n"
 				+ "| ping <IP/ID>                                                   |\n"
 				+ "|     Verifica si un equipo está activo dado su IP o ID          |\n"
-				+ "|----------------------------------------------------------------|\n"
-				+ "| rango <IP (primeros digitos)>                                  |\n"
-				+ "|     Devuelve el estado de todas las ip en un rango determinado |\n"
 				+ "|----------------------------------------------------------------|\n"
 				+ "| rango <IP (primeros digitos)>                                  |\n"
 				+ "|     Devuelve el estado de todas las ip en un rango determinado |\n"
