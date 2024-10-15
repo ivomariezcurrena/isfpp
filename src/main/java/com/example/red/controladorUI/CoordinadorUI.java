@@ -2,7 +2,7 @@ package com.example.red.controladorUI;
 
 import java.util.List;
 
-import com.example.red.interfazUI.InterfazUI;
+import com.example.red.interfaz_ui.InterfazUI;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Ubicacion;
@@ -28,8 +28,8 @@ public class CoordinadorUI {
 
     public void setCalculo(Calculo calculo) {
         this.calculo = calculo;
-    }   
-  
+    }
+
     public Equipo buscarEquipos(Equipo equipo) {
         return red.buscarEquipo(equipo);
     }

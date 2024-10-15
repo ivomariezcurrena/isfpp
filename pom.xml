@@ -71,6 +71,29 @@
             <version>RELEASE90</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>TimingFramework-0.55.jar</groupId>
+            <artifactId>TimingFramework-0.55.jar</artifactId>
+            <version>0.55</version>
+        </dependency>
+        <dependency>
+            <groupId>miglayout-4.0.jar</groupId>
+            <artifactId>miglayout</artifactId>
+            <version>4.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.miginfocom</groupId>
+            <artifactId>miglayout</artifactId>
+            <version>4.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.metawidget.modules</groupId>
+            <artifactId>metawidget-miglayout</artifactId>
+            <version>4.2</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
