@@ -1,11 +1,15 @@
 package com.example.red.interfaz_ui.component;
 
+import com.example.red.interfaz_ui.model.ModelUser;
 import com.example.red.interfaz_ui.swing.Button;
 import com.example.red.interfaz_ui.swing.MyPasswordField;
 import com.example.red.interfaz_ui.swing.MyTextField;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,17 +18,23 @@ import net.miginfocom.swing.MigLayout;
 //es un panel que puede contener múltiples capas de componentes. Este panel específico gestiona dos secciones: una para iniciar sesión y otra para registrarse. Dependiendo del estado, una de las dos vistas (login o register) se hace visible
 public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
-    public PanelLoginAndRegister() {
+    public ModelUser getUser() {
+        return user;
+    }
+
+    private ModelUser user;
+
+    public PanelLoginAndRegister(ActionListener eventRegister) {
         // es responsable de inicializar los componentes del panel
         initComponents();
-        initRegister();// para configurar los paneles de registro e inicio de sesion
+        initRegister(eventRegister);// para configurar los paneles de registro e inicio de sesion
         initLogin();// para configurar los paneles de registro e inicio de sesion
         login.setVisible(false);// login configurado como invisible
         registrar.setVisible(true);// registrar confirmado como visible
     }
 
     // metodo para iniciar in panel
-    private void initRegister() {
+    private void initRegister(ActionListener eventRegister) {
         registrar.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
         JLabel label = new JLabel("Crear Cuenta");
         label.setFont(new Font("sansserif", 1, 30));
@@ -57,8 +67,18 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         Button cmd = new Button();
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
+        cmd.addActionListener(eventRegister);
         cmd.setText("REGISTRARSE");
         registrar.add(cmd, "w 40%, h 40");
+        cmd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String userName = txtUser.getText().trim();
+                String email = txtEmail.getText().trim();
+                String password = String.valueOf(txtPass.getPassword());
+                user = new ModelUser(0, userName, email, password);
+            }
+        });
     }
 
     private void initLogin() {
