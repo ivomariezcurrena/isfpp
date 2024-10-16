@@ -76,7 +76,9 @@ public class InterfazUI extends javax.swing.JFrame {
         RangoBoton = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        HelperLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,7 +230,6 @@ public class InterfazUI extends javax.swing.JFrame {
         RangoPanel.setBackground(new java.awt.Color(233, 233, 233));
 
         RangoBox1.setEditable(true);
-        RangoBox1.setSelectedIndex(-1);
         RangoBox1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 RangoBox1MouseEntered(evt);
@@ -292,10 +293,16 @@ public class InterfazUI extends javax.swing.JFrame {
         jLabel1.setText("Bienvenido");
         jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 65, 628, 80));
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 630, 21));
+        HelperLabel.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        HelperLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        HelperLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jPanel4.add(HelperLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 630, 21));
+
+        jLabel2.setText("jLabel2");
+        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 640, 40));
+
+        jLabel3.setText("jLabel3");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 640, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 640, 200));
 
@@ -335,7 +342,7 @@ public class InterfazUI extends javax.swing.JFrame {
 
     private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PingBotonMouseClicked
         String id = red.validarEquipo((String)PingBox.getSelectedItem()); 
-        jLabel2.setText("");
+        HelperLabel.setText("");
         if (id != null){
             jLabel1.setText("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));         
         } else {
@@ -357,16 +364,16 @@ public class InterfazUI extends javax.swing.JFrame {
             resultado = calculo.traceRoute(id1, id2);
         if (resultado == null){
             jLabel1.setText("Al menos un equipo no se ha encontrado en la red");
-            jLabel2.setText(":c");
+            HelperLabel.setText(":c");
         }
          else if (resultado.isEmpty()){
              jLabel1.setText("No se ha encontrado un camino de equipos activos");
-             jLabel2.setText(":c");}
+             HelperLabel.setText(":c");}
          //else if (!resultado.get(0).equals(id1) || !resultado.get(resultado.size() - 1).equals(id2)){   ESTE DA FALSO POSITIVO
         //    jLabel1.setText("No se ha encontrado un camino de equipos activos");
          //    jLabel2.setText(":c");}
         else{
-            jLabel2.setText("Camino encontrado:");
+            HelperLabel.setText("Camino encontrado:");
             for (int i = 0; i < resultado.size() - 1; i++) {
                 id1 = resultado.get(i);
                 id2 = resultado.get(i + 1);
@@ -387,19 +394,35 @@ public class InterfazUI extends javax.swing.JFrame {
     private void RangoBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RangoBotonMouseClicked
         List<String> equiposConEsaIP = red.rangoEquiposIP((String)RangoBox1.getSelectedItem());
         String msj = "";
+        String msj2 = "";
+        String msj3 = "";
+        int count = 0;
         if (equiposConEsaIP.isEmpty()){
             jLabel1.setText("Ningun equipo encontrado");
-            jLabel2.setText("F");}
+            HelperLabel.setText("F");}
         else {
             Map<String, Boolean> resultado = calculo.rangoPing(equiposConEsaIP);
-            jLabel2.setText("Estado de los equipos:");
+            HelperLabel.setText("Estado de los equipos:");
             for (Map.Entry<String, Boolean> entry : resultado.entrySet()) {
+                if (count<5){
                 String id = entry.getKey();              
                 boolean isActivo = entry.getValue();
                 msj = msj + (id + " " + (isActivo ? "activo \n" : "inactivo \n"));
-                               
+                count++;}
+                else if(count<12){
+                String id = entry.getKey();              
+                boolean isActivo = entry.getValue();
+                msj2 = msj2 + (id + " " + (isActivo ? "activo \n" : "inactivo \n"));
+                count++;}else{
+                String id = entry.getKey();              
+                boolean isActivo = entry.getValue();
+                msj3 = msj3 + (id + " " + (isActivo ? "activo \n" : "inactivo \n"));
+                count++;
+                }                              
             }
             jLabel1.setText(msj);
+            jLabel2.setText(msj2);
+            jLabel3.setText(msj3);
         }
     }//GEN-LAST:event_RangoBotonMouseClicked
     private void TraceBox1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
@@ -484,6 +507,7 @@ public class InterfazUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DecorLabel;
+    private javax.swing.JLabel HelperLabel;
     private javax.swing.JButton PingBoton;
     private javax.swing.JComboBox<String> PingBox;
     private javax.swing.JPanel PingPanel;
@@ -496,6 +520,7 @@ public class InterfazUI extends javax.swing.JFrame {
     private javax.swing.JPanel TracePanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTabbedPane jTabbedPane1;
