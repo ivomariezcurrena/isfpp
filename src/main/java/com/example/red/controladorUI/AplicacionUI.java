@@ -6,16 +6,15 @@ import java.util.Map.Entry;
 
 import com.example.red.controlador.AplicacionConsultas;
 import com.example.red.controlador.Coordinador;
-import com.example.red.interfazUI.InterfazUI;
+import com.example.red.interfaz_ui.InterfazUI;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.EquipoExistenteExeption;
 import com.example.red.negocio.Red;
 
-
 public class AplicacionUI {
-     private Red red;
+    private Red red;
     private Calculo calculo;
-      
+
     private InterfazUI interfaz;
     // controlador
     private Coordinador coordinador;
@@ -23,10 +22,9 @@ public class AplicacionUI {
 
     public static void main(String[] args) throws EquipoExistenteExeption {
         AplicacionConsultas app = new AplicacionConsultas();
-         
+
         new InterfazUI().setVisible(true);
-            
-      
+
     }
 
     private void iniciar() throws EquipoExistenteExeption {
@@ -37,7 +35,6 @@ public class AplicacionUI {
         interfaz = new InterfazUI();
 
         calculo.setCoordinador(coordinador);
-       
 
         coordinador.setCalculo(calculo);
 
@@ -46,22 +43,21 @@ public class AplicacionUI {
 
     public void consultar() {
         calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
-                                   
+
     }
 
-
-    public String ping(String parametro1){
+    public String ping(String parametro1) {
         String id = red.validarEquipo(parametro1);
-        if (id != null){
+        if (id != null) {
             mensage = ("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));
-           
+
         } else {
-            mensage = ("El equipo '" + parametro1+"' no se ha encontrado en la red");
+            mensage = ("El equipo '" + parametro1 + "' no se ha encontrado en la red");
         }
         return mensage;
     }
 
-    private String traceRoute(String parametro1, String parametro2){
+    private String traceRoute(String parametro1, String parametro2) {
         String id1 = red.validarEquipo(parametro1);
         String id2 = red.validarEquipo(parametro2);
         List<String> resultado = null;
@@ -80,16 +76,15 @@ public class AplicacionUI {
                 id2 = resultado.get(i + 1);
                 mensage = ("- " + id1 + " -> " + id2);
             }
-           
-            
+
         }
         return mensage;
     }
 
-    private String rangoPing(String parametro1){
+    private String rangoPing(String parametro1) {
         List<String> equiposConEsaIP = red.rangoEquiposIP(parametro1);
         if (equiposConEsaIP.isEmpty())
-        mensage = ("Ningun equipo encontrado");
+            mensage = ("Ningun equipo encontrado");
         else {
             Map<String, Boolean> resultado = calculo.rangoPing(equiposConEsaIP);
             mensage = ("Estado de los equipos: \n");
@@ -97,10 +92,10 @@ public class AplicacionUI {
                 String id = entry.getKey();
                 boolean isActivo = entry.getValue();
                 mensage = (id + " " + (isActivo ? "activo" : "inactivo"));
-                
+
             }
         }
         return mensage;
     }
-    
+
 }

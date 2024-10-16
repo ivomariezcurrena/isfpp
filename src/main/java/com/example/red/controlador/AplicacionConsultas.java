@@ -90,6 +90,8 @@ public class AplicacionConsultas {
         }
     }
 
+
+    //DEBERIA ESTAR EN INTERFAZ
     private void ping(String parametro1){
         String id = red.validarEquipo(parametro1);
         if (id != null){

@@ -97,7 +97,7 @@ public class RedVisual extends JFrame {
     public RedVisual() {
 
     }
-    
+
     /*
      * Carga los equipos a los atributos de la instancia
      */
@@ -332,7 +332,7 @@ public class RedVisual extends JFrame {
                 cell = (mxCell) tablaArcos.get(id2 + " " + id1);
             if (cell != null)
                 cell.setStyle(estilo); // Aplica el cambio
-            
+
             redVisual.refresh();
         } finally {
             redVisual.getModel().endUpdate();
@@ -358,8 +358,8 @@ public class RedVisual extends JFrame {
      * 
      * @param tipo de estilo
      */
-    public void setEstiloArcos(List<String[]> ids, String tipoEstilo){
-        for (String[] parIds : ids){
+    public void setEstiloArcos(List<String[]> ids, String tipoEstilo) {
+        for (String[] parIds : ids) {
             String id1 = parIds[0];
             String id2 = parIds[1];
             setEstiloArco(id1, id2, tipoEstilo);
@@ -371,15 +371,16 @@ public class RedVisual extends JFrame {
      * 
      * @param lista de IDs de la secuencia de equipos. Deben estar conectados entre
      * si, de lo contrario pueden quedar algunos arcos sin el estilo deseado. En ese
-     * caso primero divida la lista original entre varias listas de equipos consecutivos,
+     * caso primero divida la lista original entre varias listas de equipos
+     * consecutivos,
      * luego use este método para cada una de esas listas
      * 
      * @param tipo de estilo
      */
     public void setEstiloCaminoArcos(List<String> ids, String tipoEstilo) {
-        for (int i = 0; i < ids.size()-1; i++){
+        for (int i = 0; i < ids.size() - 1; i++) {
             String id1 = ids.get(i);
-            String id2 = ids.get(i+1);
+            String id2 = ids.get(i + 1);
             setEstiloArco(id1, id2, tipoEstilo);
         }
     }
