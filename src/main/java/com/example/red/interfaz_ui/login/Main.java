@@ -1,12 +1,18 @@
 package com.example.red.interfaz_ui.login;
 
+import com.example.red.interfaz_ui.component.Message;
 import com.example.red.interfaz_ui.component.PanelCover;
+import com.example.red.interfaz_ui.component.PanelLoading;
 import com.example.red.interfaz_ui.component.PanelLoginAndRegister;
+import com.example.red.interfaz_ui.component.PanelVerifyCode;
+import com.example.red.interfaz_ui.model.ModelUser;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import javax.swing.JLayeredPane;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -15,17 +21,18 @@ import org.jdesktop.animation.timing.TimingTargetAdapter;
 //Esta clase es una ventana (JFrame) que contiene una interfaz de inicio de sesión y registro con animaciones suaves, utilizando componentes personalizados y la librería MigLayout para organizar los componentes dentro del formulario.
 
 public class Main extends javax.swing.JFrame {
-    // Es un formato decimal que se usa para limitar la precision de los numeros que
-    // controlan las posiciones de los paneles durante la animacion.
+
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
 
     // se utiliza para organizar los componentes dentro del panel bg (la capa
     // principal que contiene los otros componentes)
     private MigLayout layout;
-    private PanelCover cover;// cubre la interfaz durante la animacion
-    private PanelLoginAndRegister loginAndRegister;// contiene los formularios de inicio de sesion y registro
-    private boolean isLogin = true;// Un booleano que indica si la vista actual
-    private final double addSize = 30;// se utiliza para ajustar el tamaño durante la animación.
+    private PanelCover cover;
+    private PanelLoading loading;
+    private PanelVerifyCode verifyCode;
+    private PanelLoginAndRegister loginAndRegister;
+    private boolean isLogin;
+    private final double addSize = 30;
     private final double coverSize = 40;
     private final double loginSize = 60;
 
@@ -40,7 +47,15 @@ public class Main extends javax.swing.JFrame {
         // columnas
         layout = new MigLayout("fill, insets 0");
         cover = new PanelCover();
-        loginAndRegister = new PanelLoginAndRegister();
+        loading = new PanelLoading();
+        verifyCode = new PanelVerifyCode();
+        ActionListener eventRegister = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                register();
+            }
+        };
+        loginAndRegister = new PanelLoginAndRegister(eventRegister);
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             // La variable fraction indica el progreso de la animación, y se utiliza para
@@ -102,11 +117,12 @@ public class Main extends javax.swing.JFrame {
         animator.setDeceleration(0.5f);
         animator.setResolution(0); // for smooth animation
         bg.setLayout(layout);
-        bg.add(cover, "width " + coverSize + "%, pos " + (isLogin ? "1al" : "0al") + " 0 n 100%");
-        bg.add(loginAndRegister, "width " + loginSize + "%, pos " + (isLogin ? "0al" : "1al") + " 0 n 100%"); // 1al as
-                                                                                                              // 100%
-        loginAndRegister.showRegister(!isLogin);
-        cover.login(isLogin);
+        bg.setLayer(loading, JLayeredPane.POPUP_LAYER);
+        bg.setLayer(verifyCode, JLayeredPane.POPUP_LAYER);
+        bg.add(loading, "pos 0 0 100% 100%");
+        bg.add(verifyCode, "pos 0 0 100% 100%");
+        bg.add(cover, "width " + coverSize + "%, pos 0al 0 n 100%");
+        bg.add(loginAndRegister, "width " + loginSize + "%, pos 1al 0 n 100%"); // 1al as 100%
         cover.addEvent(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -117,9 +133,70 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
+    private void register() {
+        ModelUser user = loginAndRegister.getUser();
+        // loading.setVisible(true);
+        loading.setVisible(true);
+        showMessage(Message.MessageType.ERROR, "Test Message");
+    }
+
+    private void showMessage(Message.MessageType messageType, String message) {
+        Message ms = new Message();
+        ms.showMessage(messageType, message);
+        TimingTarget target = new TimingTargetAdapter() {
+            @Override
+            public void begin() {
+                if (!ms.isShow()) {
+                    bg.add(ms, "pos 0.5al -30", 0); // Insert to bg fist index 0
+                    ms.setVisible(true);
+                    bg.repaint();
+                }
+            }
+
+            @Override
+            public void timingEvent(float fraction) {
+                float f;
+                if (ms.isShow()) {
+                    f = 40 * (1f - fraction);
+                } else {
+                    f = 40 * fraction;
+                }
+                layout.setComponentConstraints(ms, "pos 0.5al " + (int) (f - 30));
+                bg.repaint();
+                bg.revalidate();
+            }
+
+            @Override
+            public void end() {
+                if (ms.isShow()) {
+                    bg.remove(ms);
+                    bg.repaint();
+                    bg.revalidate();
+                } else {
+                    ms.setShow(true);
+                }
+            }
+        };
+        Animator animator = new Animator(300, target);
+        animator.setResolution(0);
+        animator.setAcceleration(0.5f);
+        animator.setDeceleration(0.5f);
+        animator.start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    animator.start();
+                } catch (InterruptedException e) {
+                    System.err.println(e);
+                }
+            }
+        }).start();
+    }
+
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() {
 
         bg = new javax.swing.JLayeredPane();
@@ -150,18 +227,10 @@ public class Main extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
-        // (optional) ">
-        /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
-         * look and feel.
-         * For details see
-         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -188,7 +257,7 @@ public class Main extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify
     private javax.swing.JLayeredPane bg;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration
 }
