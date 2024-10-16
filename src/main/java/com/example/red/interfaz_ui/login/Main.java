@@ -1,5 +1,17 @@
 package com.example.red.interfaz_ui.login;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
+import javax.swing.JLayeredPane;
+
+import org.jdesktop.animation.timing.Animator;
+import org.jdesktop.animation.timing.TimingTarget;
+import org.jdesktop.animation.timing.TimingTargetAdapter;
+
 import com.example.red.interfaz_ui.component.Message;
 import com.example.red.interfaz_ui.component.PanelCover;
 import com.example.red.interfaz_ui.component.PanelLoading;
@@ -7,16 +19,7 @@ import com.example.red.interfaz_ui.component.PanelLoginAndRegister;
 import com.example.red.interfaz_ui.component.PanelVerifyCode;
 import com.example.red.interfaz_ui.model.ModelUser;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
-import javax.swing.JLayeredPane;
 import net.miginfocom.swing.MigLayout;
-import org.jdesktop.animation.timing.Animator;
-import org.jdesktop.animation.timing.TimingTarget;
-import org.jdesktop.animation.timing.TimingTargetAdapter;
 
 //Esta clase es una ventana (JFrame) que contiene una interfaz de inicio de sesión y registro con animaciones suaves, utilizando componentes personalizados y la librería MigLayout para organizar los componentes dentro del formulario.
 
@@ -74,17 +77,17 @@ public class Main extends javax.swing.JFrame {
                     fractionCover = 1f - fraction;
                     fractionLogin = fraction;
                     if (fraction >= 0.5f) {
-                        cover.registerRight(fractionCover * 100);
+                        cover.registroDerecha(fractionCover * 100);
                     } else {
-                        cover.loginRight(fractionLogin * 100);
+                        cover.loginDerecha(fractionLogin * 100);
                     }
                 } else {
                     fractionCover = fraction;
                     fractionLogin = 1f - fraction;
                     if (fraction <= 0.5f) {
-                        cover.registerLeft(fraction * 100);
+                        cover.registroDerecha(fraction * 100);
                     } else {
-                        cover.loginLeft((1f - fraction) * 100);
+                        cover.loginIzquierda((1f - fraction) * 100);
                     }
                 }
                 if (fraction >= 0.5f) {
@@ -123,7 +126,7 @@ public class Main extends javax.swing.JFrame {
         bg.add(verifyCode, "pos 0 0 100% 100%");
         bg.add(cover, "width " + coverSize + "%, pos 0al 0 n 100%");
         bg.add(loginAndRegister, "width " + loginSize + "%, pos 1al 0 n 100%"); // 1al as 100%
-        cover.addEvent(new ActionListener() {
+        cover.agregarEvento(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (!animator.isRunning()) {

@@ -13,159 +13,156 @@ import java.util.Locale;
 
 import javax.swing.JLabel;
 
-import com.example.red.interfaz_ui.swing.ButtonOutLine;
+import com.example.red.interfaz_ui.swing.BotonContorno;
 
 import net.miginfocom.swing.MigLayout;
 
-//Componente grafico que se usa en la clase main
+// Componente grafico que se usa en la clase principal
 public class PanelCover extends javax.swing.JPanel {
-    // Un formateador numerico para manejar decimales con tres digitos de precision
-    private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
-    // Un listener para manejar los eventos de accion (clics en el boton)
-    private ActionListener event;
+    // Formateador numerico para manejar decimales con tres digitos de precision
+    private final DecimalFormat formatoDecimal = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
+    // Listener para manejar los eventos de accion (clics en el boton)
+    private ActionListener evento;
     // MigLayout organiza los componentes dentro del panel
-    private MigLayout layout;
+    private MigLayout diseño;
 
-    private JLabel Titulo;// Etiqueta para el titulo
-    private JLabel descripcion;// Etiqueta para una descripcion
-    private JLabel descripcion1;// Etiqueta para una descripcion
-    private ButtonOutLine boton;
-    private boolean isLogin;// Un booleano que indica si el panel está en modo "Login" o "Registro".
+    // Etiquetas para el titulo y descripciones
+    private JLabel titulo;
+    private JLabel descripcion;
+    private JLabel descripcion1;
+    private BotonContorno boton;
+    // Booleano que indica si el panel esta en modo "Login" o "Registro"
+    private boolean esLogin;
 
+    // Constructor del panel
     public PanelCover() {
         initComponents();
-        // hace que el panel sea transparente, permitiendo que se dibuje un fondo
-        // personalizado.
+        // Hace que el panel sea transparente para poder dibujar un fondo personalizado
         setOpaque(false);
 
-        // organiza los componentes en el panel
-        layout = new MigLayout("wrap, fill", "[center]", "push[]25[]10[]25[]push");//
-        setLayout(layout);
-        init();// para configurar los elementos gráficos.
-
+        // Organiza los componentes dentro del panel
+        diseño = new MigLayout("wrap, fill", "[center]", "push[]25[]10[]25[]push");
+        setLayout(diseño);
+        init(); // Inicializa los elementos graficos
     }
 
+    // Inicializa los componentes visuales del panel
     private void init() {
-        // Inicializa el JLabel para el título y lo añade al panel
-        Titulo = new JLabel("Bienvenido de nuevo!");
-        Titulo.setFont(new Font("sansserif", 1, 30));
-        Titulo.setForeground(new Color(245, 245, 245));
-        add(Titulo);
-        // Añade una primera descripción
-        descripcion = new JLabel("Para conectarte porfavor");
-        descripcion.setForeground(new Color(245, 245, 245));
+        // Inicializa el JLabel para el titulo y lo añade al panel
+        titulo = new JLabel("¡Bienvenido de nuevo!");
+        titulo.setFont(new Font("sansserif", 1, 30)); // Fuente y tamaño del titulo
+        titulo.setForeground(new Color(245, 245, 245)); // Color del texto
+        add(titulo); // Añade el titulo al panel
+
+        // Añade una primera descripcion
+        descripcion = new JLabel("Para conectarte, por favor");
+        descripcion.setForeground(new Color(245, 245, 245)); // Color del texto
         add(descripcion);
 
-        // Añade una segunda descripción
+        // Añade una segunda descripcion
         descripcion1 = new JLabel("registrate con tu informacion personal");
-        descripcion1.setForeground(new Color(245, 245, 245));
+        descripcion1.setForeground(new Color(245, 245, 245)); // Color del texto
         add(descripcion1);
 
-        // Crea un botón con el texto "REGISTRARME", le añade un listener para manejar
-        // los clics, y lo agrega al panel con un tamaño específico (w 60%, h 40)
-        boton = new ButtonOutLine();
-        boton.setBackground(new Color(255, 255, 255));
-        boton.setForeground(new Color(255, 255, 255));
-        boton.setText("REGISTRARME");
+        // Crea un boton con el texto "REGISTRARME" y le añade un listener para manejar los clics
+        boton = new BotonContorno();
+        boton.setBackground(new Color(255, 255, 255)); // Color del boton
+        boton.setForeground(new Color(255, 255, 255)); // Color del texto del boton
+        boton.setText("REGISTRARME"); // Texto del boton
         boton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                event.actionPerformed(ae);
+                evento.actionPerformed(ae); // Dispara el evento cuando se hace clic
             }
         });
-        add(boton, "w 60%, h 40");
+        add(boton, "w 60%, h 40"); // Añade el boton con tamaño especifico
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Codigo generado">
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout diseño = new javax.swing.GroupLayout(this);
+        this.setLayout(diseño);
+        diseño.setHorizontalGroup(
+                diseño.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 327, Short.MAX_VALUE));
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        diseño.setVerticalGroup(
+                diseño.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGap(0, 300, Short.MAX_VALUE));
-    }// </editor-fold>//GEN-END:initComponents
+    }
+    // </editor-fold>
 
-    // Sobrescribe el metodo paintComponent para dibujar un fondo degradado en el
-    // panel. El degradado va de un color mas claro (0, 133, 132) a uno mas oscuro
-    // (0, 102, 102)
+    // Sobrescribe el metodo paintComponent para dibujar un fondo degradado en el panel
+    // El degradado va de un color mas claro (0, 133, 132) a uno mas oscuro (0, 102, 102)
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
-        GradientPaint gra = new GradientPaint(0, 0, new Color(0, 133, 132), 0, getHeight(), new Color(0, 102, 102));
-        g2.setPaint(gra);
+        GradientPaint gradiente = new GradientPaint(0, 0, new Color(0, 133, 132), 0, getHeight(), new Color(0, 102, 102));
+        g2.setPaint(gradiente);
         g2.fillRect(0, 0, getWidth(), getHeight());
         super.paintComponent(grphcs);
     }
 
-    // Permite asignar un ActionListener externo que manejará los eventos del botón
-    // (cuando se haga clic).
-    public void addEvent(ActionListener event) {
-        this.event = event;
+    // Permite asignar un ActionListener externo para manejar los eventos del boton
+    public void agregarEvento(ActionListener evento) {
+        this.evento = evento;
     }
 
-    // Ajusta la posicion del titulo y las descripciones hacia la izquierda, en
-    // funcion del valor v, simulando una animacion de transicion. Establece el modo
-    // en "Registro" (login(false))
-    public void registerLeft(double v) {
-        v = Double.valueOf(df.format(v));
-        login(false);
-        layout.setComponentConstraints(Titulo, "pad 0 -" + v + "% 0 0");
-        layout.setComponentConstraints(descripcion, "pad 0 -" + v + "% 0 0");
-        layout.setComponentConstraints(descripcion1, "pad 0 -" + v + "% 0 0");
+    // Ajusta la posicion del titulo y las descripciones hacia la izquierda, simulando una animacion
+    public void registroIzquierda(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(false); // Establece el modo en "Registro"
+        diseño.setComponentConstraints(titulo, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion1, "pad 0 -" + valor + "% 0 0");
     }
 
-    // Similar al método anterior, pero animando hacia la derecha.
-    public void registerRight(double v) {
-        v = Double.valueOf(df.format(v));
-        login(false);
-        layout.setComponentConstraints(Titulo, "pad 0 -" + v + "% 0 0");
-        layout.setComponentConstraints(descripcion, "pad 0 -" + v + "% 0 0");
-        layout.setComponentConstraints(descripcion1, "pad 0 -" + v + "% 0 0");
+    // Similar al metodo anterior, pero animando hacia la derecha
+    public void registroDerecha(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(false); // Establece el modo en "Registro"
+        diseño.setComponentConstraints(titulo, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion1, "pad 0 -" + valor + "% 0 0");
     }
 
     // Anima los componentes hacia la izquierda en el modo "Login"
-    public void loginLeft(double v) {
-        v = Double.valueOf(df.format(v));
-        login(true);
-        layout.setComponentConstraints(Titulo, "pad 0 " + v + "% 0 " + v + "%");
-        layout.setComponentConstraints(descripcion, "pad 0 " + v + "% 0 " + v + "%");
-        layout.setComponentConstraints(descripcion1, "pad 0 " + v + "% 0 " + v + "%");
+    public void loginIzquierda(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(true); // Establece el modo en "Login"
+        diseño.setComponentConstraints(titulo, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion1, "pad 0 " + valor + "% 0 " + valor + "%");
     }
 
     // Anima los componentes hacia la derecha en el modo "Login"
-    public void loginRight(double v) {
-        v = Double.valueOf(df.format(v));
-        login(true);
-        layout.setComponentConstraints(Titulo, "pad 0 " + v + "% 0 " + v + "%");
-        layout.setComponentConstraints(descripcion, "pad 0 " + v + "% 0 " + v + "%");
-        layout.setComponentConstraints(descripcion1, "pad 0 " + v + "% 0 " + v + "%");
+    public void loginDerecha(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(true); // Establece el modo en "Login"
+        diseño.setComponentConstraints(titulo, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion1, "pad 0 " + valor + "% 0 " + valor + "%");
     }
 
-    // Este método actualiza los textos del panel dependiendo de si está en el modo
-    // "Login" o "Registro"
-    public void login(boolean login) {
-        if (this.isLogin != login) {
+    // Este metodo actualiza los textos del panel dependiendo del modo "Login" o "Registro"
+    public void cambiarAModoLogin(boolean login) {
+        if (this.esLogin != login) {
             if (login) {
-                Titulo.setText("¡Hola Amigo!");
+                titulo.setText("¡Hola Amigo!");
                 descripcion.setText("Ingresa tus datos en 5 min");
                 descripcion1.setText("para poder empezar a usar el sistema");
                 boton.setText("REGISTRARME");
             } else {
-                Titulo.setText("¡Bienvenido de nuevo!");
+                titulo.setText("¡Bienvenido de nuevo!");
                 descripcion.setText("Inicia sesion ahora con tu informacion");
                 descripcion1.setText("para usar el sistema");
                 boton.setText("INICIAR SESION");
             }
-            this.isLogin = login;
+            this.esLogin = login; // Actualiza el estado del panel
         }
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify
+    // End of variables declaration
 }
