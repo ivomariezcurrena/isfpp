@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 
 import com.example.red.controlador.AplicacionConsultas;
 import com.example.red.controlador.Coordinador;
-import com.example.red.interfaz_ui.InterfazUI;
+import com.example.red.gui.InterfazUI;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.EquipoExistenteExeption;
 import com.example.red.negocio.Red;

@@ -2,7 +2,7 @@ package com.example.red.controladorUI;
 
 import java.util.List;
 
-import com.example.red.interfaz_ui.InterfazUI;
+import com.example.red.gui.InterfazUI;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Ubicacion;
