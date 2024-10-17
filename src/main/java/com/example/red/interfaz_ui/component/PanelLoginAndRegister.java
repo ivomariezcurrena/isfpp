@@ -1,10 +1,5 @@
 package com.example.red.interfaz_ui.component;
 
-import com.example.red.interfaz_ui.model.ModelUser;
-import com.example.red.interfaz_ui.swing.Boton;
-import com.example.red.interfaz_ui.swing.CampoContrasena;
-
-import com.example.red.interfaz_ui.swing.MyTextField;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
@@ -14,6 +9,12 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import com.example.red.interfaz_ui.model.ModelUser;
+import com.example.red.interfaz_ui.swing.Boton;
+import com.example.red.interfaz_ui.swing.CampoContrasena;
+import com.example.red.interfaz_ui.swing.CampoTexto;
+
 import net.miginfocom.swing.MigLayout;
 
 //es un panel que puede contener múltiples capas de componentes. Este panel específico gestiona dos secciones: una para iniciar sesión y otra para registrarse. Dependiendo del estado, una de las dos vistas (login o register) se hace visible
@@ -45,15 +46,17 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         // Es un campo de texto (MyTextField es una clase dentro de la carpeta swing),
         // que incluye un icono de usuario al principio y un placeholder con el texto
         // "Nombre"
-        MyTextField txtUser = new MyTextField();
-        txtUser.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/user.png")));
-        txtUser.setHint("Nombre");
+        CampoTexto txtUser = new CampoTexto();
+        txtUser.establecerIconoPrefijo(
+                new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/user.png")));
+        txtUser.establecerSugerencia("Nombre");
         registrar.add(txtUser, "w 60%");
 
         // similar pero con otro icono para el mail
-        MyTextField txtEmail = new MyTextField();
-        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/mail.png")));
-        txtEmail.setHint("Email");
+        CampoTexto txtEmail = new CampoTexto();
+        txtEmail.establecerIconoPrefijo(
+                new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/mail.png")));
+        txtEmail.establecerSugerencia("Email");
         registrar.add(txtEmail, "w 60%");
 
         // Un campo de contraseña personalizado (MyPasswordField) con un icono de
@@ -89,9 +92,10 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(0, 133, 132));
         login.add(label);
-        MyTextField txtEmail = new MyTextField();
-        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/mail.png")));
-        txtEmail.setHint("Email");
+        CampoTexto txtEmail = new CampoTexto();
+        txtEmail.establecerIconoPrefijo(
+                new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/mail.png")));
+        txtEmail.establecerSugerencia("Email");
         login.add(txtEmail, "w 60%");
         CampoContrasena txtPass = new CampoContrasena();
         txtPass.establecerIconoPrefijo(

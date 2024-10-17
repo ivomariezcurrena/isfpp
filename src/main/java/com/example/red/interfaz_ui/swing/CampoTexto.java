@@ -10,9 +10,9 @@ import java.awt.RenderingHints;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
-public class CampoContrasena extends JPasswordField {
+public class CampoTexto extends JTextField {
 
     // Obtener el texto de sugerencia
     public String obtenerSugerencia() {
@@ -51,34 +51,34 @@ public class CampoContrasena extends JPasswordField {
     private String sugerencia = "";
 
     // Constructor
-    public CampoContrasena() {
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Establece un borde vacio
+    public CampoTexto() {
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Borde vacío
         setBackground(new Color(0, 0, 0, 0)); // Fondo transparente
-        setForeground(Color.decode("#7A8C8D")); // Color de texto
+        setForeground(Color.decode("#7A8C8D")); // Color del texto
         setFont(new java.awt.Font("sansserif", 0, 13)); // Fuente
-        setSelectionColor(new Color(75, 175, 152)); // Color de seleccion de texto
+        setSelectionColor(new Color(75, 175, 152)); // Color de selección de texto
     }
 
     @Override
     protected void paintComponent(Graphics graficos) {
         Graphics2D g2 = (Graphics2D) graficos;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // Anti-aliasing
-        g2.setColor(new Color(230, 245, 241)); // Color de fondo del campo
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5); // Rectangulo redondeado para el fondo
-        pintarIconos(graficos); // Metodo para pintar los iconos
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // Suavizado de bordes
+        g2.setColor(new Color(230, 245, 241)); // Color de fondo del campo de texto
+        g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5); // Fondo redondeado
+        pintarIconos(graficos); // Pintar los iconos si existen
         super.paintComponent(graficos);
     }
 
     @Override
     public void paint(Graphics graficos) {
         super.paint(graficos);
-        if (getPassword().length == 0) { // Si no hay contrasena ingresada
+        if (getText().length() == 0) { // Si no hay texto ingresado
             int altura = getHeight();
             ((Graphics2D) graficos).setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
                     RenderingHints.VALUE_TEXT_ANTIALIAS_ON); // Suavizado de texto
             Insets margenes = getInsets();
             FontMetrics fm = graficos.getFontMetrics();
-            graficos.setColor(new Color(200, 200, 200)); // Color para el texto de sugerencia
+            graficos.setColor(new Color(200, 200, 200)); // Color del texto de sugerencia
             graficos.drawString(sugerencia, margenes.left, altura / 2 + fm.getAscent() / 2 - 2); // Dibuja la sugerencia
         }
     }
@@ -98,17 +98,17 @@ public class CampoContrasena extends JPasswordField {
         }
     }
 
-    // Metodo para inicializar el borde segun los iconos
+    // Metodo para inicializar los bordes segun los iconos
     private void inicializarBorde() {
         int izquierda = 15;
         int derecha = 15;
-        // 5 es el valor predeterminado
+        // 5 es el valor por defecto
         if (iconoPrefijo != null) {
             izquierda = iconoPrefijo.getIconWidth() + 15; // Ajusta el margen izquierdo si hay icono de prefijo
         }
         if (iconoSufijo != null) {
             derecha = iconoSufijo.getIconWidth() + 15; // Ajusta el margen derecho si hay icono de sufijo
         }
-        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, izquierda, 10, derecha)); // Ajusta los margenes
+        setBorder(javax.swing.BorderFactory.createEmptyBorder(10, izquierda, 10, derecha)); // Ajuste del borde
     }
 }
