@@ -1,8 +1,9 @@
 package com.example.red.interfaz_ui.component;
 
 import com.example.red.interfaz_ui.model.ModelUser;
-import com.example.red.interfaz_ui.swing.Button;
-import com.example.red.interfaz_ui.swing.MyPasswordField;
+import com.example.red.interfaz_ui.swing.Boton;
+import com.example.red.interfaz_ui.swing.CampoContrasena;
+
 import com.example.red.interfaz_ui.swing.MyTextField;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -57,14 +58,15 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
         // Un campo de contraseña personalizado (MyPasswordField) con un icono de
         // candado y un placeholder que dice "Contraseña"
-        MyPasswordField txtPass = new MyPasswordField();
-        txtPass.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/pass.png")));
-        txtPass.setHint("Contraseña");
+        CampoContrasena txtPass = new CampoContrasena();
+        txtPass.establecerIconoPrefijo(
+                new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/pass.png")));
+        txtPass.establecerSugerencia("Contraseña");
         registrar.add(txtPass, "w 60%");
 
         // Un boton personalizado con el texto "REGISTRARSE" y colores especificos. Este
         // boton probablemente este vinculado a un evento en otro lugar del codigo
-        Button cmd = new Button();
+        Boton cmd = new Boton();
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
         cmd.addActionListener(eventRegister);
@@ -91,9 +93,10 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/mail.png")));
         txtEmail.setHint("Email");
         login.add(txtEmail, "w 60%");
-        MyPasswordField txtPass = new MyPasswordField();
-        txtPass.setPrefixIcon(new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/pass.png")));
-        txtPass.setHint("Contraseña");
+        CampoContrasena txtPass = new CampoContrasena();
+        txtPass.establecerIconoPrefijo(
+                new ImageIcon(getClass().getResource("/com/example/red/interfaz_ui/icon/pass.png")));
+        txtPass.establecerSugerencia("Contraseña");
         login.add(txtPass, "w 60%");
         JButton cmdForget = new JButton("Olvidaste tu contraseña ?");
         cmdForget.setForeground(new Color(100, 100, 100));
@@ -101,7 +104,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmdForget.setContentAreaFilled(false);
         cmdForget.setCursor(new Cursor(Cursor.HAND_CURSOR));
         login.add(cmdForget);
-        Button cmd = new Button();
+        Boton cmd = new Boton();
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
         cmd.setText("INICIAR");

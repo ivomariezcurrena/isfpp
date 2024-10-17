@@ -13,7 +13,7 @@ import java.util.Locale;
 
 import javax.swing.JLabel;
 
-import com.example.red.interfaz_ui.swing.ButtonOutLine;
+import com.example.red.interfaz_ui.swing.BotonContorno;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -29,7 +29,7 @@ public class PanelCover extends javax.swing.JPanel {
     private JLabel Titulo;// Etiqueta para el titulo
     private JLabel descripcion;// Etiqueta para una descripcion
     private JLabel descripcion1;// Etiqueta para una descripcion
-    private ButtonOutLine boton;
+    private BotonContorno boton;
     private boolean isLogin;// Un booleano que indica si el panel está en modo "Login" o "Registro".
 
     public PanelCover() {
@@ -63,7 +63,7 @@ public class PanelCover extends javax.swing.JPanel {
 
         // Crea un botón con el texto "REGISTRARME", le añade un listener para manejar
         // los clics, y lo agrega al panel con un tamaño específico (w 60%, h 40)
-        boton = new ButtonOutLine();
+        boton = new BotonContorno();
         boton.setBackground(new Color(255, 255, 255));
         boton.setForeground(new Color(255, 255, 255));
         boton.setText("REGISTRARME");

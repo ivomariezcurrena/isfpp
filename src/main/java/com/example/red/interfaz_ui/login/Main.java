@@ -137,7 +137,7 @@ public class Main extends javax.swing.JFrame {
         ModelUser user = loginAndRegister.getUser();
         // loading.setVisible(true);
         loading.setVisible(true);
-        showMessage(Message.MessageType.ERROR, "Test Message");
+        showMessage(Message.MessageType.ERROR, "Mensaje de prueba");
     }
 
     private void showMessage(Message.MessageType messageType, String message) {
