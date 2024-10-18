@@ -1,0 +1,178 @@
+package com.example.red.gui.component;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
+
+import javax.swing.JLabel;
+
+import com.example.red.gui.swing.BotonContorno;
+
+import net.miginfocom.swing.MigLayout;
+
+// Componente grafico que se usa en la clase principal
+public class PanelCover extends javax.swing.JPanel {
+    // Formateador numerico para manejar decimales con tres digitos de precision
+    private final DecimalFormat formatoDecimal = new DecimalFormat("##0.###",
+            DecimalFormatSymbols.getInstance(Locale.US));
+
+    // Listener para manejar los eventos de accion (clics en el boton)
+    private ActionListener evento;
+
+    // MigLayout organiza los componentes dentro del panel
+    private MigLayout diseño;
+
+    // Etiquetas (JLabel) para mostrar el titulo y descripciones
+    private JLabel titulo;
+    private JLabel descripcion;
+    private JLabel descripcion1;
+
+    // Boton personalizado que se usara en el panel
+    private BotonContorno boton;
+
+    // Booleano que indica si el panel esta en modo "Login" o "Registro"
+    private boolean esLogin;
+
+    // Constructor del panel
+    public PanelCover() {
+        initComponents();
+        // Hace que el panel sea transparente
+        setOpaque(false);
+
+        // Define el diseño con MigLayout, organizando los componentes centrados
+        diseño = new MigLayout("wrap, fill", "[center]", "push[]25[]10[]25[]push");
+        setLayout(diseño);
+        init(); // Inicializa los elementos graficos
+    }
+
+    // Metodo para inicializar los componentes del panel
+    private void init() {
+        // Inicializa y configura el JLabel para el titulo
+        titulo = new JLabel("¡Bienvenido de nuevo!");
+        titulo.setFont(new Font("sansserif", 1, 30)); // Define fuente y tamaño
+        titulo.setForeground(new Color(245, 245, 245)); // Color del texto
+        add(titulo); // Añade el titulo al panel
+
+        // Añade una primera descripcion
+        descripcion = new JLabel("Para conectarte, por favor");
+        descripcion.setForeground(new Color(245, 245, 245)); // Color del texto
+        add(descripcion);
+
+        // Añade una segunda descripcion
+        descripcion1 = new JLabel("registrate con tu informacion personal");
+        descripcion1.setForeground(new Color(245, 245, 245)); // Color del texto
+        add(descripcion1);
+
+        // Crea y configura el boton de registro
+        boton = new BotonContorno();
+        boton.setBackground(new Color(255, 255, 255)); // Color de fondo del boton
+        boton.setForeground(new Color(255, 255, 255)); // Color del texto del boton
+        boton.setText("REGISTRARME"); // Texto del boton
+        // Añade un listener al boton que ejecuta el evento al hacer clic
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                evento.actionPerformed(ae); // Dispara el evento al hacer clic
+            }
+        });
+        add(boton, "w 60%, h 40"); // Añade el boton al panel con tamaño especifico
+    }
+
+    @SuppressWarnings("unchecked")
+    // Metodo generado automaticamente para el diseño (generalmente ignorado)
+    private void initComponents() {
+        javax.swing.GroupLayout diseño = new javax.swing.GroupLayout(this);
+        this.setLayout(diseño);
+        diseño.setHorizontalGroup(
+                diseño.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 327, Short.MAX_VALUE));
+        diseño.setVerticalGroup(
+                diseño.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 300, Short.MAX_VALUE));
+    }
+
+    // Sobrescribe el metodo paintComponent para dibujar un fondo degradado
+    @Override
+    protected void paintComponent(Graphics grphcs) {
+        Graphics2D g2 = (Graphics2D) grphcs;
+        // Crea un degradado de color para el fondo del panel
+        GradientPaint gradiente = new GradientPaint(0, 0, new Color(0, 133, 132), 0, getHeight(),
+                new Color(0, 102, 102));
+        g2.setPaint(gradiente);
+        g2.fillRect(0, 0, getWidth(), getHeight());
+        super.paintComponent(grphcs); // Llama al metodo padre para dibujar el resto del panel
+    }
+
+    // Metodo para agregar un listener de evento desde fuera de la clase
+    public void agregarEvento(ActionListener evento) {
+        this.evento = evento;
+    }
+
+    // Metodos para realizar animaciones (movimiento de componentes)
+    // Anima el contenido hacia la izquierda para el registro
+    public void registroIzquierda(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(false); // Cambia el panel al modo "Registro"
+        // Modifica la posicion de los componentes en el layout
+        diseño.setComponentConstraints(titulo, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion1, "pad 0 -" + valor + "% 0 0");
+    }
+
+    // Anima el contenido hacia la derecha para el registro
+    public void registroDerecha(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(false); // Cambia al modo "Registro"
+        diseño.setComponentConstraints(titulo, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion, "pad 0 -" + valor + "% 0 0");
+        diseño.setComponentConstraints(descripcion1, "pad 0 -" + valor + "% 0 0");
+    }
+
+    // Anima hacia la izquierda para el modo "Login"
+    public void loginIzquierda(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(true); // Cambia al modo "Login"
+        diseño.setComponentConstraints(titulo, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion1, "pad 0 " + valor + "% 0 " + valor + "%");
+    }
+
+    // Anima hacia la derecha para el modo "Login"
+    public void loginDerecha(double valor) {
+        valor = Double.valueOf(formatoDecimal.format(valor));
+        cambiarAModoLogin(true); // Cambia al modo "Login"
+        diseño.setComponentConstraints(titulo, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion, "pad 0 " + valor + "% 0 " + valor + "%");
+        diseño.setComponentConstraints(descripcion1, "pad 0 " + valor + "% 0 " + valor + "%");
+    }
+
+    // Cambia entre los modos "Login" y "Registro" actualizando los textos y el
+    // boton
+    public void cambiarAModoLogin(boolean login) {
+        if (this.esLogin != login) {
+            if (login) {
+                // Cambia el contenido para el modo "Login"
+                titulo.setText("¡Hola Amigo!");
+                descripcion.setText("Ingresa tus datos en 5 min");
+                descripcion1.setText("para poder empezar a usar el sistema");
+                boton.setText("REGISTRARME");
+            } else {
+                // Cambia el contenido para el modo "Registro"
+                titulo.setText("¡Bienvenido de nuevo!");
+                descripcion.setText("Inicia sesion ahora con tu informacion");
+                descripcion1.setText("para usar el sistema");
+                boton.setText("INICIAR SESION");
+            }
+            this.esLogin = login; // Actualiza el estado del modo
+        }
+    }
+
+    // Declaracion de variables (para el diseño generado automaticamente)
+}
