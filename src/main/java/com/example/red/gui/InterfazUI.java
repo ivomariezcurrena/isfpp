@@ -4,12 +4,9 @@
  */
 package com.example.red.gui;
 
-import com.example.red.controladorUI.CoordinadorUI;
-
 import java.util.HashMap;
 import java.util.List;
 
-import com.example.red.controladorUI.AplicacionUI;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Ubicacion;
