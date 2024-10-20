@@ -1,4 +1,4 @@
-package com.example.red.dao.secuenciabd;
+package com.example.red.dao.secuencialbd;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,11 +11,11 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Ubicacion;
 
-public class UbicacionSecuencialSqlDAO implements GenericDAO<String, Ubicacion> {
-    
+public class UbicacionSqlDAO implements GenericDAO<String, Ubicacion> {
+
     private Connection conexion;
 
-    public UbicacionSecuencialSqlDAO() {
+    public UbicacionSqlDAO() {
         this.conexion = ConexionBD.getInstance().getConnection();
     }
 

@@ -1,6 +1,7 @@
 package com.example.red.servicio;
 
 import com.example.red.conexion.*;
+import com.example.red.gui.model.ModelLogin;
 import com.example.red.gui.model.ModelUser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,6 +17,24 @@ public class ServiceUsuario {
     public ServiceUsuario() {
         // Obtener la conexión desde la instancia singleton
         con = ConexionBD.getInstance().getConnection();
+    }
+
+    public ModelUser login(ModelLogin login) throws SQLException {
+        ModelUser data = null;
+        PreparedStatement p = con.prepareStatement(
+                "SELECT id_usuario, nombre_usuario, Email FROM poo2024.usuarios_ivoma where Email=? and contraseña=? and estado='Verificado'");
+        p.setString(1, login.getEmail());
+        p.setString(2, login.getPassword());
+        ResultSet r = p.executeQuery();
+        if (r.next()) {
+            int userID = r.getInt(1);
+            String userName = r.getString(2);
+            String email = r.getString(3);
+            data = new ModelUser(userID, userName, email, "");
+        }
+        r.close();
+        p.close();
+        return data;
     }
 
     // Método para insertar un nuevo usuario en la tabla "usuarios_ivoma"

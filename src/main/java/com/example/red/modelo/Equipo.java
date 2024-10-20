@@ -32,6 +32,10 @@ public class Equipo {
 		this.activo = activo;
 	}
 
+	public void setDireccionesIP(List<String> direccionesIP) {
+		this.direccionesIP = direccionesIP;
+	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
@@ -107,6 +111,18 @@ public class Equipo {
 
 	public List<String> getDireccionesIP() {
 		return direccionesIP;
+	}
+
+	public List<Object[]> getPuertosInfo() {
+		List<Object[]> puertosInfo = new ArrayList<>();
+		for (Puerto p : puertos) {
+			puertosInfo.add(new Object[] { p.getTipoPuerto().getCodigo(), p.getCantidad() });
+		}
+		return puertosInfo;
+	}
+
+	public void agregarDireccionIP(String ip) {
+		direccionesIP.add(ip);
 	}
 
 	public void agregarPuerto(TipoPuerto tipoPuerto, int cantidad) {

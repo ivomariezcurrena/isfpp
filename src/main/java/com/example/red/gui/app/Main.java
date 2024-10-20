@@ -13,11 +13,13 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import com.example.red.conexion.ConexionBD;
+import com.example.red.gui.InterfazUI;
 import com.example.red.gui.component.Message;
 import com.example.red.gui.component.PanelCover;
 import com.example.red.gui.component.PanelLoading;
 import com.example.red.gui.component.PanelLoginAndRegister;
 import com.example.red.gui.component.PanelVerifyCode;
+import com.example.red.gui.model.ModelLogin;
 import com.example.red.gui.model.ModelMessage;
 import com.example.red.gui.model.ModelUser;
 import com.example.red.servicio.ServiceMail;
@@ -64,7 +66,13 @@ public class Main extends javax.swing.JFrame {
                 register();
             }
         };
-        loginAndRegister = new PanelLoginAndRegister(eventRegister);
+        ActionListener eventLogin = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                login();
+            }
+        };
+        loginAndRegister = new PanelLoginAndRegister(eventRegister, eventLogin);
         TimingTarget target = new TimingTargetAdapter() {
             @Override
             // La variable fraction indica el progreso de la animación, y se utiliza para
@@ -175,6 +183,22 @@ public class Main extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace(); // Esto imprimirá el error en la consola.
             showMessage(Message.MessageType.ERROR, "Error al registrar: " + e.getMessage());
+        }
+    }
+
+    private void login() {
+        ModelLogin data = loginAndRegister.getDataLogin();
+        try {
+            ModelUser user = service.login(data);
+            if (user != null) {
+                this.dispose();
+                InterfazUI.main(null);// deberia agregar user luego para que inicie el sistema
+            } else {
+                showMessage(Message.MessageType.ERROR, "Email o contraseña incorrectos");
+            }
+
+        } catch (SQLException e) {
+            showMessage(Message.MessageType.ERROR, "Error Login");
         }
     }
 

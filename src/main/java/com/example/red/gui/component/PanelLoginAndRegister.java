@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import com.example.red.gui.swing.Boton;
 import com.example.red.gui.swing.CampoContrasena;
 import com.example.red.gui.swing.CampoTexto;
+import com.example.red.gui.model.ModelLogin;
 import com.example.red.gui.model.ModelUser;
 
 import net.miginfocom.swing.MigLayout;
@@ -24,13 +25,18 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         return user;
     }
 
-    private ModelUser user;
+    public ModelLogin getDataLogin() {
+        return dataLogin;
+    }
 
-    public PanelLoginAndRegister(ActionListener eventRegister) {
+    private ModelUser user;
+    private ModelLogin dataLogin;
+
+    public PanelLoginAndRegister(ActionListener eventRegister, ActionListener eventLogin) {
         // es responsable de inicializar los componentes del panel
         initComponents();
         initRegister(eventRegister);// para configurar los paneles de registro e inicio de sesion
-        initLogin();// para configurar los paneles de registro e inicio de sesion
+        initLogin(eventLogin);// para configurar los paneles de registro e inicio de sesion
         login.setVisible(false);// login configurado como invisible
         registrar.setVisible(true);// registrar confirmado como visible
     }
@@ -86,7 +92,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         });
     }
 
-    private void initLogin() {
+    private void initLogin(ActionListener eventLogin) {
         login.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
         JLabel label = new JLabel("Iniciar sesion");
         label.setFont(new Font("sansserif", 1, 30));
@@ -111,8 +117,18 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         Boton cmd = new Boton();
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
+        cmd.addActionListener(eventLogin);
         cmd.setText("INICIAR");
         login.add(cmd, "w 40%, h 40");
+        cmd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+
+                String email = txtEmail.getText().trim();
+                String password = String.valueOf(txtPass.getPassword());
+                dataLogin = new ModelLogin(email, password);
+            }
+        });
     }
 
     public void showRegister(boolean show) {

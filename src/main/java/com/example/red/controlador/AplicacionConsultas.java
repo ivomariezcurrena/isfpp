@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.example.red.conexion.ConexionBD;
 import com.example.red.interfaz.Interfaz;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.EquipoExistenteExeption;
@@ -26,6 +27,11 @@ public class AplicacionConsultas {
 
     private void iniciar() throws EquipoExistenteExeption {
         /* Se instancian las clases */
+        try {
+            ConexionBD.getInstance().connectToDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         red = Red.getRed();
         calculo = new Calculo();
         coordinador = new Coordinador();
@@ -73,16 +79,16 @@ public class AplicacionConsultas {
             else if (comando.equals("")) // Ignorar entrada
                 continue;
 
-            else if (comando.equals("help")) 
+            else if (comando.equals("help"))
                 interfaz.mostrarMenu();
 
             else if (comando.equals("ping") && !parametro1.equals(""))
                 ping(parametro1);
 
-            else if (comando.equals("traceroute") && !parametro1.equals("") && !parametro2.equals("")) 
+            else if (comando.equals("traceroute") && !parametro1.equals("") && !parametro2.equals(""))
                 traceRoute(parametro1, parametro2);
 
-            else if (comando.equals("rango") && !parametro1.equals("")) 
+            else if (comando.equals("rango") && !parametro1.equals(""))
                 rangoPing(parametro1);
 
             else // error de sintaxis
@@ -90,19 +96,18 @@ public class AplicacionConsultas {
         }
     }
 
-
-    //DEBERIA ESTAR EN INTERFAZ
-    private void ping(String parametro1){
+    // DEBERIA ESTAR EN INTERFAZ
+    private void ping(String parametro1) {
         String id = red.validarEquipo(parametro1);
-        if (id != null){
+        if (id != null) {
             interfaz.mostrar("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));
             interfaz.setEstiloNodo(id, "highlight");
         } else {
-            interfaz.mostrar("El equipo '" + parametro1+"' no se ha encontrado en la red");
+            interfaz.mostrar("El equipo '" + parametro1 + "' no se ha encontrado en la red");
         }
     }
 
-    private void traceRoute(String parametro1, String parametro2){
+    private void traceRoute(String parametro1, String parametro2) {
         String id1 = red.validarEquipo(parametro1);
         String id2 = red.validarEquipo(parametro2);
         List<String> resultado = null;
@@ -126,7 +131,7 @@ public class AplicacionConsultas {
         }
     }
 
-    private void rangoPing(String parametro1){
+    private void rangoPing(String parametro1) {
         List<String> equiposConEsaIP = red.rangoEquiposIP(parametro1);
         if (equiposConEsaIP.isEmpty())
             interfaz.mostrar("Ningun equipo encontrado");

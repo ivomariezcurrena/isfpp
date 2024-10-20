@@ -120,9 +120,16 @@ public class Red {
 	public Map<String, String> getLocalDns() {
 		Map<String, String> localDns = new TreeMap<>();
 		for (Equipo equipo : equipos) {
-			String id = equipo.getCodigo();
-			for (String ip : equipo.getDireccionesIP())
-				localDns.put(ip, id);
+			if (equipo != null) {
+				String id = equipo.getCodigo();
+				if (id != null) {
+					for (String ip : equipo.getDireccionesIP()) {
+						if (ip != null) {
+							localDns.put(ip, id);
+						}
+					}
+				}
+			}
 		}
 		return localDns;
 	}
@@ -131,6 +138,7 @@ public class Red {
 	 * Valida si un equipo existe
 	 * 
 	 * @param Identificador (ID o IP) del equipo
+	 * 
 	 * @return ID del equipo, o null si no se encontró
 	 */
 	public String validarEquipo(String identificador) {
@@ -153,19 +161,20 @@ public class Red {
 	 * Valida un rango de equipos por sus IP
 	 * 
 	 * @param IP para un rango de equipos
+	 * 
 	 * @return lista de IDs de equipos, lista vacia si no hay ninguno
 	 */
 	public List<String> rangoEquiposIP(String rango) {
-		int i=0;
 		List<String> resultado = new ArrayList<>();
 		Map<String, Equipo> tablaEquipos = getTablaEquipos();
-		
+
 		for (Equipo e : tablaEquipos.values()) {
-			List<String> equipos = e.getDireccionesIP();
-			String ip = equipos.get(i);
-			
-			if (ip.startsWith(rango)) {
-				resultado.add(e.getCodigo());
+			List<String> direccionesIP = e.getDireccionesIP();
+			for (String ip : direccionesIP) {
+				if (ip != null && ip.startsWith(rango)) {
+					resultado.add(e.getCodigo());
+					break; // Para evitar añadir múltiples veces el mismo equipo
+				}
 			}
 		}
 
