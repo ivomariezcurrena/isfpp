@@ -370,8 +370,7 @@ public class InterfazUI extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenu2MouseClicked
         // ABRIR OTRO PANEL PARA EDITAR EQUIPOS
         // ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        EquipoList ETable = new EquipoList(this, true);
-        ETable.setVisible(true);
+        EquipoList.main(null);
         
     }// GEN-LAST:event_jMenu2MouseClicked
 

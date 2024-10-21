@@ -11,19 +11,9 @@ import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
+
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
+
 
 /**
  *
@@ -41,17 +31,27 @@ public class EquipoList extends javax.swing.JFrame {
     public EquipoList() {
         initComponents();
         setTable();
-       // red = Red.getRed();
-       // calculo = new Calculo();
-       // calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
-	
-	
+        red = Red.getRed();
+        calculo = new Calculo();
+        calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
+       setDatos();	
     }
     
     private void setTable (){
-    String[] title = {"codigo","nombre","borrar"};
+    String[] title = {"codigo","nombre","modificar","borrar"};
     E.setColumnIdentifiers(title);
     TableEquipos.setModel(E);
+    }
+    private void setDatos(){
+        Object[] datos = new Object[E.getColumnCount()];
+        for (Equipo hard : red.getEquipos()) {
+            String codigo = hard.getCodigo();
+            String nombre = hard.getDescripcion();
+            datos[0] = codigo;
+            datos[1] = nombre;
+            E.addRow(datos);
+        }
+        
     }
 
     /**
@@ -148,7 +148,12 @@ public class EquipoList extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(EquipoList.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        //Conexion a la base de datos
+        try {
+            ConexionBD.getInstance().connectToDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
