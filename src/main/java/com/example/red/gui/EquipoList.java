@@ -10,6 +10,7 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
+import java.awt.Color;
 
 
 import javax.swing.table.DefaultTableModel;
@@ -37,18 +38,19 @@ public class EquipoList extends javax.swing.JFrame {
        setDatos();	
     }
     
-    private void setTable (){
-    String[] title = {"codigo","nombre","modificar","borrar"};
+    private void setTable (){                     //CREA Y NOMBRA COLUMNAS
+    String[] title = {"Codigo","Nombre", "IP"};
     E.setColumnIdentifiers(title);
     TableEquipos.setModel(E);
     }
-    private void setDatos(){
+    private void setDatos(){                      //CREA FILA PARA CADA EQUIPO
         Object[] datos = new Object[E.getColumnCount()];
         for (Equipo hard : red.getEquipos()) {
             String codigo = hard.getCodigo();
             String nombre = hard.getDescripcion();
             datos[0] = codigo;
             datos[1] = nombre;
+            datos[2] = hard.getDireccionesIP();
             E.addRow(datos);
         }
         
@@ -67,6 +69,9 @@ public class EquipoList extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TableEquipos = new javax.swing.JTable();
         jToggleButton1 = new javax.swing.JToggleButton();
+        AddBoton = new javax.swing.JButton();
+        ModBoton = new javax.swing.JButton();
+        BorrarBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,7 +88,53 @@ public class EquipoList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableEquipos);
 
-        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setFont(new java.awt.Font("Papyrus", 1, 12)); // NOI18N
+        jToggleButton1.setText("Soy Admin");
+        jToggleButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder()));
+
+        AddBoton.setBackground(new java.awt.Color(0, 102, 102));
+        AddBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        AddBoton.setForeground(new java.awt.Color(255, 255, 255));
+        AddBoton.setText("Agregar");
+        AddBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddBotonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AddBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AddBotonMouseExited(evt);
+            }
+        });
+        AddBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddBotonActionPerformed(evt);
+            }
+        });
+
+        ModBoton.setBackground(new java.awt.Color(0, 102, 102));
+        ModBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        ModBoton.setForeground(new java.awt.Color(255, 255, 255));
+        ModBoton.setText("Modificar");
+
+        BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
+        BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        BorrarBoton.setForeground(new java.awt.Color(255, 255, 255));
+        BorrarBoton.setText("Borrar");
+        BorrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseExited(evt);
+            }
+        });
+        BorrarBoton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarBotonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -95,7 +146,13 @@ public class EquipoList extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jToggleButton1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AddBoton)
+                        .addGap(50, 50, 50)
+                        .addComponent(ModBoton)
+                        .addGap(50, 50, 50)
+                        .addComponent(BorrarBoton)
+                        .addGap(100, 100, 100)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -104,8 +161,12 @@ public class EquipoList extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jToggleButton1)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jToggleButton1)
+                    .addComponent(AddBoton)
+                    .addComponent(ModBoton)
+                    .addComponent(BorrarBoton))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -121,6 +182,34 @@ public class EquipoList extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AddBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBotonActionPerformed
+
+    private void BorrarBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarBotonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrarBotonActionPerformed
+
+    private void BorrarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseExited
+        BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
+    }//GEN-LAST:event_BorrarBotonMouseExited
+
+    private void BorrarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseEntered
+        BorrarBoton.setBackground(Color.red);
+    }//GEN-LAST:event_BorrarBotonMouseEntered
+
+    private void AddBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBotonMouseEntered
+        AddBoton.setBackground(new java.awt.Color(100,204,79));
+    }//GEN-LAST:event_AddBotonMouseEntered
+
+    private void AddBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBotonMouseExited
+        AddBoton.setBackground(new java.awt.Color(0, 102, 102));
+    }//GEN-LAST:event_AddBotonMouseExited
+
+    private void AddBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBotonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddBotonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,6 +252,9 @@ public class EquipoList extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBoton;
+    private javax.swing.JButton BorrarBoton;
+    private javax.swing.JButton ModBoton;
     private javax.swing.JTable TableEquipos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

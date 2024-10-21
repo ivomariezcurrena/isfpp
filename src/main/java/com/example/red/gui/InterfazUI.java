@@ -367,12 +367,12 @@ public class InterfazUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenu2MouseClicked
-        // ABRIR OTRO PANEL PARA EDITAR EQUIPOS
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {
+        // ABRIR PANEL PARA EDITAR EQUIPOS
         // ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         EquipoList.main(null);
         
-    }// GEN-LAST:event_jMenu2MouseClicked
+    }
 
     private void PingBotonMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PingBotonMouseEntered
         PingBoton.setBackground(new java.awt.Color(0, 133, 132));
@@ -390,7 +390,7 @@ public class InterfazUI extends javax.swing.JFrame {
         TraceBoton.setBackground(new java.awt.Color(0, 102, 102));
     }// GEN-LAST:event_TraceBotonMouseExited
 
-    private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PingBotonMouseClicked
+    private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {
 
         String id = red.validarEquipo((String) PingBox.getSelectedItem());
         HelperLabel.setText("");
@@ -400,13 +400,13 @@ public class InterfazUI extends javax.swing.JFrame {
             jTextArea1.setText("El equipo '" + (String) PingBox.getSelectedItem() + "' no se ha encontrado en la red");
         }
 
-    }// GEN-LAST:event_PingBotonMouseClicked
+    }
 
     private void PingBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_PingBoxActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_PingBoxActionPerformed
 
-    private void TraceBotonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_TraceBotonMouseClicked
+    private void TraceBotonMouseClicked(java.awt.event.MouseEvent evt) {
         String id1 = (String) TraceBox1.getSelectedItem();
         String id2 = (String) TraceBox2.getSelectedItem();
         List<String> resultado = null;
@@ -422,7 +422,7 @@ public class InterfazUI extends javax.swing.JFrame {
             HelperLabel.setText(":c");
         }
         // else if (!resultado.get(0).equals(id1) || !resultado.get(resultado.size() -
-        // 1).equals(id2)){ ESTE DA FALSO POSITIVO
+        // 1).equals(id2)){                                                      ESTE DA FALSO POSITIVO
         // jLabel1.setText("No se ha encontrado un camino de equipos activos");
         // jLabel2.setText(":c");}
         else {
@@ -433,10 +433,9 @@ public class InterfazUI extends javax.swing.JFrame {
                 id2 = resultado.get(i + 1);
                 msj = msj + ("- " + id1 + " -> " + id2) + "\n";
             }
-
             jTextArea1.setText(msj);
         }
-    }// GEN-LAST:event_TraceBotonMouseClicked
+    }
 
     private void PingBoxMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PingBoxMouseEntered
         PingBox.setBackground(new java.awt.Color(0, 133, 132));
@@ -446,11 +445,11 @@ public class InterfazUI extends javax.swing.JFrame {
         PingBox.setBackground(new java.awt.Color(225, 225, 225));
     }// GEN-LAST:event_PingBoxMouseExited
 
-    private void RangoBotonMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_RangoBotonMouseClicked
+    private void RangoBotonMouseClicked(java.awt.event.MouseEvent evt) {     
         List<String> equiposConEsaIP = red.rangoEquiposIP((String) RangoBox1.getSelectedItem());
         String msj = "";
-
         int count = 0;
+        
         if (equiposConEsaIP.isEmpty()) {
             jTextArea1.setText("Ningun equipo encontrado");
             HelperLabel.setText("F");
@@ -467,7 +466,7 @@ public class InterfazUI extends javax.swing.JFrame {
             jTextArea1.setText(msj);
 
         }
-    }// GEN-LAST:event_RangoBotonMouseClicked
+    }
 
     private void TraceBox1ActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
