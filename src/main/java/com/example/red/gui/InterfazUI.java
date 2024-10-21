@@ -11,6 +11,7 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
+import com.example.red.gui.EquipoList;
 
 /**
  *
@@ -369,6 +370,9 @@ public class InterfazUI extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenu2MouseClicked
         // ABRIR OTRO PANEL PARA EDITAR EQUIPOS
         // ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        EquipoList ETable = new EquipoList(this, true);
+        ETable.setVisible(true);
+        
     }// GEN-LAST:event_jMenu2MouseClicked
 
     private void PingBotonMouseEntered(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_PingBotonMouseEntered
