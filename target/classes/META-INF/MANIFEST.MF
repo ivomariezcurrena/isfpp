@@ -1,6 +1,11 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Bnd-LastModified: 1729659806273
 Build-Jdk-Spec: 21
+=======
+Bnd-LastModified: 1729649745692
+Build-Jdk-Spec: 22
+>>>>>>> 2671b5dc38392b9b41bbe90f636931d4b2a31e06
 Bundle-Description: A Java class library for graph-theory data structure
  s and algorithms.
 Bundle-License: http://jgrapht.sourceforge.net/LGPL.html, http://www.ecl

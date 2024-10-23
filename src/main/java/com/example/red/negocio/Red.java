@@ -7,13 +7,17 @@ import java.util.Map;
 
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
+import com.example.red.modelo.TipoCable;
+import com.example.red.modelo.TipoEquipo;
+import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
 import com.example.red.servicio.ConexionService;
 import com.example.red.servicio.ConexionServiceImpl;
 import com.example.red.servicio.EquipoService;
 import com.example.red.servicio.EquipoServiceImpl;
+import com.example.red.servicio.TipoCableService;
 import com.example.red.servicio.UbicacionService;
-import com.example.red.servicio.UbicacionServiceImpl;
+import com.example.red.servicio.*;
 
 public class Red {
 	private static Red red = null;
@@ -25,6 +29,12 @@ public class Red {
 	private EquipoService equipoService;
 	private List<Conexion> conexiones;
 	private ConexionService conexionService;
+	private List<TipoCable> tipoCable;
+	private TipoCableService tipoCableService;
+	private List<TipoEquipo> tipoEquipo;
+	private TipoEquipoService TipoEquipoService;
+	private List<TipoPuerto> tipoPuerto;
+	private TipoPuertoService tipoPuertoService;
 
 	public static Red getRed() {
 		if (red == null) {
@@ -49,6 +59,21 @@ public class Red {
 		conexiones = new ArrayList<Conexion>();
 		conexionService = new ConexionServiceImpl();
 		conexiones.addAll(conexionService.buscarTodos().values());
+
+		// TipoCable
+		tipoCable = new ArrayList<TipoCable>();
+		tipoCableService = new TipoCableServiceImpl();
+		tipoCable.addAll(tipoCableService.buscarTodos().values());
+
+		// TipoEquipo
+		tipoEquipo = new ArrayList<TipoEquipo>();
+		TipoEquipoService = new TipoEquipoServiceImpl();
+		tipoEquipo.addAll(TipoEquipoService.buscarTodos().values());
+
+		// TipoPuerto
+		tipoPuerto = new ArrayList<TipoPuerto>();
+		tipoPuertoService = new TipoPuertoServiceImpl();
+		tipoPuerto.addAll(tipoPuertoService.buscarTodos().values());
 	}
 
 	public void agregarEquipo(Equipo equipo) throws EquipoExistenteExeption {
@@ -95,6 +120,26 @@ public class Red {
 
 	public List<Conexion> getConexiones() {
 		return conexiones;
+	}
+
+	public List<TipoCable> getTipoCable() {
+		return tipoCable;
+	}
+
+	public List<TipoEquipo> getTipoEquipos() {
+		return tipoEquipo;
+	}
+
+	public List<TipoPuerto> getTipoPuertos() {
+		return tipoPuerto;
+	}
+
+	public List<TipoEquipo> getTipoEquipo() {
+		return tipoEquipo;
+	}
+
+	public List<TipoPuerto> getTipoPuerto() {
+		return tipoPuerto;
 	}
 
 	public Map<String, Equipo> getTablaEquipos() {
