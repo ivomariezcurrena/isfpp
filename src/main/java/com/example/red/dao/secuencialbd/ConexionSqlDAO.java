@@ -30,7 +30,7 @@ public class ConexionSqlDAO implements GenericDAO<String, Conexion> {
 
     @Override
     public void insertar(Conexion conexion) {
-        String sql = "INSERT INTO poo2024.conexion_ivoma (Equipo1, Equipo2,TipoCable tipoPuerto1, tipoPuerto2) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO poo2024.conexion_ivoma (Equipo1, Equipo2,TipoCable, tipoPuerto1, tipoPuerto2) VALUES (?, ?, ?, ?, ?)";
 
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setString(1, conexion.getEquipo1().getCodigo());
