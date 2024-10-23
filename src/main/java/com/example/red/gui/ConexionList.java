@@ -114,6 +114,11 @@ public class ConexionList extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modificar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
         BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -203,6 +208,11 @@ public class ConexionList extends javax.swing.JFrame {
     private void BorrarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseExited
         BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
     }//GEN-LAST:event_BorrarBotonMouseExited
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+     
+        ConexionMod.main(null);
+    }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                          
         red = Red.getRed();       
