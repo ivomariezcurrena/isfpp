@@ -73,7 +73,7 @@ public class EquipoList extends javax.swing.JFrame {
         ModBoton = new javax.swing.JButton();
         BorrarBoton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         TableEquipos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,7 +159,7 @@ public class EquipoList extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
@@ -208,7 +208,7 @@ public class EquipoList extends javax.swing.JFrame {
     }//GEN-LAST:event_AddBotonMouseExited
 
     private void AddBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBotonMouseClicked
-        // TODO add your handling code here:
+        EquipoAdd.main(null);
     }//GEN-LAST:event_AddBotonMouseClicked
 
     /**

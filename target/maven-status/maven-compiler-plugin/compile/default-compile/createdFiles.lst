@@ -1,4 +1,8 @@
+com\example\red\gui\ConexionList.class
+com\example\red\gui\ConexionAdd.class
+com\example\red\gui\ConexionAdd$1.class
 com\example\red\gui\EquipoList$1.class
-com\example\red\gui\EquipoEdit$1.class
-com\example\red\gui\EquipoEdit.class
+com\example\red\gui\ConexionList$1.class
 com\example\red\gui\EquipoList.class
+com\example\red\gui\ConexionList$2.class
+com\example\red\gui\InterfazUI$15.class
