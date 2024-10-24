@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Bnd-LastModified: 1729717856992
+Bnd-LastModified: 1729740805433
 Build-Jdk-Spec: 21
 Bundle-Description: A Java class library for graph-theory data structure
  s and algorithms.

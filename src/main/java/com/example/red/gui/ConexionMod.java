@@ -32,11 +32,11 @@ public class ConexionMod extends javax.swing.JFrame {
          jComboBox4.addItem(E1.getCodigo()+P1.getCodigo());
         }
         for (Equipo equipo : red.getEquipos()) {           
-            //jComboBox4.addItem(equi);
+          
             jComboBox1.addItem(equipo.getCodigo());                   
         }
         for (TipoPuerto puertos : red.getTipoPuerto()){           
-            //jComboBox5.addItem(pu);
+          
             jComboBox2.addItem(puertos.getCodigo()); 
         }     
         for (TipoCable cables : red.getTipoCable()){                     
