@@ -91,11 +91,7 @@ public class EquipoAdd extends javax.swing.JFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel1.setText("Puerto/s");
-
-        TpuertoBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Especificaciones del Equipo");
 
@@ -195,7 +191,7 @@ public class EquipoAdd extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void EModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EModeloActionPerformed

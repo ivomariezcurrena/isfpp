@@ -112,6 +112,11 @@ public class EquipoList extends javax.swing.JFrame {
         ModBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         ModBoton.setForeground(new java.awt.Color(255, 255, 255));
         ModBoton.setText("Modificar");
+        ModBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ModBotonMouseClicked(evt);
+            }
+        });
 
         BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
         BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -203,6 +208,10 @@ public class EquipoList extends javax.swing.JFrame {
     private void AddBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddBotonMouseClicked
         EquipoAdd.main(null);
     }//GEN-LAST:event_AddBotonMouseClicked
+
+    private void ModBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModBotonMouseClicked
+        EquipoMod.main(null);
+    }//GEN-LAST:event_ModBotonMouseClicked
 
     /**
      * @param args the command line arguments

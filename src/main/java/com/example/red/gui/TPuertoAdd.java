@@ -58,9 +58,14 @@ public class TPuertoAdd extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cerrar");
+        jButton2.setText("Cancelar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText(" ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,6 +131,10 @@ public class TPuertoAdd extends javax.swing.JFrame {
         tipoPuertoSer.insertar(new TipoPuerto(jTextField1.getText(),jTextField2.getText(),velocidad));
         jLabel1.setText("Nuevo TipoCable Creado");
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments

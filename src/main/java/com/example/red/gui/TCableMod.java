@@ -66,6 +66,11 @@ public class TCableMod extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,6 +134,10 @@ public class TCableMod extends javax.swing.JFrame {
         int velocidad = Integer.parseInt(jTextField2.getText());
         tipoCableSer.actualizar(new TipoCable((String)jComboBox1.getSelectedItem(),jTextField1.getText(),velocidad));
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
