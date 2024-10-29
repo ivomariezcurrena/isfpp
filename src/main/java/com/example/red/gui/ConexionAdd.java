@@ -104,6 +104,9 @@ public class ConexionAdd extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -133,11 +136,7 @@ public class ConexionAdd extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(84, 84, 84))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(84, 84, 84))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +195,10 @@ public class ConexionAdd extends javax.swing.JFrame {
         Equipo E1 = null, E2 = null;
         TipoPuerto P1 = null, P2 = null;
         TipoCable C1 = null;
-        for (Equipo equipo : red.getEquipos()) {
+        if(E1Box.getSelectedItem().equals(E2Box.getSelectedItem())){
+        jLabel6.setText("NO SE PUEDE CONECTAR UN EQUIPO A SI MISMO");
+        }else{
+        for (Equipo equipo : red.getEquipos()) {           
             String equi = equipo.getCodigo();
             if(equi.equals((String) E1Box.getSelectedItem())){
             E1 = equipo;
@@ -223,11 +225,14 @@ public class ConexionAdd extends javax.swing.JFrame {
             if(ca.equals((String) CableBox.getSelectedItem())){
             C1 = cables;
             System.out.printf(C1.getCodigo());
-            }}
+            }
+         }
+        
        //Conexion conex = new Conexion(E1,E2,C1,P1,P2);
        //System.out.print(conex.getTipoPuerto2());
        ConService.insertar(new Conexion(E1,E2,C1,P1,P2));
        jLabel6.setText("conexion creada");
+      }
     
     }                                     
 
