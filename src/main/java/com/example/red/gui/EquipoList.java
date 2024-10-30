@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class EquipoList extends javax.swing.JFrame {
     private Red red;
-    private Calculo calculo;
+   // private Calculo calculo;
     private Equipo equipo;
     DefaultTableModel E = new DefaultTableModel();
 
@@ -33,8 +33,8 @@ public class EquipoList extends javax.swing.JFrame {
         initComponents();
         setTable();
         red = Red.getRed();
-        calculo = new Calculo();
-        calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
+       // calculo = new Calculo();
+       // calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
        setDatos();	
     }
     
@@ -68,7 +68,6 @@ public class EquipoList extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableEquipos = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
         AddBoton = new javax.swing.JButton();
         ModBoton = new javax.swing.JButton();
         BorrarBoton = new javax.swing.JButton();
@@ -87,10 +86,6 @@ public class EquipoList extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(TableEquipos);
-
-        jToggleButton1.setFont(new java.awt.Font("Papyrus", 1, 12)); // NOI18N
-        jToggleButton1.setText("Soy Admin");
-        jToggleButton1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), javax.swing.BorderFactory.createEtchedBorder()));
 
         AddBoton.setBackground(new java.awt.Color(0, 102, 102));
         AddBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -145,8 +140,7 @@ public class EquipoList extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jToggleButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(AddBoton)
                         .addGap(50, 50, 50)
                         .addComponent(ModBoton)
@@ -160,13 +154,12 @@ public class EquipoList extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                .addGap(31, 31, 31)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
                     .addComponent(AddBoton)
                     .addComponent(ModBoton)
                     .addComponent(BorrarBoton))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -258,6 +251,5 @@ public class EquipoList extends javax.swing.JFrame {
     private javax.swing.JTable TableEquipos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

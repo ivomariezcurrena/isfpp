@@ -97,8 +97,12 @@ public class InterfazUI extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuConect = new javax.swing.JMenu();
-        MenuEquip = new javax.swing.JMenu();
-        MenuConex = new javax.swing.JMenu();
+        EquiposMenu = new javax.swing.JMenuItem();
+        ConexMenu = new javax.swing.JMenuItem();
+        UbicMenu = new javax.swing.JMenuItem();
+        TEquipoMenu = new javax.swing.JMenuItem();
+        TCableMenu = new javax.swing.JMenuItem();
+        TPuertoMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -515,23 +519,60 @@ public class InterfazUI extends javax.swing.JFrame {
 
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 980, 620));
 
-        MenuConect.setText("File");
+        MenuConect.setText("Inicio");
 
-        MenuEquip.setText("Editar Equipos");
-        MenuEquip.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuEquipMouseClicked(evt);
+        EquiposMenu.setText("Editar Equipos");
+        EquiposMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EquiposMenuActionPerformed(evt);
             }
         });
-        MenuConect.add(MenuEquip);
+        MenuConect.add(EquiposMenu);
 
-        MenuConex.setText("Editar Conexiones");
-        MenuConex.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MenuConexMouseClicked(evt);
+        ConexMenu.setText("Editar Conexiones");
+        ConexMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConexMenuActionPerformed(evt);
             }
         });
-        MenuConect.add(MenuConex);
+        MenuConect.add(ConexMenu);
+
+        UbicMenu.setText("Editar Ubicaciónes");
+        UbicMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UbicMenuActionPerformed(evt);
+            }
+        });
+        MenuConect.add(UbicMenu);
+
+        TEquipoMenu.setText("Editar TipoEquipo");
+        TEquipoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TEquipoMenuActionPerformed(evt);
+            }
+        });
+        MenuConect.add(TEquipoMenu);
+
+        TCableMenu.setText("Editar TipoCables");
+        TCableMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TCableMenuMouseClicked(evt);
+            }
+        });
+        TCableMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TCableMenuActionPerformed(evt);
+            }
+        });
+        MenuConect.add(TCableMenu);
+
+        TPuertoMenu.setText("Editar TipoPuerto");
+        TPuertoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TPuertoMenuActionPerformed(evt);
+            }
+        });
+        MenuConect.add(TPuertoMenu);
 
         jMenuBar1.add(MenuConect);
 
@@ -551,9 +592,33 @@ public class InterfazUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuConexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuConexMouseClicked
+    private void TCableMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TCableMenuMouseClicked
+        TCableList.main(null);
+    }//GEN-LAST:event_TCableMenuMouseClicked
+
+    private void TCableMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TCableMenuActionPerformed
+        TCableList.main(null);
+    }//GEN-LAST:event_TCableMenuActionPerformed
+
+    private void ConexMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConexMenuActionPerformed
         ConexionList.main(null);
-    }//GEN-LAST:event_MenuConexMouseClicked
+    }//GEN-LAST:event_ConexMenuActionPerformed
+
+    private void EquiposMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquiposMenuActionPerformed
+        EquipoList.main(null);
+    }//GEN-LAST:event_EquiposMenuActionPerformed
+
+    private void TEquipoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TEquipoMenuActionPerformed
+        TEquipoList.main(null);
+    }//GEN-LAST:event_TEquipoMenuActionPerformed
+
+    private void TPuertoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TPuertoMenuActionPerformed
+        TPuertoList.main(null);
+    }//GEN-LAST:event_TPuertoMenuActionPerformed
+
+    private void UbicMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UbicMenuActionPerformed
+        UbicacionList.main(null);
+    }//GEN-LAST:event_UbicMenuActionPerformed
 
     private void MenuEquipMouseClicked(java.awt.event.MouseEvent evt) {
         // ABRIR PANEL PARA EDITAR EQUIPOS
@@ -752,21 +817,25 @@ public class InterfazUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ConexMenu;
     private javax.swing.JLabel DecorLabel;
+    private javax.swing.JMenuItem EquiposMenu;
     private javax.swing.JLabel HelperLabel;
     private javax.swing.JMenu MenuConect;
-    private javax.swing.JMenu MenuConex;
-    private javax.swing.JMenu MenuEquip;
     private javax.swing.JButton PingBoton;
     private javax.swing.JComboBox<String> PingBox;
     private javax.swing.JPanel PingPanel;
     private javax.swing.JButton RangoBoton;
     private javax.swing.JComboBox<String> RangoBox1;
     private javax.swing.JPanel RangoPanel;
+    private javax.swing.JMenuItem TCableMenu;
+    private javax.swing.JMenuItem TEquipoMenu;
+    private javax.swing.JMenuItem TPuertoMenu;
     private javax.swing.JButton TraceBoton;
     private javax.swing.JComboBox<String> TraceBox1;
     private javax.swing.JComboBox<String> TraceBox2;
     private javax.swing.JPanel TracePanel;
+    private javax.swing.JMenuItem UbicMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -787,7 +856,6 @@ public class InterfazUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-   
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;

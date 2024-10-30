@@ -14,6 +14,7 @@ import com.example.red.negocio.Red;
 import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 import com.example.red.servicio.ConexionService;
+import com.example.red.servicio.ConexionServiceImpl;
 
 /**
  *
@@ -21,8 +22,8 @@ import com.example.red.servicio.ConexionService;
  */
 public class ConexionList extends javax.swing.JFrame {
     private Red red;
-    private Calculo calculo;
-   
+   // private Calculo calculo;
+   private ConexionServiceImpl ConService = new ConexionServiceImpl();
     DefaultTableModel E = new DefaultTableModel();
 
     /**
@@ -31,9 +32,9 @@ public class ConexionList extends javax.swing.JFrame {
     public ConexionList() {
         initComponents();
         setTable();
-        red = Red.getRed();
-        calculo = new Calculo();
-        calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
+        
+       // calculo = new Calculo();
+        //calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
        setDatos();
     }
     
@@ -42,8 +43,8 @@ public class ConexionList extends javax.swing.JFrame {
     E.setColumnIdentifiers(title);
     TableConex.setModel(E);
     }
-    private void setDatos(){                      //CREA FILA PARA CADA EQUIPO
-        
+    private void setDatos(){                      //CREA FILA PARA CADA Conexion
+        red = Red.getRed();
         Object[] datos = new Object[E.getColumnCount()];
         for (Conexion hard : red.getConexiones()) {
             Equipo E1 = hard.getEquipo1();
@@ -74,8 +75,9 @@ public class ConexionList extends javax.swing.JFrame {
         TableConex = new javax.swing.JTable();
         AddConex = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BorrarBoton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -92,23 +94,56 @@ public class ConexionList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableConex);
 
+        AddConex.setBackground(new java.awt.Color(0, 102, 102));
+        AddConex.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        AddConex.setForeground(new java.awt.Color(255, 255, 255));
         AddConex.setText("Agregar");
         AddConex.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddConexMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AddConexMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AddConexMouseExited(evt);
+            }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 102, 102));
+        jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Modificar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Borrar");
+        BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
+        BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        BorrarBoton.setForeground(new java.awt.Color(255, 255, 255));
+        BorrarBoton.setText("Borrar");
+        BorrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseExited(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Reset");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
+
+        jLabel1.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,30 +154,36 @@ public class ConexionList extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(AddConex)
-                .addGap(118, 118, 118)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(93, 93, 93))
+                .addGap(28, 28, 28)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(205, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(AddConex)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton2)
+                        .addGap(50, 50, 50)
+                        .addComponent(BorrarBoton)))
+                .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddConex)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(9, 9, 9)
-                .addComponent(jButton1))
+                    .addComponent(BorrarBoton))
+                .addGap(3, 3, 3)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -152,11 +193,76 @@ public class ConexionList extends javax.swing.JFrame {
         ConexionAdd.main(null);
     }//GEN-LAST:event_AddConexMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       
-        setTable();
+    private void AddConexMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddConexMouseEntered
+        AddConex.setBackground(new java.awt.Color(100,204,79));
+    }//GEN-LAST:event_AddConexMouseEntered
+
+    private void AddConexMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddConexMouseExited
+        AddConex.setBackground(new java.awt.Color(0, 102, 102));
+    }//GEN-LAST:event_AddConexMouseExited
+
+    private void BorrarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseEntered
+        BorrarBoton.setBackground(Color.red);
+    }//GEN-LAST:event_BorrarBotonMouseEntered
+
+    private void BorrarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseExited
+        BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
+    }//GEN-LAST:event_BorrarBotonMouseExited
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+     
+        ConexionMod.main(null);
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                          
+        red = Red.getRed();       
+        E.setRowCount(0);      
         setDatos();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }                                     
+
+    private void BorrarBotonMouseClicked(java.awt.event.MouseEvent evt) {
+    int selectRow = TableConex.getSelectedRow();
+    if (selectRow != -1) {
+        Equipo E1 = null, E2 = null;
+        TipoPuerto P1 = null, P2 = null;
+        TipoCable C1 = null;
+        String AE1 = (String)TableConex.getValueAt(selectRow, 0);
+        String AP1 = (String)TableConex.getValueAt(selectRow, 1);
+        String AE2 = (String)TableConex.getValueAt(selectRow,2);
+        String AP2 = (String)TableConex.getValueAt(selectRow, 3);
+        String AC1 = (String)TableConex.getValueAt(selectRow, 4);
+            // Obtener el número de columnas
+            for (Equipo equipo : red.getEquipos()) {
+                String equi = equipo.getCodigo();
+                if(equi.equals(AE1)){
+                E1 = equipo;
+                System.out.printf(E1.getCodigo());
+                }
+                if(equi.equals(AE2)){
+                E2 = equipo;
+                System.out.printf(E2.getCodigo());
+                }                              
+            }
+            for (TipoPuerto puertos : red.getTipoPuerto()){
+                String pu = puertos.getCodigo();
+                if(pu.equals(AP1)){
+                P1 = puertos;
+                System.out.printf(P1.getCodigo());
+                }
+                if(pu.equals(AP2)){
+                P2 = puertos;
+                System.out.printf(P2.getCodigo());
+                }
+            }
+             for (TipoCable cables : red.getTipoCable()){          
+                String ca = cables.getCodigo();
+                if(ca.equals(AC1)){
+                C1 = cables;
+                System.out.printf(C1.getCodigo());
+                }}
+        ConService.borrar(new Conexion(E1,E2,C1,P1,P2));
+        jLabel1.setText("la conexion " + AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 + " se borró");
+    }}
 
     /**
      * @param args the command line arguments
@@ -201,10 +307,11 @@ public class ConexionList extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddConex;
+    private javax.swing.JButton BorrarBoton;
     private javax.swing.JTable TableConex;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
