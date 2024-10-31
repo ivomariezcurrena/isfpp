@@ -59,3 +59,33 @@ public class PanelLoading extends javax.swing.JPanel {
         private javax.swing.JLabel jLabel1;
         // End of variables declaration//GEN-END:variables
 }
+/**
+ * La clase PanelLoading representa un panel de carga visual para indicar al
+ * usuario
+ * que una operación está en progreso, bloqueando la interacción con otros
+ * componentes
+ * y mostrando una animación de "loading".
+ *
+ * Funcionalidades principales:
+ * - **Superposición semitransparente**: Sobrescribe el método paintComponent
+ * para
+ * añadir una capa blanca translúcida al panel, utilizando 50% de opacidad.
+ * Esto ayuda a crear un efecto de "pantalla de bloqueo" que evita la
+ * interacción
+ * accidental con otros elementos mientras el panel está activo.
+ *
+ * - **Animación de carga**: Muestra un GIF de carga en el centro del panel
+ * (mediante
+ * el JLabel `jLabel1`), lo que brinda una indicación visual de que el sistema
+ * está
+ * ocupado. Este GIF debe estar ubicado en el directorio especificado.
+ *
+ * - **Evita interacción del usuario**: El panel se configura para ser enfocable
+ * y
+ * bloquear la interacción sin realizar ninguna acción con eventos de ratón o
+ * teclado.
+ * 
+ * Uso recomendado para indicar operaciones en curso que necesitan bloquear la
+ * interfaz
+ * temporalmente.
+ */

@@ -74,7 +74,7 @@ public class PanelCover extends javax.swing.JPanel {
         boton = new BotonContorno();
         boton.setBackground(new Color(255, 255, 255)); // Color de fondo del boton
         boton.setForeground(new Color(255, 255, 255)); // Color del texto del boton
-        boton.setText("REGISTRARME"); // Texto del boton
+        boton.setText("INICIAR SESION"); // Texto del boton
         // Añade un listener al boton que ejecuta el evento al hacer clic
         boton.addActionListener(new ActionListener() {
             @Override
@@ -176,3 +176,33 @@ public class PanelCover extends javax.swing.JPanel {
 
     // Declaracion de variables (para el diseño generado automaticamente)
 }
+
+/**
+ * La clase PanelCover representa un panel de bienvenida y registro en una
+ * interfaz gráfica de usuario,
+ * permitiendo alternar entre modos "Login" y "Registro" mediante una transición
+ * suave y animada.
+ *
+ * Funcionalidades principales:
+ * - **Fondo degradado**: Añade un fondo de color degradado que va de verde
+ * oscuro a un tono más claro,
+ * ofreciendo una apariencia moderna y visualmente agradable.
+ * - **Alternancia entre modos**: Cambia el contenido del panel para adaptarse a
+ * los modos de
+ * "Login" y "Registro" mediante el método cambiarAModoLogin(boolean login), que
+ * actualiza los textos
+ * y el botón.
+ * - **Animaciones de transición**: Cuatro métodos (`registroIzquierda`,
+ * `registroDerecha`,
+ * `loginIzquierda`, `loginDerecha`) permiten una animación de desplazamiento,
+ * moviendo los elementos
+ * hacia los lados según el modo.
+ * - **Botón con evento personalizado**: El botón principal permite agregar un
+ * ActionListener personalizado
+ * mediante el método agregarEvento(ActionListener evento), lo que facilita su
+ * integración en aplicaciones.
+ *
+ * Este panel es ideal para pantallas de bienvenida o registro, adaptándose
+ * visual y funcionalmente al
+ * contexto de autenticación que la aplicación necesite.
+ */

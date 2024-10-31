@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.red.conexion.ConexionBD;
+import com.example.red.interfaz.RedVisual;
+import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
-import com.example.red.gui.EquipoList;
-import com.example.red.gui.ConexionList;
+
 
 /**
  *
@@ -21,6 +22,7 @@ import com.example.red.gui.ConexionList;
 public class InterfazUI extends javax.swing.JFrame {
     private Red red;
     private Calculo calculo;
+    private RedVisual ventana;
 
     /**
      * Creates new form interfazUI
@@ -45,6 +47,15 @@ public class InterfazUI extends javax.swing.JFrame {
 
         }
     }
+public void cargarGrafo(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
+        ventana = new RedVisual();
+	ventana.cargarDatos(tablaEquipos, tablaConexiones);
+}
+public void iniciarGrafo() {
+            cargarGrafo(red.getTablaEquipos(), red.getTablaConexiones());
+		ventana.renderizarRed();
+		ventana.renderizarBotones();
+	}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -103,6 +114,8 @@ public class InterfazUI extends javax.swing.JFrame {
         TEquipoMenu = new javax.swing.JMenuItem();
         TCableMenu = new javax.swing.JMenuItem();
         TPuertoMenu = new javax.swing.JMenuItem();
+        MenuGrafo = new javax.swing.JMenu();
+        VerGrafoItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -519,7 +532,7 @@ public class InterfazUI extends javax.swing.JFrame {
 
         jPanel1.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 980, 620));
 
-        MenuConect.setText("Inicio");
+        MenuConect.setText("Editar");
 
         EquiposMenu.setText("Editar Equipos");
         EquiposMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -576,6 +589,18 @@ public class InterfazUI extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuConect);
 
+        MenuGrafo.setText("Grafo");
+
+        VerGrafoItem.setText("Ver Grafo");
+        VerGrafoItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerGrafoItemActionPerformed(evt);
+            }
+        });
+        MenuGrafo.add(VerGrafoItem);
+
+        jMenuBar1.add(MenuGrafo);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -619,6 +644,10 @@ public class InterfazUI extends javax.swing.JFrame {
     private void UbicMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UbicMenuActionPerformed
         UbicacionList.main(null);
     }//GEN-LAST:event_UbicMenuActionPerformed
+
+    private void VerGrafoItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerGrafoItemActionPerformed
+        iniciarGrafo();
+    }//GEN-LAST:event_VerGrafoItemActionPerformed
 
     private void MenuEquipMouseClicked(java.awt.event.MouseEvent evt) {
         // ABRIR PANEL PARA EDITAR EQUIPOS
@@ -822,6 +851,7 @@ public class InterfazUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem EquiposMenu;
     private javax.swing.JLabel HelperLabel;
     private javax.swing.JMenu MenuConect;
+    private javax.swing.JMenu MenuGrafo;
     private javax.swing.JButton PingBoton;
     private javax.swing.JComboBox<String> PingBox;
     private javax.swing.JPanel PingPanel;
@@ -836,6 +866,7 @@ public class InterfazUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> TraceBox2;
     private javax.swing.JPanel TracePanel;
     private javax.swing.JMenuItem UbicMenu;
+    private javax.swing.JMenuItem VerGrafoItem;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

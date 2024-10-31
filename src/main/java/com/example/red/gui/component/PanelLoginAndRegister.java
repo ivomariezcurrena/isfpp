@@ -183,3 +183,32 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     private javax.swing.JPanel registrar;
     // End of variables declaration//GEN-END:variables
 }
+/**
+ * La clase PanelLoginAndRegister proporciona una interfaz gráfica para
+ * gestionar el
+ * proceso de registro e inicio de sesión. Este panel alterna entre dos vistas
+ * (registro
+ * y login) y permite capturar datos de usuario para crear instancias de
+ * ModelUser y
+ * ModelLogin, facilitando la integración con un backend o sistema de
+ * autenticación.
+ *
+ * Funcionalidades principales:
+ * - **Registro**: Contiene campos personalizados para ingresar nombre, email y
+ * contraseña. Al hacer clic en el botón "REGISTRARSE", los datos se guardan en
+ * un
+ * objeto `ModelUser` para su procesamiento.
+ * - **Login**: Proporciona un formulario para iniciar sesión con email y
+ * contraseña.
+ * Los datos se almacenan en un objeto `ModelLogin` al presionar el botón
+ * "INICIAR".
+ * - **Cambio de paneles**: Mediante el método `showRegister`, permite alternar
+ * entre el panel de registro y el de inicio de sesión, según las necesidades de
+ * la aplicación.
+ *
+ * Parámetros del constructor:
+ * - `eventRegister`: Un `ActionListener` para manejar el evento de registro.
+ * - `eventLogin`: Un `ActionListener` para manejar el evento de inicio de
+ * sesión.
+ *
+ */

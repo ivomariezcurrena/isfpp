@@ -21,8 +21,8 @@ import com.example.red.servicio.ConexionServiceImpl;
  * @author Lautaro
  */
 public class ConexionList extends javax.swing.JFrame {
-    private Red red;
-   // private Calculo calculo;
+    //private Red red; 
+   
    private ConexionServiceImpl ConService = new ConexionServiceImpl();
     DefaultTableModel E = new DefaultTableModel();
 
@@ -44,9 +44,9 @@ public class ConexionList extends javax.swing.JFrame {
     TableConex.setModel(E);
     }
     private void setDatos(){                      //CREA FILA PARA CADA Conexion
-        red = Red.getRed();
+        Red ned = new Red();
         Object[] datos = new Object[E.getColumnCount()];
-        for (Conexion hard : red.getConexiones()) {
+        for (Conexion hard : ned.getConexiones()) {
             Equipo E1 = hard.getEquipo1();
             Equipo E2 = hard.getEquipo2();
             TipoCable C = hard.getTipocable();
@@ -215,12 +215,13 @@ public class ConexionList extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                          
-        red = Red.getRed();       
+        //red = Red.getRed();       
         E.setRowCount(0);      
         setDatos();
     }                                     
 
     private void BorrarBotonMouseClicked(java.awt.event.MouseEvent evt) {
+        Red ned = new Red();
     int selectRow = TableConex.getSelectedRow();
     if (selectRow != -1) {
         Equipo E1 = null, E2 = null;
@@ -232,7 +233,7 @@ public class ConexionList extends javax.swing.JFrame {
         String AP2 = (String)TableConex.getValueAt(selectRow, 3);
         String AC1 = (String)TableConex.getValueAt(selectRow, 4);
             // Obtener el número de columnas
-            for (Equipo equipo : red.getEquipos()) {
+            for (Equipo equipo : ned.getEquipos()) {
                 String equi = equipo.getCodigo();
                 if(equi.equals(AE1)){
                 E1 = equipo;
@@ -243,7 +244,7 @@ public class ConexionList extends javax.swing.JFrame {
                 System.out.printf(E2.getCodigo());
                 }                              
             }
-            for (TipoPuerto puertos : red.getTipoPuerto()){
+            for (TipoPuerto puertos : ned.getTipoPuerto()){
                 String pu = puertos.getCodigo();
                 if(pu.equals(AP1)){
                 P1 = puertos;
@@ -254,7 +255,7 @@ public class ConexionList extends javax.swing.JFrame {
                 System.out.printf(P2.getCodigo());
                 }
             }
-             for (TipoCable cables : red.getTipoCable()){          
+             for (TipoCable cables : ned.getTipoCable()){          
                 String ca = cables.getCodigo();
                 if(ca.equals(AC1)){
                 C1 = cables;

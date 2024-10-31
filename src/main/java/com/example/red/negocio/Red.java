@@ -43,7 +43,7 @@ public class Red {
 		return red;
 	}
 
-	private Red() {
+	public Red() {
 		super();
 		// ubis
 		ubicaciones = new ArrayList<Ubicacion>();
