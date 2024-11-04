@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JLayeredPane;
 
@@ -31,6 +32,9 @@ import net.miginfocom.swing.MigLayout;
 
 public class Main extends javax.swing.JFrame {
 
+    // idioma
+    private ResourceBundle idioma;
+
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
 
     // se utiliza para organizar los componentes dentro del panel bg (la capa
@@ -49,6 +53,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         init();
+        idioma = Idioma.getRb();
     }
 
     private void init() {

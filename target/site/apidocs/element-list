@@ -1,0 +1,13 @@
+com.example.red.conexion
+com.example.red.controlador
+com.example.red.dao
+com.example.red.dao.secuencial
+com.example.red.dao.secuencialbd
+com.example.red.gui
+com.example.red.gui.app
+com.example.red.gui.component
+com.example.red.gui.model
+com.example.red.gui.swing
+com.example.red.modelo
+com.example.red.negocio
+com.example.red.servicio

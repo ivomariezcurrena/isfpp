@@ -4,15 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.TreeMap;
 
 import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
-import com.example.red.dao.secuencial.TipoEquipoSecuencialDAO;
-import com.example.red.dao.secuencial.TipoPuertoSecuencialDAO;
-import com.example.red.dao.secuencial.UbicacionSecuencialDAO;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;

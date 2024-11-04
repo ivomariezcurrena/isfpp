@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.red.conexion.ConexionBD;
-import com.example.red.interfaz.RedVisual;
+import com.example.red.gui.app.RedVisual;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Calculo;
@@ -47,14 +47,24 @@ public class InterfazUI extends javax.swing.JFrame {
 
         }
     }
-public void cargarGrafo(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
+
+    public void cargarGrafo(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
         ventana = new RedVisual();
-	ventana.cargarDatos(tablaEquipos, tablaConexiones);
-}
-public void iniciarGrafo() {
+	    ventana.cargarDatos(tablaEquipos, tablaConexiones);
+    }
+    
+    public void iniciarGrafo() {
+        // Si ya existe, cierra la ventana
+        if (ventana != null && ventana.isDisplayable()){
+            ventana.dispose();
+        }
+
+        // Nueva ventana
+        if (ventana == null || !ventana.isDisplayable()){
             cargarGrafo(red.getTablaEquipos(), red.getTablaConexiones());
-		ventana.renderizarRed();
-		ventana.renderizarBotones();
+            ventana.renderizarRed();
+            ventana.renderizarBotones();
+        }
 	}
 
     /**
@@ -673,11 +683,15 @@ public void iniciarGrafo() {
     }// GEN-LAST:event_TraceBotonMouseExited
 
     private void PingBotonMouseClicked(java.awt.event.MouseEvent evt) {
+        // Ventana del grafo visual
+        ventana.setEstiloNodosTodos("default");
+        ventana.setEstiloArcosTodos("default");
 
         String id = red.validarEquipo((String) PingBox.getSelectedItem());
         HelperLabel.setText("");
         if (id != null) {
             jTextArea1.setText("Equipo '" + id + "' " + (calculo.ping(id) ? "activo" : "inactivo"));
+            ventana.setEstiloNodo(id, "highlight");
         } else {
             jTextArea1.setText("El equipo '" + (String) PingBox.getSelectedItem() + "' no se ha encontrado en la red");
         }
@@ -689,6 +703,10 @@ public void iniciarGrafo() {
     }// GEN-LAST:event_PingBoxActionPerformed
 
     private void TraceBotonMouseClicked(java.awt.event.MouseEvent evt) {
+        // Ventana del grafo visual
+        ventana.setEstiloNodosTodos("default");
+        ventana.setEstiloArcosTodos("default");
+
         String id1 = (String) TraceBox1.getSelectedItem();
         String id2 = (String) TraceBox2.getSelectedItem();
         List<String> resultado = null;
@@ -716,6 +734,10 @@ public void iniciarGrafo() {
                 msj = msj + ("- " + id1 + " -> " + id2) + "\n";
             }
             jTextArea1.setText(msj);
+
+            // Ventana del grafo visual
+            ventana.setEstiloNodos(resultado, "highlight");
+            ventana.setEstiloCaminoArcos(resultado, "highlight");
         }
     }
 
@@ -728,6 +750,10 @@ public void iniciarGrafo() {
     }// GEN-LAST:event_PingBoxMouseExited
 
     private void RangoBotonMouseClicked(java.awt.event.MouseEvent evt) {     
+        // Ventana del grafo visual
+        ventana.setEstiloNodosTodos("default");
+        ventana.setEstiloArcosTodos("default");
+
         List<String> equiposConEsaIP = red.rangoEquiposIP((String) RangoBox1.getSelectedItem());
         String msj = "";
         int count = 0;
@@ -743,6 +769,9 @@ public void iniciarGrafo() {
                 boolean isActivo = entry.getValue();
                 msj = msj + (id + " " + (isActivo ? "activo \n" : "inactivo \n"));
                 count++;
+
+                // Ventana del grafo visual
+                ventana.setEstiloNodo(id, "highlight");
 
             }
             jTextArea1.setText(msj);
