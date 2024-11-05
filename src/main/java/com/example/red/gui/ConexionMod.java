@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
@@ -11,6 +13,7 @@ import com.example.red.modelo.TipoCable;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.negocio.Red;
 import com.example.red.servicio.ConexionServiceImpl;
+import com.example.red.servicio.IdiomaService;
 
 /**
  *
@@ -19,10 +22,12 @@ import com.example.red.servicio.ConexionServiceImpl;
 public class ConexionMod extends javax.swing.JFrame {
     private Red red;
     private ConexionServiceImpl ConService = new ConexionServiceImpl();
+    private ResourceBundle idioma;
     /**
      * Creates new form ConexionMod
      */
     public ConexionMod() {
+        idioma = IdiomaService.getRb();
         initComponents();
          red = Red.getRed(); 
         for (Conexion hard : red.getConexiones()) {
@@ -69,7 +74,7 @@ public class ConexionMod extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -81,7 +86,7 @@ public class ConexionMod extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

@@ -21,6 +21,7 @@ import java.util.TreeMap;
 public class RedVisual extends JFrame {
 
     // Para renderizado
+    private String titulo;
     private mxGraph redVisual = new mxGraph() {
         // Deshabilitar la edición de todos los labels
         @Override
@@ -93,8 +94,8 @@ public class RedVisual extends JFrame {
     Map<String, Object> estiloConexionInactivo = new TreeMap<>();
     Map<String, Object> estiloConexionHighlight = new TreeMap<>();
 
-    public RedVisual() {
-
+    public RedVisual(String titulo) {
+        this.titulo = titulo;
     }
 
     /*
@@ -153,7 +154,7 @@ public class RedVisual extends JFrame {
 
         // Mostrar
         getContentPane().add(graphComponent);
-        setTitle("Visualización del Grafo");
+        setTitle(titulo);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         setSize(800, 600);
         setVisible(true);

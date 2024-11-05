@@ -3,12 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.example.red.gui;
+import java.util.ResourceBundle;
+
+import javax.mail.Quota.Resource;
+
 import com.example.red.conexion.ConexionBD;
 
 import com.example.red.modelo.*;
 import com.example.red.negocio.Red;
 import com.example.red.servicio.*;
-import java.util.TreeMap;
 
 /**
  *
@@ -19,12 +22,13 @@ public class ConexionAdd extends javax.swing.JFrame {
     private TipoCableServiceImpl tipoCableSer = new TipoCableServiceImpl();
     private TipoPuertoServiceImpl tipoPuertoSer = new TipoPuertoServiceImpl();
     private ConexionServiceImpl ConService = new ConexionServiceImpl();
-
+    private ResourceBundle idioma;
  
     /**
      * Creates new form ConexionAdd
      */
     public ConexionAdd() {
+        idioma = IdiomaService.getRb();
         initComponents();       
         red = Red.getRed();      
         for (Equipo equipo : red.getEquipos()) {
@@ -71,29 +75,29 @@ public class ConexionAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
 
-        jLabel1.setText("Equipo 1");
+        jLabel1.setText(idioma.getString("label_equipo1"));
 
-        jLabel2.setText("Puerto 1");
+        jLabel2.setText(idioma.getString("label_puerto1"));
 
-        jLabel3.setText("Equipo 2");
+        jLabel3.setText(idioma.getString("label_equipo2"));
 
-        jLabel4.setText("Puerto 2");
+        jLabel4.setText(idioma.getString("label_equipo2"));
 
-        jLabel5.setText("Tipo de cable");
+        jLabel5.setText(idioma.getString("label_tipoCable"));
 
         jLabel6.setText(" ");
 
@@ -196,7 +200,7 @@ public class ConexionAdd extends javax.swing.JFrame {
         TipoPuerto P1 = null, P2 = null;
         TipoCable C1 = null;
         if(E1Box.getSelectedItem().equals(E2Box.getSelectedItem())){
-        jLabel6.setText("NO SE PUEDE CONECTAR UN EQUIPO A SI MISMO");
+        jLabel6.setText(idioma.getString("label_loop"));
         }else{
         for (Equipo equipo : red.getEquipos()) {           
             String equi = equipo.getCodigo();
@@ -231,7 +235,7 @@ public class ConexionAdd extends javax.swing.JFrame {
        //Conexion conex = new Conexion(E1,E2,C1,P1,P2);
        //System.out.print(conex.getTipoPuerto2());
        ConService.insertar(new Conexion(E1,E2,C1,P1,P2));
-       jLabel6.setText("conexion creada");
+       jLabel6.setText(idioma.getString("label_conexion")+ " "+idioma.getString("label_creada"));
       }
     
     }                                     

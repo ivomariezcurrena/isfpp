@@ -20,9 +20,10 @@ import com.example.red.gui.component.PanelCover;
 import com.example.red.gui.component.PanelLoading;
 import com.example.red.gui.component.PanelLoginAndRegister;
 import com.example.red.gui.component.PanelVerifyCode;
-import com.example.red.gui.model.ModelLogin;
-import com.example.red.gui.model.ModelMessage;
-import com.example.red.gui.model.ModelUser;
+import com.example.red.modelo.ModelLogin;
+import com.example.red.modelo.ModelMessage;
+import com.example.red.modelo.ModelUser;
+import com.example.red.servicio.IdiomaService;
 import com.example.red.servicio.ServiceMail;
 import com.example.red.servicio.ServiceUsuario;
 
@@ -51,9 +52,11 @@ public class Main extends javax.swing.JFrame {
     private ServiceUsuario service;
 
     public Main() {
+        // Idioma
+        idioma = IdiomaService.getRb();
+
         initComponents();
         init();
-        idioma = Idioma.getRb();
     }
 
     private void init() {
@@ -160,14 +163,14 @@ public class Main extends javax.swing.JFrame {
                     ModelUser user = loginAndRegister.getUser();
                     if (service.verifyCodeWithUser(user.getUserID(), verifyCode.getInputCode())) {
                         service.doneVerify(user.getUserID());
-                        showMessage(Message.MessageType.SUCCESS, "registro exitoso");
+                        showMessage(Message.MessageType.SUCCESS, idioma.getString("label_verificacion_exito"));
                         verifyCode.setVisible(false);
                     } else {
-                        showMessage(Message.MessageType.ERROR, "Codigo de verificacion incorrecto");
+                        showMessage(Message.MessageType.ERROR, idioma.getString("label_verificacion_error"));
                     }
                 } catch (SQLException e) {
 
-                    showMessage(Message.MessageType.ERROR, "Error: " + e.getMessage());
+                    showMessage(Message.MessageType.ERROR, idioma.getStringArray("label_error")+": " + e.getMessage());
                 }
             }
         });
@@ -178,16 +181,16 @@ public class Main extends javax.swing.JFrame {
         ModelUser user = loginAndRegister.getUser();
         try {
             if (service.checkDuplicateUser(user.getUserName())) {
-                showMessage(Message.MessageType.ERROR, "El nombre de usuario ya existe");
+                showMessage(Message.MessageType.ERROR, idioma.getString("label_verificacion_nombreExiste"));
             } else if (service.checkDuplicateEmail(user.getEmail())) {
-                showMessage(Message.MessageType.ERROR, "El email ya esta registrado");
+                showMessage(Message.MessageType.ERROR, idioma.getString("label_verificacion_emailExiste"));
             } else {
                 service.insertUser(user);
                 sendMain(user);
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Esto imprimirá el error en la consola.
-            showMessage(Message.MessageType.ERROR, "Error al registrar: " + e.getMessage());
+            showMessage(Message.MessageType.ERROR, idioma.getString("label_crearCuenta_errorRegistro")+": " + e.getMessage());
         }
     }
 
@@ -199,11 +202,11 @@ public class Main extends javax.swing.JFrame {
                 this.dispose();
                 InterfazUI.main(null);// deberia agregar user luego para que inicie el sistema
             } else {
-                showMessage(Message.MessageType.ERROR, "Email o contraseña incorrectos");
+                showMessage(Message.MessageType.ERROR, idioma.getString("label_iniciarSesion_datosInvalidos"));
             }
 
         } catch (SQLException e) {
-            showMessage(Message.MessageType.ERROR, "Error Login");
+            showMessage(Message.MessageType.ERROR, idioma.getString("label_iniciarSesion_errorInicioSesion"));
         }
     }
 

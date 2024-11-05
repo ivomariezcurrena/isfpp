@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.servicio.*;
 import com.example.red.modelo.TipoEquipo;
@@ -15,10 +17,12 @@ import com.example.red.modelo.TipoEquipo;
  */
 public class TEquipoAdd extends javax.swing.JFrame {
     TipoEquipoServiceImpl tEquipos = new TipoEquipoServiceImpl();
+    private ResourceBundle idioma;
     /**
      * Creates new form TEquipoAdd
      */
     public TEquipoAdd() {
+        idioma = IdiomaService.getRb();
         initComponents();
     }
 
@@ -38,18 +42,18 @@ public class TEquipoAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Codigo");
+        jTextField1.setText(idioma.getString("label_codigo"));
 
-        jTextField2.setText("Descripción");
+        jTextField2.setText(idioma.getString("label_descripcion"));
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

@@ -3,15 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.example.red.gui;
-import java.util.List;
-import java.util.Map;
 
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Equipo;
-import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
-import java.awt.Color;
+import com.example.red.servicio.IdiomaService;
 
+import java.awt.Color;
+import java.util.ResourceBundle;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -25,11 +24,13 @@ public class EquipoList extends javax.swing.JFrame {
    // private Calculo calculo;
     private Equipo equipo;
     DefaultTableModel E = new DefaultTableModel();
+    private ResourceBundle idioma;
 
     /**
      * Creates new form EquipoList
      */
     public EquipoList() {
+        idioma = IdiomaService.getRb();
         initComponents();
         setTable();
         red = Red.getRed();
@@ -39,7 +40,7 @@ public class EquipoList extends javax.swing.JFrame {
     }
     
     private void setTable (){                     //CREA Y NOMBRA COLUMNAS
-    String[] title = {"Codigo","Nombre", "IP"};
+    String[] title = {idioma.getString("label_codigo"),idioma.getString("label_nombre"), idioma.getString("label_ip")};
     E.setColumnIdentifiers(title);
     TableEquipos.setModel(E);
     }
@@ -90,7 +91,7 @@ public class EquipoList extends javax.swing.JFrame {
         AddBoton.setBackground(new java.awt.Color(0, 102, 102));
         AddBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         AddBoton.setForeground(new java.awt.Color(255, 255, 255));
-        AddBoton.setText("Agregar");
+        AddBoton.setText(idioma.getString("label_agregar"));
         AddBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddBotonMouseClicked(evt);
@@ -111,7 +112,7 @@ public class EquipoList extends javax.swing.JFrame {
         ModBoton.setBackground(new java.awt.Color(0, 102, 102));
         ModBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         ModBoton.setForeground(new java.awt.Color(255, 255, 255));
-        ModBoton.setText("Modificar");
+        ModBoton.setText(idioma.getString("label_modificar"));
         ModBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ModBotonMouseClicked(evt);
@@ -121,7 +122,7 @@ public class EquipoList extends javax.swing.JFrame {
         BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
         BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         BorrarBoton.setForeground(new java.awt.Color(255, 255, 255));
-        BorrarBoton.setText("Borrar");
+        BorrarBoton.setText(idioma.getString("label_borrar"));
         BorrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BorrarBotonMouseEntered(evt);

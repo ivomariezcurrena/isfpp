@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.servicio.*;
 import com.example.red.modelo.Ubicacion;
@@ -14,10 +16,14 @@ import com.example.red.modelo.Ubicacion;
 public class UbicacionAdd extends javax.swing.JFrame {
     UbicacionServiceImpl ubica = new UbicacionServiceImpl();
 
+    private ResourceBundle idioma;
+
     /**
      * Creates new form UbicacionAdd
      */
     public UbicacionAdd() {
+        // idioma
+        idioma = IdiomaService.getRb();
         initComponents();
     }
 
@@ -39,23 +45,23 @@ public class UbicacionAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Codigo");
+        jTextField1.setText(idioma.getString("label_codigo"));
 
-        jTextField2.setText("Descripcion");
+        jTextField2.setText(idioma.getString("label_descripcion"));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Aceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

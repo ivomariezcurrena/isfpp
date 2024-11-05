@@ -1,4 +1,4 @@
-package com.example.red.gui.model;
+package com.example.red.modelo;
 
 public class ModelLogin {
 
