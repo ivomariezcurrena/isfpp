@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.negocio.Red;
 import com.example.red.modelo.Equipo;
@@ -11,6 +13,7 @@ import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
 import com.example.red.servicio.EquipoServiceImpl;
+import com.example.red.servicio.IdiomaService;
 
 /**
  *
@@ -19,11 +22,13 @@ import com.example.red.servicio.EquipoServiceImpl;
 public class EquipoMod extends javax.swing.JFrame {
     private Red red;
     EquipoServiceImpl Equipos = new EquipoServiceImpl();
+    private ResourceBundle idioma;
 
     /**
      * Creates new form EquipoMod
      */
     public EquipoMod() {
+        idioma = IdiomaService.getRb();
         initComponents();
         red = Red.getRed();        
         for(Equipo Equi: red.getEquipos()){
@@ -67,21 +72,21 @@ public class EquipoMod extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("new descripcion");
+        jTextField1.setText(idioma.getString("label_descripcion"));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("new marca");
+        jTextField2.setText(idioma.getString("label_marca"));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("new modelo");
+        jTextField3.setText(idioma.getString("label_modelo"));
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "intactivo" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -90,14 +95,18 @@ public class EquipoMod extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jButton1.setText("Acceptar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
+=======
+        jButton1.setText(idioma.getString("label_aceptar"));
+>>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

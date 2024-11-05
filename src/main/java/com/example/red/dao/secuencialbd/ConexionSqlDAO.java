@@ -1,11 +1,9 @@
 package com.example.red.dao.secuencialbd;
 
-import java.security.Key;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 import java.util.TreeMap;
 
 import com.example.red.conexion.ConexionBD;

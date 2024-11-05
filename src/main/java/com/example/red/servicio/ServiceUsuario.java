@@ -1,8 +1,9 @@
 package com.example.red.servicio;
 
 import com.example.red.conexion.*;
-import com.example.red.gui.model.ModelLogin;
-import com.example.red.gui.model.ModelUser;
+import com.example.red.modelo.ModelLogin;
+import com.example.red.modelo.ModelUser;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com\example\red\gui\app\MainSystem$1.class
 com\example\red\gui\app\Main$5.class
 com\example\red\dao\secuencial\ConexionSecuancialDAO.class
@@ -118,3 +119,5 @@ com\example\red\gui\EquipoList$4.class
 com\example\red\gui\InterfazUI$3.class
 com\example\red\gui\InterfazUI$15.class
 com\example\red\gui\EquipoAdd$2.class
+=======
+>>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c

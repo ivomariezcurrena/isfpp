@@ -4,10 +4,12 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.*;
 import com.example.red.negocio.Red;
-import com.example.red.servicio.*;
+import com.example.red.servicio.IdiomaService;
 
 /**
  *
@@ -15,12 +17,18 @@ import com.example.red.servicio.*;
  */
 public class EquipoAdd extends javax.swing.JFrame {
     private Red red;
+<<<<<<< HEAD
     EquipoServiceImpl EquipoServise = new EquipoServiceImpl();
+=======
+    private ResourceBundle idioma;
+>>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
 
     /**
      * Creates new form EquipoEdit
      */
     public EquipoAdd() {
+        idioma = IdiomaService.getRb();
+
         red = Red.getRed(); 
         initComponents();
         for(TipoEquipo tEquipo : red.getTipoEquipo()){           
@@ -63,27 +71,27 @@ public class EquipoAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        ECodigo.setText("Codigo");
+        ECodigo.setText(idioma.getString("label_codigo"));
 
-        EDesc.setText("Descripcion");
+        EDesc.setText(idioma.getString("label_descripcion"));
 
-        EMarca.setText("Marca");
+        EMarca.setText(idioma.getString("label_marca"));
 
-        EModelo.setText("Modelo");
+        EModelo.setText(idioma.getString("label_modelo"));
         EModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EModeloActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Cancelar");
+        jButton1.setText(idioma.getString("label_cancelar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Acceptar");
+        jButton2.setText(idioma.getString("label_aceptar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -97,11 +105,11 @@ public class EquipoAdd extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Puerto/s");
+        jLabel1.setText(idioma.getString("label_puertos"));
 
-        jLabel2.setText("Especificaciones del Equipo");
+        jLabel2.setText(idioma.getString("label_especificaciones"));
 
-        jTextField1.setText("IP");
+        jTextField1.setText(idioma.getString("label_ip"));
 
         jLabel3.setText("Tipo Equipo");
 

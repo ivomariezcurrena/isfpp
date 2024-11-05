@@ -9,12 +9,13 @@ import com.example.red.modelo.Equipo;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.TipoCable;
 import com.example.red.modelo.TipoPuerto;
-import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
 import java.awt.Color;
+import java.util.ResourceBundle;
+
 import javax.swing.table.DefaultTableModel;
-import com.example.red.servicio.ConexionService;
 import com.example.red.servicio.ConexionServiceImpl;
+import com.example.red.servicio.IdiomaService;
 
 /**
  *
@@ -25,11 +26,13 @@ public class ConexionList extends javax.swing.JFrame {
    
    private ConexionServiceImpl ConService = new ConexionServiceImpl();
     DefaultTableModel E = new DefaultTableModel();
+    private ResourceBundle idioma;
 
     /**
      * Creates new form ConexionList
      */
     public ConexionList() {
+        idioma = IdiomaService.getRb();
         initComponents();
         setTable();       
        // calculo = new Calculo();
@@ -38,7 +41,7 @@ public class ConexionList extends javax.swing.JFrame {
     }
     
     private void setTable (){                     //CREA Y NOMBRA COLUMNAS    
-    String[] title = {"Equipo 1","Puerto 1","Equipo 2","Puerto 2", "Cable"};
+    String[] title = {idioma.getString("label_equipo1"),idioma.getString("label_puerto1"),idioma.getString("label_equipo2"),idioma.getString("label_puerto2"), idioma.getString("label_cable")};
     E.setColumnIdentifiers(title);
     TableConex.setModel(E);
     }
@@ -100,7 +103,7 @@ public class ConexionList extends javax.swing.JFrame {
         AddConex.setBackground(new java.awt.Color(0, 102, 102));
         AddConex.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         AddConex.setForeground(new java.awt.Color(255, 255, 255));
-        AddConex.setText("Agregar");
+        AddConex.setText(idioma.getString("label_agregar"));
         AddConex.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AddConexMouseClicked(evt);
@@ -116,7 +119,7 @@ public class ConexionList extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(0, 102, 102));
         jButton2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Modificar");
+        jButton2.setText(idioma.getString("label_modificar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -126,7 +129,7 @@ public class ConexionList extends javax.swing.JFrame {
         BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
         BorrarBoton.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         BorrarBoton.setForeground(new java.awt.Color(255, 255, 255));
-        BorrarBoton.setText("Borrar");
+        BorrarBoton.setText(idioma.getString("label_borrar"));
         BorrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BorrarBotonMouseClicked(evt);
@@ -139,7 +142,7 @@ public class ConexionList extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Reset");
+        jButton1.setText("label_reset");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -264,8 +267,12 @@ public class ConexionList extends javax.swing.JFrame {
                 System.out.printf(C1.getCodigo());
                 }}
         ConService.borrar(new Conexion(E1,E2,C1,P1,P2));
+<<<<<<< HEAD
         jLabel1.setText("la conexion " + AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 + " se borró");
         ResetTabla();
+=======
+        jLabel1.setText(idioma.getString("label_conexion")+" "+ AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 +" "+idioma.getString("label_borrado"));
+>>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
     }}
 
     /**

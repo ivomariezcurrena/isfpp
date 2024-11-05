@@ -10,10 +10,12 @@ import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 
 import com.example.red.gui.swing.BotonContorno;
+import com.example.red.servicio.IdiomaService;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -39,9 +41,15 @@ public class PanelCover extends javax.swing.JPanel {
 
     // Booleano que indica si el panel esta en modo "Login" o "Registro"
     private boolean esLogin;
+    
+    // idioma
+    private ResourceBundle idioma;
 
     // Constructor del panel
     public PanelCover() {
+        // idioma
+        idioma = IdiomaService.getRb();
+
         initComponents();
         // Hace que el panel sea transparente
         setOpaque(false);
@@ -55,18 +63,18 @@ public class PanelCover extends javax.swing.JPanel {
     // Metodo para inicializar los componentes del panel
     private void init() {
         // Inicializa y configura el JLabel para el titulo
-        titulo = new JLabel("¡Bienvenido de nuevo!");
+        titulo = new JLabel(idioma.getString("label_crearCuenta_mensaje1"));
         titulo.setFont(new Font("sansserif", 1, 30)); // Define fuente y tamaño
         titulo.setForeground(new Color(245, 245, 245)); // Color del texto
         add(titulo); // Añade el titulo al panel
 
         // Añade una primera descripcion
-        descripcion = new JLabel("Para conectarte, por favor");
+        descripcion = new JLabel(idioma.getString("label_crearCuenta_mensaje2"));
         descripcion.setForeground(new Color(245, 245, 245)); // Color del texto
         add(descripcion);
 
         // Añade una segunda descripcion
-        descripcion1 = new JLabel("registrate con tu informacion personal");
+        descripcion1 = new JLabel(idioma.getString("label_crearCuenta_mensaje3"));
         descripcion1.setForeground(new Color(245, 245, 245)); // Color del texto
         add(descripcion1);
 
@@ -74,7 +82,7 @@ public class PanelCover extends javax.swing.JPanel {
         boton = new BotonContorno();
         boton.setBackground(new Color(255, 255, 255)); // Color de fondo del boton
         boton.setForeground(new Color(255, 255, 255)); // Color del texto del boton
-        boton.setText("REGISTRARME"); // Texto del boton
+        boton.setText(idioma.getString("label_boton_iniciarSesion")); // Texto del boton
         // Añade un listener al boton que ejecuta el evento al hacer clic
         boton.addActionListener(new ActionListener() {
             @Override
@@ -159,16 +167,16 @@ public class PanelCover extends javax.swing.JPanel {
         if (this.esLogin != login) {
             if (login) {
                 // Cambia el contenido para el modo "Login"
-                titulo.setText("¡Hola Amigo!");
-                descripcion.setText("Ingresa tus datos en 5 min");
-                descripcion1.setText("para poder empezar a usar el sistema");
-                boton.setText("REGISTRARME");
+                titulo.setText(idioma.getString("label_iniciarSesion_mensaje1"));
+                descripcion.setText(idioma.getString("label_iniciarSesion_mensaje2"));
+                descripcion1.setText(idioma.getString("label_iniciarSesion_mensaje3"));
+                boton.setText(idioma.getString("label_boton_registrarse"));
             } else {
                 // Cambia el contenido para el modo "Registro"
-                titulo.setText("¡Bienvenido de nuevo!");
-                descripcion.setText("Inicia sesion ahora con tu informacion");
-                descripcion1.setText("para usar el sistema");
-                boton.setText("INICIAR SESION");
+                titulo.setText(idioma.getString("label_crearCuenta_mensaje1"));
+                descripcion.setText(idioma.getString("label_crearCuenta_mensaje2"));
+                descripcion1.setText(idioma.getString("label_crearCuenta_mensaje3"));
+                boton.setText(idioma.getString("label_boton_iniciarSesion"));
             }
             this.esLogin = login; // Actualiza el estado del modo
         }

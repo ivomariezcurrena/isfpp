@@ -10,7 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import com.example.red.gui.model.ModelMessage;
+import com.example.red.modelo.ModelMessage;
 
 public class ServiceMail {
     public ModelMessage sendMain(String toEmail, String code) {

@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.servicio.*;
 import com.example.red.modelo.TipoCable;
@@ -15,12 +17,13 @@ import com.example.red.modelo.TipoCable;
  */
 public class TCableAdd extends javax.swing.JFrame {
     private TipoCableServiceImpl tipoCableSer = new TipoCableServiceImpl();
-   
+    private ResourceBundle idioma;
 
     /**
      * Creates new form TCableAdd
      */
     public TCableAdd() {       
+        idioma = IdiomaService.getRb();
         initComponents();
     }
 
@@ -43,25 +46,25 @@ public class TCableAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Codigo");
+        jTextField1.setText(idioma.getString("label_codigo"));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Descripcion");
+        jTextField2.setText(idioma.getString("label_descripcion"));
 
-        jTextField3.setText("Velocidad");
+        jTextField3.setText(idioma.getString("label_velocidad"));
 
-        jButton1.setText("Aceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -70,7 +73,7 @@ public class TCableAdd extends javax.swing.JFrame {
 
         jLabel1.setText(" ");
 
-        jLabel2.setText("Numeros porfa");
+        jLabel2.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +130,7 @@ public class TCableAdd extends javax.swing.JFrame {
         int velocidad = Integer.parseInt(jTextField3.getText()); 
         
         tipoCableSer.insertar(new TipoCable(jTextField1.getText(),jTextField2.getText(),velocidad));
-        jLabel1.setText("Nuevo TipoCable Creado");
+        jLabel1.setText(idioma.getString("label_tipoCable")+" "+idioma.getString("label_creado"));
         
     }//GEN-LAST:event_jButton1MouseClicked
 
