@@ -15,6 +15,7 @@ import com.example.red.servicio.*;
  */
 public class EquipoAdd extends javax.swing.JFrame {
     private Red red;
+    EquipoServiceImpl EquipoServise = new EquipoServiceImpl();
 
     /**
      * Creates new form EquipoEdit
@@ -27,6 +28,9 @@ public class EquipoAdd extends javax.swing.JFrame {
         }
         for(Ubicacion ubi : red.getUbicaciones()){
             UbicacionBox.addItem(ubi.getDescripcion());
+        }
+        for(TipoPuerto tPuerto : red.getTipoPuertos()){
+        TpuertoBox.addItem(tPuerto.getCodigo());
         }
     }
 
@@ -49,11 +53,13 @@ public class EquipoAdd extends javax.swing.JFrame {
         TEquipoBox = new javax.swing.JComboBox<>();
         UbicacionBox = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         TpuertoBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -97,6 +103,12 @@ public class EquipoAdd extends javax.swing.JFrame {
 
         jTextField1.setText("IP");
 
+        jLabel3.setText("Tipo Equipo");
+
+        jLabel4.setText("Ubicacion");
+
+        jTextField2.setText("Cantidad (int)");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,25 +123,26 @@ public class EquipoAdd extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ECodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(TEquipoBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(TEquipoBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(EDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                                            .addComponent(TpuertoBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(EDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(51, 51, 51)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(EMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                    .addComponent(UbicacionBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(UbicacionBox, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(EModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TpuertoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -150,7 +163,11 @@ public class EquipoAdd extends javax.swing.JFrame {
                                 .addComponent(EDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(UbicacionBox, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
                             .addComponent(TEquipoBox)
@@ -158,9 +175,9 @@ public class EquipoAdd extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TpuertoBox, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2)
+                            .addComponent(TpuertoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -207,9 +224,42 @@ public class EquipoAdd extends javax.swing.JFrame {
         String descr = EDesc.getText();
         String marca = EMarca.getText();
         String mod = EModelo.getText();
-        String tipoE = (String)TEquipoBox.getSelectedItem();
-        String ubic = (String)UbicacionBox.getSelectedItem();
-        boolean act = (boolean) jComboBox1.getSelectedItem();
+        String chek = "true";
+        boolean activo = false;
+        TipoEquipo tipoE = null;
+        Ubicacion ubic = null;
+        TipoPuerto tipoP = null;
+        String ip = jTextField1.getText();
+        int cant = Integer.parseInt(jTextField2.getText());
+        
+        if (chek.equals((String)jComboBox1.getSelectedItem())){
+        activo = true;
+        }
+        for(TipoPuerto tPuerto : red.getTipoPuertos()){
+        String tp = tPuerto.getCodigo();
+         if(tp.equals((String)TpuertoBox.getSelectedItem())){
+            tipoP = tPuerto;           
+            }
+        }      
+        for (TipoEquipo tipo : red.getTipoEquipos()){           //busca equipo seleccionado
+            String te = tipo.getCodigo();
+            if(te.equals((String)TEquipoBox.getSelectedItem())){
+            tipoE = tipo;           
+            }}
+        for (Ubicacion ubica : red.getUbicaciones()){       //busca ubicacion seleccionado
+            String ub = ubica.getDescripcion();
+             System.out.printf("aaa");
+            if(ub.equals((String)UbicacionBox.getSelectedItem())){
+            ubic = ubica;           
+            System.out.printf(ubic.getCodigo()+"aaa");
+            }
+            
+        }
+        Equipo equip = new Equipo(code,descr,marca,mod,tipoE,ubic,activo);
+        equip.agregarDireccionIP(ip);
+        equip.agregarPuerto(tipoP, cant);
+        
+        EquipoServise.insertar(equip);
     }//GEN-LAST:event_jButton2MouseClicked
 
     /**
@@ -265,10 +315,12 @@ public class EquipoAdd extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

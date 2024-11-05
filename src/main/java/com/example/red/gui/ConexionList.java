@@ -31,8 +31,7 @@ public class ConexionList extends javax.swing.JFrame {
      */
     public ConexionList() {
         initComponents();
-        setTable();
-        
+        setTable();       
        // calculo = new Calculo();
         //calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
        setDatos();
@@ -60,6 +59,10 @@ public class ConexionList extends javax.swing.JFrame {
             E.addRow(datos);
         }
         
+    }
+     void ResetTabla(){
+        E.setRowCount(0);      
+        setDatos();
     }
 
     /**
@@ -216,8 +219,7 @@ public class ConexionList extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {                                          
         //red = Red.getRed();       
-        E.setRowCount(0);      
-        setDatos();
+        ResetTabla();
     }                                     
 
     private void BorrarBotonMouseClicked(java.awt.event.MouseEvent evt) {
@@ -263,6 +265,7 @@ public class ConexionList extends javax.swing.JFrame {
                 }}
         ConService.borrar(new Conexion(E1,E2,C1,P1,P2));
         jLabel1.setText("la conexion " + AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 + " se borró");
+        ResetTabla();
     }}
 
     /**

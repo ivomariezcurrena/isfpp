@@ -31,48 +31,73 @@ public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
         this.conexion = ConexionBD.getInstance().getConnection();
     }
 
-    public void insertar(Equipo equipo) {
-        String sql = "INSERT INTO poo2024.Equipo_ivoma (codigo, descripcion, marca, modelo, tipoequipo_codigo, ubicacion_codigo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement pst = conexion.prepareStatement(sql)) {
-            pst.setString(1, equipo.getCodigo());
-            pst.setString(2, equipo.getDescripcion());
-            pst.setString(3, equipo.getMarca());
-            pst.setString(4, equipo.getModelo());
-            pst.setString(5, equipo.getTipoEquipo().getCodigo());
-            pst.setString(6, equipo.getUbicacion().getCodigo());
-            pst.setBoolean(7, equipo.isActivo());
-            pst.executeUpdate();
+   public void insertar(Equipo equipo) {
+    String sqlEquipo = "INSERT INTO poo2024.Equipo_ivoma (codigo, descripcion, marca, modelo, tipoequipo_codigo, ubicacion_codigo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    String sqlPuerto = "INSERT INTO poo2024.Puerto_ivoma (equipo_codigo, tipopuerto_id, cantidad) VALUES (?, ?, ?)";
+    String sqlIP = "INSERT INTO poo2024.DireccionIP_ivoma (equipo_codigo, direccion_ip) VALUES (?, ?)";
+    
+    try {
+        // Inicia una transacción
+        conexion.setAutoCommit(false);
+        
+        // Inserta en la tabla Equipo
+        try (PreparedStatement pstEquipo = conexion.prepareStatement(sqlEquipo)) {
+            pstEquipo.setString(1, equipo.getCodigo());
+            pstEquipo.setString(2, equipo.getDescripcion());
+            pstEquipo.setString(3, equipo.getMarca());
+            pstEquipo.setString(4, equipo.getModelo());
+            pstEquipo.setString(5, equipo.getTipoEquipo().getCodigo());
+            pstEquipo.setString(6, equipo.getUbicacion().getCodigo());
+            pstEquipo.setBoolean(7, equipo.isActivo());
+            pstEquipo.executeUpdate();
+        }
 
-            // Inserción de los puertos sin acceder directamente a la clase Puerto
-            String sqlPuerto = "INSERT INTO poo2024.Puerto_ivoma (equipo_codigo, tipopuerto_id, cantidad) VALUES (?, ?, ?)";
-            try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlPuerto)) {
-                for (Object[] puertoInfo : equipo.getPuertosInfo()) {
-                    String tipoPuertoId = (String) puertoInfo[0]; // tipoPuerto
-                    int cantidad = (int) puertoInfo[1]; // cantidad
-
-                    pstPuerto.setString(1, equipo.getCodigo());
-                    pstPuerto.setString(2, tipoPuertoId);
-                    pstPuerto.setInt(3, cantidad);
-                    pstPuerto.addBatch(); // Añadir a la batch de inserciones
-                }
-                pstPuerto.executeBatch(); // Ejecutar todas las inserciones de puertos a la vez
+        // Inserta en la tabla Puerto
+        try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlPuerto)) {
+            for (Object[] puertoInfo : equipo.getPuertosInfo()) {
+                TipoPuerto tipoPuertoId = (TipoPuerto) puertoInfo[0];
+                int cantidad = (int) puertoInfo[1];
+                pstPuerto.setString(1, equipo.getCodigo());
+                pstPuerto.setString(2, tipoPuertoId.getCodigo());
+                pstPuerto.setInt(3, cantidad);
+                pstPuerto.addBatch();
             }
+            pstPuerto.executeBatch(); // Ejecuta el batch insert para puertos
+        }
 
-            // Inserta las direcciones IP
-            String sqlIP = "INSERT INTO poo2024.DireccionIP_ivoma (equipo_codigo, direccion_ip) VALUES (?, ?)";
-            try (PreparedStatement pstmIP = conexion.prepareStatement(sqlIP)) {
-                for (String ip : equipo.getDireccionesIP()) {
-                    pstmIP.setString(1, equipo.getCodigo());
-                    pstmIP.setString(2, ip);
-                    pstmIP.addBatch();
-                }
-                pstmIP.executeBatch();
+        // Inserta en la tabla Direccion IP
+        try (PreparedStatement pstIP = conexion.prepareStatement(sqlIP)) {
+            for (String ip : equipo.getDireccionesIP()) {
+                pstIP.setString(1, equipo.getCodigo());
+                pstIP.setString(2, ip);
+                pstIP.addBatch();
             }
+            pstIP.executeBatch(); // Ejecuta el batch insert para IPs
+        }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Commit de la transacción
+        conexion.commit();
+    } catch (SQLException e) {
+        e.printStackTrace();
+        try {
+            // Rollback en caso de error
+            if (conexion != null) {
+                conexion.rollback();
+            }
+        } catch (SQLException rollbackEx) {
+            rollbackEx.printStackTrace();
+            throw new RuntimeException("Error al realizar rollback de la transacción", rollbackEx);
+        }
+        throw new RuntimeException("Error al insertar equipo y sus datos asociados", e);
+    } finally {
+        try {
+            // Restaurar el auto-commit
+            conexion.setAutoCommit(true);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
+}
 
     @Override
     public void actualizar(Equipo equipo) {

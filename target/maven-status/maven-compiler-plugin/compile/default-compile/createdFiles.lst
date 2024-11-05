@@ -67,6 +67,7 @@ com\example\red\gui\ConexionList.class
 com\example\red\gui\InterfazUI$13.class
 com\example\red\negocio\EquipoExistenteExeption.class
 com\example\red\gui\InterfazUI$1.class
+com\example\red\gui\UbicacionList$7.class
 com\example\red\gui\app\Main$8.class
 com\example\red\servicio\TipoCableServiceImpl.class
 com\example\red\servicio\ConexionServiceImpl.class
@@ -82,6 +83,7 @@ com\example\red\dao\secuencial\TipoCableSecuencialDAO.class
 com\example\red\gui\swing\Boton$1.class
 com\example\red\servicio\ServiceUsuario.class
 com\example\red\gui\EquipoList$1.class
+com\example\red\gui\EquipoList$7.class
 com\example\red\modelo\Equipo$Puerto.class
 com\example\red\gui\InterfazUI$6.class
 com\example\red\dao\secuencial\EquipoSecuencialDAO.class
@@ -110,6 +112,7 @@ com\example\red\gui\component\PanelLoading$1.class
 com\example\red\gui\EquipoList.class
 com\example\red\gui\InterfazUI$14.class
 com\example\red\interfaz\RedVisual$1.class
+com\example\red\gui\UbicacionList$6.class
 com\example\red\gui\swing\CampoContrasena.class
 com\example\red\gui\EquipoList$4.class
 com\example\red\gui\InterfazUI$3.class

@@ -3,13 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.example.red.gui;
-import java.util.List;
-import java.util.Map;
-
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Equipo;
-import com.example.red.negocio.Calculo;
 import com.example.red.negocio.Red;
+import com.example.red.servicio.EquipoServiceImpl;
 import java.awt.Color;
 
 
@@ -21,10 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author Lautaro
  */
 public class EquipoList extends javax.swing.JFrame {
-    private Red red;
+   // private Red red;
    // private Calculo calculo;
     private Equipo equipo;
     DefaultTableModel E = new DefaultTableModel();
+    EquipoServiceImpl EquipoServise = new EquipoServiceImpl();
 
     /**
      * Creates new form EquipoList
@@ -32,28 +30,32 @@ public class EquipoList extends javax.swing.JFrame {
     public EquipoList() {
         initComponents();
         setTable();
-        red = Red.getRed();
+    //    red = Red.getRed();
        // calculo = new Calculo();
        // calculo.cargarDatos(red.getTablaEquipos(), red.getConexiones());
        setDatos();	
     }
     
     private void setTable (){                     //CREA Y NOMBRA COLUMNAS
-    String[] title = {"Codigo","Nombre", "IP"};
+    String[] title = {"Codigo","Descripcion","modelo","ubicacion", "IP"};
     E.setColumnIdentifiers(title);
     TableEquipos.setModel(E);
     }
     private void setDatos(){                      //CREA FILA PARA CADA EQUIPO
+        Red red = new Red();
         Object[] datos = new Object[E.getColumnCount()];
-        for (Equipo hard : red.getEquipos()) {
-            String codigo = hard.getCodigo();
-            String nombre = hard.getDescripcion();
-            datos[0] = codigo;
-            datos[1] = nombre;
-            datos[2] = hard.getDireccionesIP();
+        for (Equipo hard : red.getEquipos()) {          
+            datos[0] = hard.getCodigo();
+            datos[1] = hard.getDescripcion();
+            datos[2] = hard.getModelo();
+            datos[3] = hard.getUbicacion().getDescripcion();
+            datos[4] = hard.getDireccionesIP();
             E.addRow(datos);
-        }
-        
+        }       
+    }
+    private void ResetTabla(){
+        E.setRowCount(0);      
+        setDatos();
     }
 
     /**
@@ -71,6 +73,8 @@ public class EquipoList extends javax.swing.JFrame {
         AddBoton = new javax.swing.JButton();
         ModBoton = new javax.swing.JButton();
         BorrarBoton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -123,6 +127,9 @@ public class EquipoList extends javax.swing.JFrame {
         BorrarBoton.setForeground(new java.awt.Color(255, 255, 255));
         BorrarBoton.setText("Borrar");
         BorrarBoton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BorrarBotonMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 BorrarBotonMouseEntered(evt);
             }
@@ -136,22 +143,39 @@ public class EquipoList extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Reset");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        jLabel1.setText(" ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(AddBoton)
-                        .addGap(50, 50, 50)
-                        .addComponent(ModBoton)
-                        .addGap(50, 50, 50)
-                        .addComponent(BorrarBoton)
-                        .addGap(100, 100, 100)))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(AddBoton)
+                                .addGap(50, 50, 50)
+                                .addComponent(ModBoton)
+                                .addGap(50, 50, 50)
+                                .addComponent(BorrarBoton)
+                                .addGap(100, 100, 100)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -159,11 +183,14 @@ public class EquipoList extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                .addGap(33, 33, 33)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddBoton)
                     .addComponent(ModBoton)
-                    .addComponent(BorrarBoton))
+                    .addComponent(BorrarBoton)
+                    .addComponent(jButton1))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -213,6 +240,25 @@ public class EquipoList extends javax.swing.JFrame {
         EquipoMod.main(null);
     }//GEN-LAST:event_ModBotonMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        ResetTabla();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void BorrarBotonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseClicked
+         Red ned = new Red();
+    int selectRow = TableEquipos.getSelectedRow();
+    if (selectRow != -1) {
+        Equipo E1 = null;
+        String AE1 = (String)TableEquipos.getValueAt(selectRow, 0);
+        for (Equipo equipo : ned.getEquipos()) {
+                String equi = equipo.getCodigo();
+                if(equi.equals(AE1)){
+                E1 = equipo;}}
+        EquipoServise.borrar(E1);
+        jLabel1.setText("El equipo "+E1.getCodigo()+ " se borro");               
+     }
+    }//GEN-LAST:event_BorrarBotonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +304,8 @@ public class EquipoList extends javax.swing.JFrame {
     private javax.swing.JButton BorrarBoton;
     private javax.swing.JButton ModBoton;
     private javax.swing.JTable TableEquipos;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

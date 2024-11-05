@@ -26,7 +26,7 @@ public class ConexionAdd extends javax.swing.JFrame {
      */
     public ConexionAdd() {
         initComponents();       
-        red = Red.getRed();      
+        red = new Red();      
         for (Equipo equipo : red.getEquipos()) {
             String equi = equipo.getCodigo();
             E1Box.addItem(equi);
