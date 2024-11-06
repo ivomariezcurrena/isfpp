@@ -70,27 +70,27 @@ public class EquipoAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        ECodigo.setText(idioma.getString("label_codigo"));
+        ECodigo.setText("Codigo");
 
-        EDesc.setText(idioma.getString("label_descripcion"));
+        EDesc.setText("Descripcion");
 
-        EMarca.setText(idioma.getString("label_marca"));
+        EMarca.setText("Marca");
 
-        EModelo.setText(idioma.getString("label_modelo"));
+        EModelo.setText("Modelo");
         EModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EModeloActionPerformed(evt);
             }
         });
 
-        jButton1.setText(idioma.getString("label_cancelar"));
+        jButton1.setText("Cancelar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText(idioma.getString("label_aceptar"));
+        jButton2.setText("Acceptar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -104,11 +104,11 @@ public class EquipoAdd extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText(idioma.getString("label_puertos"));
+        jLabel1.setText("Puerto/s");
 
-        jLabel2.setText(idioma.getString("label_especificaciones"));
+        jLabel2.setText("Especificaciones del Equipo");
 
-        jTextField1.setText(idioma.getString("label_ip"));
+        jTextField1.setText("IP");
 
         jLabel3.setText("Tipo Equipo");
 
@@ -183,7 +183,7 @@ public class EquipoAdd extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                             .addComponent(TpuertoBox, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
