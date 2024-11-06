@@ -10,6 +10,8 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.*;
 import com.example.red.negocio.Red;
 import com.example.red.servicio.IdiomaService;
+import com.example.red.servicio.EquipoServiceImpl;
+
 
 /**
  *
@@ -17,11 +19,8 @@ import com.example.red.servicio.IdiomaService;
  */
 public class EquipoAdd extends javax.swing.JFrame {
     private Red red;
-<<<<<<< HEAD
     EquipoServiceImpl EquipoServise = new EquipoServiceImpl();
-=======
     private ResourceBundle idioma;
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
 
     /**
      * Creates new form EquipoEdit

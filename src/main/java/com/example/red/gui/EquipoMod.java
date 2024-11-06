@@ -40,9 +40,9 @@ public class EquipoMod extends javax.swing.JFrame {
         for(TipoEquipo tEquipo : red.getTipoEquipo()){           
             jComboBox4.addItem(tEquipo.getCodigo());
         }
-        for(TipoPuerto tPuerto : red.getTipoPuertos()){
-        jComboBox5.addItem(tPuerto.getCodigo());
-        }
+      /// for(TipoPuerto tPuerto : red.getTipoPuertos()){
+       // jComboBox5.addItem(tPuerto.getCodigo());
+       // }
     }
 
     /**
@@ -67,26 +67,25 @@ public class EquipoMod extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
-        jComboBox5 = new javax.swing.JComboBox<>();
         jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText(idioma.getString("label_descripcion"));
+        jTextField1.setText("new descripcion");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText(idioma.getString("label_marca"));
+        jTextField2.setText("new marca");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jTextField3.setText(idioma.getString("label_modelo"));
+        jTextField3.setText("new modelo");
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "activo", "intactivo" }));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
@@ -95,18 +94,14 @@ public class EquipoMod extends javax.swing.JFrame {
             }
         });
 
-<<<<<<< HEAD
         jButton1.setText("Acceptar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
-=======
-        jButton1.setText(idioma.getString("label_aceptar"));
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
 
-        jButton2.setText(idioma.getString("label_cancelar"));
+        jButton2.setText("Cancelar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -144,17 +139,16 @@ public class EquipoMod extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jComboBox5, 0, 103, Short.MAX_VALUE)
-                                .addGap(71, 71, 71)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(51, 51, 51)
-                                .addComponent(jButton3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4)))
+                                .addComponent(jButton4))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton3)))
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -168,7 +162,7 @@ public class EquipoMod extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -204,8 +198,7 @@ public class EquipoMod extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -261,7 +254,7 @@ public class EquipoMod extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-      TipoPuerto puerto = null;
+      TipoPuerto Tpuerto = null;
       int canti = Integer.parseInt(jTextField4.getText());
       String eqipo = (String) jComboBox1.getSelectedItem();
       Equipo E = null;
@@ -270,12 +263,16 @@ public class EquipoMod extends javax.swing.JFrame {
             E = equi;
             }
         }
-        for (TipoPuerto pu : red.getTipoPuertos()){
-            if(pu.getCodigo().equals((String)jComboBox5.getSelectedItem())){
-            puerto = pu;
-            }
+        for (Object[]  pu : E.getPuertosInfo()){
+            
+           Tpuerto = (TipoPuerto) pu[0];
+           break;
         }
-        E.agregarPuerto(puerto, canti);
+
+        System.out.println(canti);
+        System.out.println(Tpuerto);
+
+        E.agregarPuerto(Tpuerto, canti);
         Equipos.actualizar(E);
         
     }//GEN-LAST:event_jButton3MouseClicked
@@ -369,7 +366,6 @@ public class EquipoMod extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;

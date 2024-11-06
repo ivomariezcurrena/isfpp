@@ -3,21 +3,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.example.red.gui;
-<<<<<<< HEAD
-import com.example.red.conexion.ConexionBD;
-import com.example.red.modelo.Equipo;
-import com.example.red.negocio.Red;
-import com.example.red.servicio.EquipoServiceImpl;
-import java.awt.Color;
-=======
 
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.Equipo;
 import com.example.red.negocio.Red;
 import com.example.red.servicio.IdiomaService;
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
-
+import com.example.red.servicio.EquipoServiceImpl;
 import java.awt.Color;
+
 import java.util.ResourceBundle;
 
 import javax.swing.table.DefaultTableModel;
@@ -32,11 +25,8 @@ public class EquipoList extends javax.swing.JFrame {
    // private Calculo calculo;
     private Equipo equipo;
     DefaultTableModel E = new DefaultTableModel();
-<<<<<<< HEAD
     EquipoServiceImpl EquipoServise = new EquipoServiceImpl();
-=======
     private ResourceBundle idioma;
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
 
     /**
      * Creates new form EquipoList
@@ -52,11 +42,8 @@ public class EquipoList extends javax.swing.JFrame {
     }
     
     private void setTable (){                     //CREA Y NOMBRA COLUMNAS
-<<<<<<< HEAD
-    String[] title = {"Codigo","Descripcion","modelo","ubicacion", "IP"};
-=======
-    String[] title = {idioma.getString("label_codigo"),idioma.getString("label_nombre"), idioma.getString("label_ip")};
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
+   // String[] title = {"Codigo","Descripcion","modelo","ubicacion", "IP"};
+    String[] title = {idioma.getString("label_codigo"),idioma.getString("label_descripcion"), idioma.getString("label_modelo"),idioma.getString("label_ubicacion"),idioma.getString("label_ip")};
     E.setColumnIdentifiers(title);
     TableEquipos.setModel(E);
     }

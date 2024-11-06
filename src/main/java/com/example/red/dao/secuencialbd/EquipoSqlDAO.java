@@ -115,27 +115,34 @@ public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
 
             for (Object[] puertoInfo : equipo.getPuertosInfo()) {
                 TipoPuerto tipoPuerto = (TipoPuerto) puertoInfo[0];
-                int cantidad = 0;
-
-                // Verificar la cantidad actual de puertos
+                int cantidad = (int) puertoInfo[1]; // Usamos la cantidad del equipo
+            
+                // Verificar si el puerto ya existe en la base de datos
                 try (PreparedStatement pstSelect = conexion.prepareStatement(sqlSelectPuerto)) {
                     pstSelect.setString(1, equipo.getCodigo());
                     pstSelect.setString(2, tipoPuerto.getCodigo());
                     ResultSet rs = pstSelect.executeQuery();
+            
                     if (rs.next()) {
-                        cantidad = rs.getInt("cantidad");
+                        // Actualizar si ya existe
+                        try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlUpdatePuerto)) {
+                            pstPuerto.setInt(1, cantidad); // Usamos el valor pasado en el equipo
+                            pstPuerto.setString(2, equipo.getCodigo());
+                            pstPuerto.setString(3, tipoPuerto.getCodigo());
+                            pstPuerto.executeUpdate();
+                        }
+                    } else {
+                        // Insertar si no existe
+                        String sqlInsertPuerto = "INSERT INTO poo2024.Puerto_ivoma (equipo_codigo, tipopuerto_id, cantidad) VALUES (?, ?, ?)";
+                        try (PreparedStatement pstInsertPuerto = conexion.prepareStatement(sqlInsertPuerto)) {
+                            pstInsertPuerto.setString(1, equipo.getCodigo());
+                            pstInsertPuerto.setString(2, tipoPuerto.getCodigo());
+                            pstInsertPuerto.setInt(3, cantidad);
+                            pstInsertPuerto.executeUpdate();
+                        }
                     }
                 }
-
-                // Actualiza el puerto con la cantidad nueva
-                try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlUpdatePuerto)) {
-                    pstPuerto.setInt(1, cantidad + 1); // Lógica para incrementar o actualizar la cantidad
-                    pstPuerto.setString(2, equipo.getCodigo());
-                    pstPuerto.setString(3, tipoPuerto.getCodigo());
-                    pstPuerto.executeUpdate();
-                }
             }
-
             // Actualiza las direcciones IP
             String sqlUpdateIP = "UPDATE poo2024.DireccionIP_ivoma SET direccion_ip = ? WHERE equipo_codigo = ?";
             try (PreparedStatement pstmIP = conexion.prepareStatement(sqlUpdateIP)) {

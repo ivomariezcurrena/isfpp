@@ -127,6 +127,7 @@ public class Equipo {
 
 	public void agregarPuerto(TipoPuerto tipoPuerto, int cantidad) {
 		Puerto nuevoPuerto = new Puerto(tipoPuerto, cantidad);
+		
 		puertos.add(nuevoPuerto);
 	}
 

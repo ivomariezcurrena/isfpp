@@ -267,12 +267,7 @@ public class ConexionList extends javax.swing.JFrame {
                 System.out.printf(C1.getCodigo());
                 }}
         ConService.borrar(new Conexion(E1,E2,C1,P1,P2));
-<<<<<<< HEAD
-        jLabel1.setText("la conexion " + AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 + " se borró");
-        ResetTabla();
-=======
         jLabel1.setText(idioma.getString("label_conexion")+" "+ AE1 + ", " + AP1 + ", " + AE2 +", " + AP2 +", " + AC1 +" "+idioma.getString("label_borrado"));
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c
     }}
 
     /**
