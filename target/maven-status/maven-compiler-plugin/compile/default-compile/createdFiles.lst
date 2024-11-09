@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-com\example\red\gui\app\MainSystem$1.class
 com\example\red\gui\app\Main$5.class
 com\example\red\dao\secuencial\ConexionSecuancialDAO.class
-com\example\red\interfaz\RedVisual$3.class
 com\example\red\conexion\ConexionBD.class
 com\example\red\gui\InterfazUI$11.class
 com\example\red\dao\secuencialbd\TipoPuertoSqlDAO.class
@@ -19,17 +16,14 @@ com\example\red\gui\app\Main$6.class
 com\example\red\gui\component\Message$MessageType.class
 com\example\red\dao\secuencialbd\UbicacionSqlDAO.class
 com\example\red\gui\swing\BotonContorno.class
-com\example\red\interfaz\RedVisual$4.class
 com\example\red\gui\InterfazUI$12.class
 com\example\red\gui\component\PanelVerifyCode$2.class
 com\example\red\gui\component\PanelLoginAndRegister$1.class
 com\example\red\gui\ConexionAdd$2.class
-com\example\red\gui\model\ModelMessage.class
 com\example\red\modelo\TipoCable.class
 com\example\red\servicio\TipoEquipoService.class
 com\example\red\gui\ConexionList$4.class
 com\example\red\dao\secuencial\TipoPuertoSecuencialDAO.class
-com\example\red\interfaz\RedVisual$5.class
 com\example\red\modelo\TipoEquipo.class
 com\example\red\gui\app\Main$1.class
 com\example\red\conexion\Factory.class
@@ -44,9 +38,7 @@ com\example\red\gui\component\PanelVerifyCode$1.class
 com\example\red\gui\EquipoAdd.class
 com\example\red\gui\app\Main$4.class
 com\example\red\negocio\Red.class
-com\example\red\gui\model\ModelUser.class
 com\example\red\servicio\TipoPuertoServiceImpl.class
-com\example\red\interfaz\RedVisual.class
 com\example\red\gui\InterfazUI$9.class
 com\example\red\gui\InterfazUI.class
 com\example\red\gui\app\Main$3.class
@@ -75,7 +67,6 @@ com\example\red\servicio\ConexionServiceImpl.class
 com\example\red\gui\app\Main$7.class
 com\example\red\servicio\ConexionService.class
 com\example\red\dao\secuencial\UbicacionSecuencialDAO.class
-com\example\red\gui\app\MainSystem.class
 com\example\red\servicio\TipoEquipoServiceImpl.class
 com\example\red\gui\InterfazUI$7.class
 com\example\red\gui\app\Main.class
@@ -91,16 +82,13 @@ com\example\red\dao\secuencial\EquipoSecuencialDAO.class
 com\example\red\gui\InterfazUI$5.class
 com\example\red\gui\EquipoList$5.class
 com\example\red\controlador\Constantes.class
-com\example\red\interfaz\Interfaz.class
 com\example\red\gui\component\PanelVerifyCode.class
 com\example\red\controlador\Coordinador.class
 com\example\red\gui\EquipoAdd$1.class
 com\example\red\modelo\Equipo.class
 com\example\red\gui\app\Main$9.class
 com\example\red\gui\InterfazUI$2.class
-com\example\red\interfaz\RedVisual$2.class
 com\example\red\gui\EquipoList$2.class
-com\example\red\gui\model\ModelLogin.class
 com\example\red\dao\secuencialbd\EquipoSqlDAO.class
 com\example\red\gui\component\PanelCover$1.class
 com\example\red\servicio\EquipoServiceImpl.class
@@ -112,12 +100,9 @@ com\example\red\gui\component\Message.class
 com\example\red\gui\component\PanelLoading$1.class
 com\example\red\gui\EquipoList.class
 com\example\red\gui\InterfazUI$14.class
-com\example\red\interfaz\RedVisual$1.class
 com\example\red\gui\UbicacionList$6.class
 com\example\red\gui\swing\CampoContrasena.class
 com\example\red\gui\EquipoList$4.class
 com\example\red\gui\InterfazUI$3.class
 com\example\red\gui\InterfazUI$15.class
 com\example\red\gui\EquipoAdd$2.class
-=======
->>>>>>> e14111e8fb301bea4ac21ed81c64304ea2bf6d8c

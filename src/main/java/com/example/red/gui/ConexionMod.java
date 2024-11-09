@@ -32,18 +32,14 @@ public class ConexionMod extends javax.swing.JFrame {
          red = Red.getRed(); 
         for (Conexion hard : red.getConexiones()) {
             Equipo E1 = hard.getEquipo1();
-            TipoPuerto P1 = hard.getTipoPuerto1();
+           // TipoPuerto P1 = hard.getTipoPuerto1();
             
-         jComboBox4.addItem(E1.getCodigo()+P1.getCodigo());
+         jComboBox4.addItem(E1.getCodigo());
         }
         for (Equipo equipo : red.getEquipos()) {           
           
             jComboBox1.addItem(equipo.getCodigo());                   
-        }
-        for (TipoPuerto puertos : red.getTipoPuerto()){           
-          
-            jComboBox2.addItem(puertos.getCodigo()); 
-        }     
+        }            
         for (TipoCable cables : red.getTipoCable()){                     
             jComboBox3.addItem(cables.getCodigo());
         }
@@ -60,7 +56,6 @@ public class ConexionMod extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -68,13 +63,7 @@ public class ConexionMod extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText(idioma.getString("label_aceptar"));
+        jButton1.setText("Acceptar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -86,7 +75,7 @@ public class ConexionMod extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText(idioma.getString("label_cancelar"));
+        jButton2.setText("Cancelar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -111,8 +100,6 @@ public class ConexionMod extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBox4, 0, 120, Short.MAX_VALUE)
                             .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(38, 38, 38)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -121,9 +108,7 @@ public class ConexionMod extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -155,10 +140,6 @@ public class ConexionMod extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         Equipo E1 = null, E2 = null;
         TipoPuerto P1 = null, P2 = null;
@@ -170,22 +151,32 @@ public class ConexionMod extends javax.swing.JFrame {
             System.out.printf(E2.getCodigo());
             }                              
         }
+        for (Object[]  pu : E2.getPuertosInfo()){
+            
+           P2 = (TipoPuerto) pu[0];
+           break;
+        }
         for (Conexion hard : red.getConexiones()) {
             Equipo AE1 = hard.getEquipo1();
-            TipoPuerto AP1 = hard.getTipoPuerto1();
-            String ha = AE1.getCodigo()+AP1.getCodigo();
+           // TipoPuerto AP1 = hard.getTipoPuerto1();
+            String ha = AE1.getCodigo();
                 if(ha.equals(jComboBox4.getSelectedItem())){
                 E1 = AE1;
-                P1 = AP1;
+                //P1 = AP1;
                 }
         }
-        for (TipoPuerto puertos : red.getTipoPuerto()){
-            String pu = puertos.getCodigo();           
-            if(pu.equals((String) jComboBox2.getSelectedItem())){
-            P2 = puertos;
-            System.out.printf(P2.getCodigo());
-            }
+        for (Object[]  pu : E1.getPuertosInfo()){
+            
+           P1 = (TipoPuerto) pu[0];
+           break;
         }
+      //  for (TipoPuerto puertos : red.getTipoPuerto()){
+      //      String pu = puertos.getCodigo();           
+       //     if(pu.equals((String) jComboBox2.getSelectedItem())){
+       //     P2 = puertos;
+       //     System.out.printf(P2.getCodigo());
+       //     }
+      //  }
          for (TipoCable cables : red.getTipoCable()){          
             String ca = cables.getCodigo();
             if(ca.equals((String) jComboBox3.getSelectedItem())){
@@ -245,7 +236,6 @@ public class ConexionMod extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JPanel jPanel1;

@@ -87,7 +87,7 @@ public class UbicacionList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText(idioma.getString("label_agregar"));
+        jButton1.setText("Agregar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -99,21 +99,21 @@ public class UbicacionList extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText(idioma.getString("label_modificar"));
+        jButton2.setText("Modificar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
             }
         });
 
-        jButton3.setText(idioma.getString("label_borrar"));
+        jButton3.setText("Borrar");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
             }
         });
 
-        jLabel1.setText("");
+        jLabel1.setText(" ");
 
         jButton4.setText("Reset");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
