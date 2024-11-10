@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,8 +14,9 @@ import javax.swing.JLabel;
 import com.example.red.gui.swing.Boton;
 import com.example.red.gui.swing.CampoContrasena;
 import com.example.red.gui.swing.CampoTexto;
-import com.example.red.gui.model.ModelLogin;
-import com.example.red.gui.model.ModelUser;
+import com.example.red.modelo.ModelLogin;
+import com.example.red.modelo.ModelUser;
+import com.example.red.servicio.IdiomaService;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -31,8 +33,12 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     private ModelUser user;
     private ModelLogin dataLogin;
+    private ResourceBundle idioma;
 
     public PanelLoginAndRegister(ActionListener eventRegister, ActionListener eventLogin) {
+        // idioma
+        idioma = IdiomaService.getRb();
+
         // es responsable de inicializar los componentes del panel
         initComponents();
         initRegister(eventRegister);// para configurar los paneles de registro e inicio de sesion
@@ -44,7 +50,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
     // metodo para iniciar in panel
     private void initRegister(ActionListener eventRegister) {
         registrar.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
-        JLabel label = new JLabel("Crear Cuenta");
+        JLabel label = new JLabel(idioma.getString("label_crearCuenta_titulo"));
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(0, 133, 132));
         registrar.add(label);
@@ -55,14 +61,14 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         CampoTexto txtUser = new CampoTexto();
         txtUser.establecerIconoPrefijo(
                 new ImageIcon(getClass().getResource("/com/example/red/gui/icon/user.png")));
-        txtUser.establecerSugerencia("Nombre");
+        txtUser.establecerSugerencia(idioma.getString("label_nombre"));
         registrar.add(txtUser, "w 60%");
 
         // similar pero con otro icono para el mail
         CampoTexto txtEmail = new CampoTexto();
         txtEmail.establecerIconoPrefijo(
                 new ImageIcon(getClass().getResource("/com/example/red/gui/icon/mail.png")));
-        txtEmail.establecerSugerencia("Email");
+        txtEmail.establecerSugerencia(idioma.getString("label_email"));
         registrar.add(txtEmail, "w 60%");
 
         // Un campo de contraseña personalizado (MyPasswordField) con un icono de
@@ -70,7 +76,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         CampoContrasena txtPass = new CampoContrasena();
         txtPass.establecerIconoPrefijo(
                 new ImageIcon(getClass().getResource("/com/example/red/gui/icon/pass.png")));
-        txtPass.establecerSugerencia("Contraseña");
+        txtPass.establecerSugerencia(idioma.getString("label_contrasena"));
         registrar.add(txtPass, "w 60%");
 
         // Un boton personalizado con el texto "REGISTRARSE" y colores especificos. Este
@@ -79,7 +85,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
         cmd.addActionListener(eventRegister);
-        cmd.setText("REGISTRARSE");
+        cmd.setText(idioma.getString("label_boton_registrarse"));
         registrar.add(cmd, "w 40%, h 40");
         cmd.addActionListener(new ActionListener() {
             @Override
@@ -94,21 +100,21 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
 
     private void initLogin(ActionListener eventLogin) {
         login.setLayout(new MigLayout("wrap", "push[center]push", "push[]25[]10[]10[]25[]push"));
-        JLabel label = new JLabel("Iniciar sesion");
+        JLabel label = new JLabel(idioma.getString("label_iniciarSesion_titulo"));
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(0, 133, 132));
         login.add(label);
         CampoTexto txtEmail = new CampoTexto();
         txtEmail.establecerIconoPrefijo(
                 new ImageIcon(getClass().getResource("/com/example/red/gui/icon/mail.png")));
-        txtEmail.establecerSugerencia("Email");
+        txtEmail.establecerSugerencia(idioma.getString("label_email"));
         login.add(txtEmail, "w 60%");
         CampoContrasena txtPass = new CampoContrasena();
         txtPass.establecerIconoPrefijo(
                 new ImageIcon(getClass().getResource("/com/example/red/gui/icon/pass.png")));
-        txtPass.establecerSugerencia("Contraseña");
+        txtPass.establecerSugerencia(idioma.getString("label_contrasena"));
         login.add(txtPass, "w 60%");
-        JButton cmdForget = new JButton("Olvidaste tu contraseña ?");
+        JButton cmdForget = new JButton(idioma.getString("label_iniciarSesion_contrasenaOlvidada"));
         cmdForget.setForeground(new Color(100, 100, 100));
         cmdForget.setFont(new Font("sansserif", 1, 12));
         cmdForget.setContentAreaFilled(false);
@@ -118,7 +124,7 @@ public class PanelLoginAndRegister extends javax.swing.JLayeredPane {
         cmd.setBackground(new Color(0, 133, 132));
         cmd.setForeground(new Color(250, 250, 250));
         cmd.addActionListener(eventLogin);
-        cmd.setText("INICIAR");
+        cmd.setText(idioma.getString("label_boton_iniciarSesion"));
         login.add(cmd, "w 40%, h 40");
         cmd.addActionListener(new ActionListener() {
             @Override

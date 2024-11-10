@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.TipoCable;
 import com.example.red.negocio.Red;
@@ -16,10 +18,12 @@ import com.example.red.servicio.*;
 public class TCableMod extends javax.swing.JFrame {
     private Red red;
     private TipoCableServiceImpl tipoCableSer = new TipoCableServiceImpl();
+    private ResourceBundle idioma;
     /**
      * Creates new form TCableMod
      */
     public TCableMod() {
+        idioma = IdiomaService.getRb();
         initComponents();
         red = Red.getRed(); 
         for(TipoCable tCable : red.getTipoCable()){
@@ -47,25 +51,25 @@ public class TCableMod extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Nueva Descripcion");
+        jTextField1.setText(idioma.getString("label_descripcion"));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Nueca velocidad (int)");
+        jTextField2.setText(idioma.getString("label_velocidad"));
 
-        jLabel1.setText("TipoCable a cambiar");
+        jLabel1.setText(" ");
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

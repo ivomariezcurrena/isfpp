@@ -5,18 +5,13 @@ import java.util.TreeMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.red.controlador.Constantes;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoCable;
 import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
-import com.example.red.servicio.ConexionService;
-import com.example.red.servicio.ConexionServiceImpl;
-import com.example.red.servicio.EquipoService;
-import com.example.red.servicio.EquipoServiceImpl;
-import com.example.red.servicio.TipoCableService;
-import com.example.red.servicio.UbicacionService;
 import com.example.red.servicio.*;
 
 public class Red {
@@ -74,6 +69,15 @@ public class Red {
 		tipoPuerto = new ArrayList<TipoPuerto>();
 		tipoPuertoService = new TipoPuertoServiceImpl();
 		tipoPuerto.addAll(tipoPuertoService.buscarTodos().values());
+
+		// verificar el modo
+		String modoActual = ModoRealService.getModo();
+		if (Constantes.MODO_REAL.equals(modoActual))
+			actualizarEstadosReales(true, null);
+	}
+
+	public void actualizarEstadosReales(boolean todos, List<String> ids){
+		ModoRealService.cargarEstadosReales(equipos, todos, ids);
 	}
 
 	public void agregarEquipo(Equipo equipo) throws EquipoExistenteExeption {

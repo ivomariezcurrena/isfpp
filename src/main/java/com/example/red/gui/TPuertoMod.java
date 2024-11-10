@@ -4,6 +4,8 @@
  */
 package com.example.red.gui;
 
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.negocio.Red;
@@ -16,11 +18,13 @@ import com.example.red.servicio.*;
 public class TPuertoMod extends javax.swing.JFrame {
     private Red red;
     private TipoPuertoServiceImpl tipoPuertoSer = new TipoPuertoServiceImpl();
+    private ResourceBundle idioma;
 
     /**
      * Creates new form TPuertoMod
      */
     public TPuertoMod() {
+        idioma = IdiomaService.getRb();
         initComponents();
         red = Red.getRed(); 
         for(TipoPuerto tPuerto : red.getTipoPuerto()){
@@ -47,18 +51,18 @@ public class TPuertoMod extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Nueva descripción");
+        jTextField1.setText(idioma.getString("label_descripcion"));
 
-        jTextField2.setText("Velocidad (int)");
+        jTextField2.setText(idioma.getString("label_velocidad"));
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);

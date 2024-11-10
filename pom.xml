@@ -97,7 +97,8 @@
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
-            <version>3.0</version>
+            <version>3.5.2</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -108,6 +109,11 @@
             <groupId>postgresq</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>FlatLaf</groupId>
+            <artifactId>FlatLaf</artifactId>
+            <version>3.5.2</version>
         </dependency>
     </dependencies>
     <build>

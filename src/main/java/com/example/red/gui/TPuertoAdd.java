@@ -5,6 +5,9 @@
 package com.example.red.gui;
 
 import com.example.red.modelo.TipoPuerto;
+
+import java.util.ResourceBundle;
+
 import com.example.red.conexion.ConexionBD;
 import com.example.red.servicio.*;
 /**
@@ -13,11 +16,13 @@ import com.example.red.servicio.*;
  */
 public class TPuertoAdd extends javax.swing.JFrame {
     private TipoPuertoServiceImpl tipoPuertoSer = new TipoPuertoServiceImpl();
+    private ResourceBundle idioma;
 
     /**
      * Creates new form TPuertoAdd
      */
     public TPuertoAdd() {
+        idioma = IdiomaService.getRb();
         initComponents();
     }
 
@@ -40,25 +45,25 @@ public class TPuertoAdd extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTextField1.setText("Codigo");
+        jTextField1.setText(idioma.getString("label_codigo"));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
 
-        jTextField2.setText("Descripcion");
+        jTextField2.setText(idioma.getString("label_descripcion"));
 
-        jTextField3.setText("Velocidad (int)");
+        jTextField3.setText(idioma.getString("label_velocidad"));
 
-        jButton1.setText("Acceptar");
+        jButton1.setText(idioma.getString("label_aceptar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Cancelar");
+        jButton2.setText(idioma.getString("label_cancelar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -129,7 +134,7 @@ public class TPuertoAdd extends javax.swing.JFrame {
         int velocidad = Integer.parseInt(jTextField3.getText()); 
         
         tipoPuertoSer.insertar(new TipoPuerto(jTextField1.getText(),jTextField2.getText(),velocidad));
-        jLabel1.setText("Nuevo TipoCable Creado");
+        jLabel1.setText(idioma.getString("label_tipoCable") + " " + idioma.getString("label_creado"));
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

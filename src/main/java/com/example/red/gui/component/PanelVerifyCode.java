@@ -6,10 +6,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.util.ResourceBundle;
+
+import com.example.red.servicio.IdiomaService;
 
 public class PanelVerifyCode extends javax.swing.JPanel {
 
+        private ResourceBundle idioma;
+
         public PanelVerifyCode() {
+                idioma = IdiomaService.getRb();
+
                 initComponents();
                 setOpaque(false);
                 setFocusCycleRoot(true);
@@ -44,17 +51,17 @@ public class PanelVerifyCode extends javax.swing.JPanel {
                 jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
                 jLabel1.setForeground(new java.awt.Color(63, 63, 63));
                 jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel1.setText("Verify Code");
+                jLabel1.setText(idioma.getString("label_verificacion_verificarCodigo"));
 
                 jLabel2.setForeground(new java.awt.Color(63, 63, 63));
                 jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                jLabel2.setText("Check your mail to get verify code");
+                jLabel2.setText(idioma.getString("label_verificacion_verificarMail"));
 
                 cmdOK.setBackground(new java.awt.Color(18, 138, 62));
-                cmdOK.setText("OK");
+                cmdOK.setText(idioma.getString("label_boton_ok"));
 
                 cmdCancel.setBackground(new java.awt.Color(192, 25, 25));
-                cmdCancel.setText("Cancel");
+                cmdCancel.setText(idioma.getString("label_cancelar"));
                 cmdCancel.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 cmdCancelActionPerformed(evt);

@@ -116,7 +116,7 @@ public class Equipo {
 	public List<Object[]> getPuertosInfo() {
 		List<Object[]> puertosInfo = new ArrayList<>();
 		for (Puerto p : puertos) {
-			puertosInfo.add(new Object[] { p.getTipoPuerto().getCodigo(), p.getCantidad() });
+			puertosInfo.add(new Object[] { p.getTipoPuerto(), p.getCantidad() });
 		}
 		return puertosInfo;
 	}
@@ -127,6 +127,7 @@ public class Equipo {
 
 	public void agregarPuerto(TipoPuerto tipoPuerto, int cantidad) {
 		Puerto nuevoPuerto = new Puerto(tipoPuerto, cantidad);
+		
 		puertos.add(nuevoPuerto);
 	}
 

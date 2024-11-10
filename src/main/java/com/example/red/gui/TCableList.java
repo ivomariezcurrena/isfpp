@@ -7,6 +7,9 @@ package com.example.red.gui;
 import com.example.red.conexion.ConexionBD;
 import com.example.red.modelo.TipoCable;
 import com.example.red.negocio.Red;
+
+import java.util.ResourceBundle;
+
 import javax.swing.table.DefaultTableModel;
 import com.example.red.servicio.*;
 
@@ -18,10 +21,14 @@ public class TCableList extends javax.swing.JFrame {
      private Red red;
      TipoCableServiceImpl tCableSer = new TipoCableServiceImpl();
      DefaultTableModel E = new DefaultTableModel();
+     private ResourceBundle idioma;
     /**
      * Creates new form TCableList
      */
     public TCableList() {
+
+        idioma = IdiomaService.getRb();
+
         initComponents();
         setTable();
         setDatos();
@@ -29,7 +36,7 @@ public class TCableList extends javax.swing.JFrame {
        
     }
     private void setTable (){                     //CREA Y NOMBRA COLUMNAS    
-    String[] title = {"Codigo","Descripcion","Velocidad"};
+    String[] title = {idioma.getString("label_codigo"),idioma.getString("label_descripcion"),idioma.getString("label_velocidad")};
     E.setColumnIdentifiers(title);
     jTable1.setModel(E);
     }
@@ -79,14 +86,14 @@ public class TCableList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Agregar");
+        jButton1.setText(idioma.getString("label_agregar"));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setText("Modificar");
+        jButton2.setText(idioma.getString("label_modificar"));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -98,7 +105,7 @@ public class TCableList extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Borrar");
+        jButton3.setText(idioma.getString("label_borrar"));
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
@@ -183,7 +190,7 @@ public class TCableList extends javax.swing.JFrame {
             vel = Integer.parseInt((String) value);  // Si es un String, lo convertimos a int
             }
         tCableSer.borrar(new TipoCable(code,desc,vel));
-        jLabel1.setText("EL TipoCable"+code+" "+desc+" "+vel+"se borró");
+        jLabel1.setText(idioma.getString("label_tipoCable")+" "+code+" "+desc+" "+vel+" "+idioma.getString("label_borrado"));
         }      
         
     }//GEN-LAST:event_jButton3MouseClicked
