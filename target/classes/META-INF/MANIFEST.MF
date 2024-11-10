@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1731183921401
+Build-Jdk-Spec: 21
+Bundle-Description: A Java class library for graph-theory data structure
+ s and algorithms.
+Bundle-License: http://jgrapht.sourceforge.net/LGPL.html, http://www.ecl
+ ipse.org/legal/epl-v20.html
+Bundle-ManifestVersion: 2
+Bundle-Name: JGraphT - Core
+Bundle-SymbolicName: org.jgrapht.core
+Bundle-Version: 1.5.2
+Created-By: Apache Maven Bundle Plugin 5.1.8
+Export-Package: com.example.red.conexion;version="1.5.2",com.example.red
+ .controlador;version="1.5.2";uses:="com.example.red.modelo,com.example.
+ red.negocio",com.example.red.dao;version="1.5.2",com.example.red.dao.se
+ cuencial;version="1.5.2";uses:="com.example.red.dao,com.example.red.mod
+ elo",com.example.red.dao.secuencialbd;version="1.5.2";uses:="com.exampl
+ e.red.dao,com.example.red.modelo",com.example.red.gui;version="1.5.2";u
+ ses:="com.example.red.modelo,javax.swing",com.example.red.gui.app;versi
+ on="1.5.2";uses:="com.example.red.modelo,javax.swing",com.example.red.g
+ ui.component;version="1.5.2";uses:="com.example.red.modelo,javax.swing"
+ ,com.example.red.gui.icon;version="1.5.2",com.example.red.gui.swing;ver
+ sion="1.5.2";uses:="javax.swing",com.example.red.modelo;version="1.5.2"
+ ,com.example.red.negocio;version="1.5.2";uses:="com.example.red.control
+ ador,com.example.red.modelo",com.example.red.servicio;version="1.5.2";u
+ ses:="com.example.red.modelo"
+Import-Package: com.mxgraph.layout;version="[4.2,5)",com.mxgraph.model;v
+ ersion="[4.2,5)",com.mxgraph.swing;version="[4.2,5)",com.mxgraph.util;v
+ ersion="[4.2,5)",com.mxgraph.view;version="[4.2,5)",java.awt,java.awt.e
+ vent,java.awt.image,java.io,java.lang,java.lang.invoke,java.lang.reflec
+ t,java.net,java.sql,java.text,java.util,java.util.concurrent,java.util.
+ logging,javax.mail;version="[1.6,2)",javax.mail.internet;version="[1.6,
+ 2)",javax.swing,javax.swing.border,javax.swing.table,net.miginfocom.swi
+ ng,org.jdesktop.animation.timing,org.jgrapht;version="[1.5,2)",org.jgra
+ pht.alg.shortestpath;version="[1.5,2)",org.jgrapht.graph;version="[1.5,
+ 2)",org.netbeans.lib.awtextra
+Originally-Created-By: Apache Maven Bundle Plugin 5.1.8
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
+Tool: Bnd-6.3.1.202206071316

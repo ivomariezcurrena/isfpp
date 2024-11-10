@@ -106,8 +106,11 @@ public class UbicacionList extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+<<<<<<< HEAD
         jButton1.setBackground(new java.awt.Color(0, 133, 132));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
+=======
+>>>>>>> 0a785cbcd8d5ec9da4f86cabcda3d5349f03dede
         jButton1.setText("Agregar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -120,7 +123,10 @@ public class UbicacionList extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jButton2.setForeground(new java.awt.Color(0, 133, 132));
+=======
+>>>>>>> 0a785cbcd8d5ec9da4f86cabcda3d5349f03dede
         jButton2.setText("Modificar");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -128,7 +134,10 @@ public class UbicacionList extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jButton3.setForeground(new java.awt.Color(255, 51, 51));
+=======
+>>>>>>> 0a785cbcd8d5ec9da4f86cabcda3d5349f03dede
         jButton3.setText("Borrar");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -136,8 +145,12 @@ public class UbicacionList extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 133, 132));
+=======
+        jLabel1.setText(" ");
+>>>>>>> 0a785cbcd8d5ec9da4f86cabcda3d5349f03dede
 
         jButton4.setForeground(new java.awt.Color(0, 133, 132));
         jButton4.setText("Reset");
