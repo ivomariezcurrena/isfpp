@@ -305,7 +305,7 @@ public class EquipoList extends javax.swing.JFrame {
     }//GEN-LAST:event_BorrarBotonActionPerformed
 
     private void BorrarBotonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseExited
-        BorrarBoton.setBackground(new java.awt.Color(0, 102, 102));
+        BorrarBoton.setBackground(new java.awt.Color(255,255,255));
     }//GEN-LAST:event_BorrarBotonMouseExited
 
     private void BorrarBotonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrarBotonMouseEntered
