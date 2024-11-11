@@ -11,9 +11,15 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoEquipo;
 
+/**
+ * DAO para los tipos de equipos en base de datos
+ */
 public class TipoEquipoSqlDAO implements GenericDAO<String, TipoEquipo> {
+
+    /** Conexion con la base de datos */
     private Connection conexion;
 
+    /** Constructor */
     public TipoEquipoSqlDAO() {
         this.conexion = ConexionBD.getInstance().getConnection();
     }
@@ -59,6 +65,7 @@ public class TipoEquipoSqlDAO implements GenericDAO<String, TipoEquipo> {
         }
     }
 
+    @Override
     public TreeMap<String, TipoEquipo> buscarTodos() {
         TreeMap<String, TipoEquipo> map = new TreeMap<>();
         String sql = "SELECT * FROM poo2024.TipoEquipo_ivoma";

@@ -1,14 +1,18 @@
 package com.example.red.servicio;
 
 import java.util.TreeMap;
-
 import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoEquipo;
 
+/**
+ * Implementación de la interfaz TipoEquipoService
+ */
 public class TipoEquipoServiceImpl implements TipoEquipoService {
+    /** DAO para los tipos de equipos */
     private GenericDAO<String, TipoEquipo> tipoEquipoDAO;
 
+    /** COnstructor */
     public TipoEquipoServiceImpl() {
         tipoEquipoDAO = Factory.getInstancia("TIPOEQUIPO");
     }

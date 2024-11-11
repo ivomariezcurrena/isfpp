@@ -13,12 +13,23 @@ import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoCable;
 import com.example.red.modelo.TipoPuerto;
 
+/**
+ * DAO para las conexiones en base de datos
+ */
 public class ConexionSqlDAO implements GenericDAO<String, Conexion> {
+    /** Conexion con la base de datos */
     private Connection con;
+
+    /** Mapa de equipos */
     private TreeMap<String, Equipo> equipos;
+
+    /** Mapa de tipos de cables */
     private TreeMap<String, TipoCable> cables;
+
+    /** Mapa de tipos de puertos */
     private TreeMap<String, TipoPuerto> puertos;
 
+    /** Constructor */
     public ConexionSqlDAO() {
         this.con = ConexionBD.getInstance().getConnection();
         equipos = cargarEquipos();
@@ -100,18 +111,33 @@ public class ConexionSqlDAO implements GenericDAO<String, Conexion> {
         return map;
     }
 
+    /**
+     * Carga los equipos
+     * 
+     * @return mapa de equipos
+     */
     private TreeMap<String, Equipo> cargarEquipos() {
         EquipoSqlDAO equipoDAO = new EquipoSqlDAO();
         TreeMap<String, Equipo> ds = equipoDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga los tipos de cables
+     * 
+     * @return mapa de tipos de cables
+     */
     private TreeMap<String, TipoCable> cargarCables() {
         TipoCableSqlDAO cableDAO = new TipoCableSqlDAO();
         TreeMap<String, TipoCable> ds = cableDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga los tipos de puertos
+     * 
+     * @return mapa de tipos de puertos
+     */
     private TreeMap<String, TipoPuerto> cargarPuertos() {
         TipoPuertoSqlDAO puertoDAO = new TipoPuertoSqlDAO();
         TreeMap<String, TipoPuerto> ds = puertoDAO.buscarTodos();

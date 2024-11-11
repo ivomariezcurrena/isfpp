@@ -6,14 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.TreeMap;
-
 import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoCable;
 
+/**
+ * DAO para los tipos de cables en base de datos
+ */
 public class TipoCableSqlDAO implements GenericDAO<String, TipoCable> {
+
+    /** Conexion con la base de datos */
     private Connection conexion;
 
+    /** Constructor */
     public TipoCableSqlDAO() {
         this.conexion = ConexionBD.getInstance().getConnection();
     }
@@ -62,6 +67,7 @@ public class TipoCableSqlDAO implements GenericDAO<String, TipoCable> {
         }
     }
 
+    @Override
     public TreeMap<String, TipoCable> buscarTodos() {
         TreeMap<String, TipoCable> map = new TreeMap<>();
         String sql = "SELECT * FROM poo2024.TipoCable_ivoma";

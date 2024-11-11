@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Esta clase se encarga de mostrar gráficamente la red
+ */
 public class RedVisual extends JFrame {
 
     // Para renderizado
@@ -98,7 +101,7 @@ public class RedVisual extends JFrame {
         this.titulo = titulo;
     }
 
-    /*
+    /**
      * Carga los equipos a los atributos de la instancia
      */
     public void cargarDatos(Map<String, Equipo> tablaEquipos, Map<String, Conexion> tablaConexiones) {
@@ -113,7 +116,7 @@ public class RedVisual extends JFrame {
         this.tablaConexiones = tablaConexiones;
     }
 
-    /*
+    /**
      * Renderiza la red en un JFrame
      */
     public void renderizarRed() {
@@ -173,7 +176,7 @@ public class RedVisual extends JFrame {
 
     }
 
-    /*
+    /**
      * Muestra los botones dentro del JFrame de la red
      */
     public void renderizarBotones() {
@@ -233,7 +236,7 @@ public class RedVisual extends JFrame {
         });
     }
 
-    /*
+    /**
      * Obtiene el estilo correcto para un nodo
      * 
      * @param ID del equipo
@@ -273,7 +276,7 @@ public class RedVisual extends JFrame {
         return estilo;
     }
 
-    /*
+    /**
      * Obtiene el estilo correcto para un arco
      * 
      * @param IDs de los equipos extremos del arco
@@ -296,7 +299,7 @@ public class RedVisual extends JFrame {
         return estilo;
     }
 
-    /*
+    /**
      * Aplica un estilo a un nodo
      * 
      * @param ID del equipo
@@ -316,7 +319,7 @@ public class RedVisual extends JFrame {
         }
     }
 
-    /*
+    /**
      * Aplica un estilo a un arco
      * 
      * @param IDs de los 2 equipos extremos
@@ -339,7 +342,7 @@ public class RedVisual extends JFrame {
         }
     }
 
-    /*
+    /**
      * Aplica un estilo a varios nodos
      * 
      * @param lista de IDs de los equipos
@@ -351,7 +354,7 @@ public class RedVisual extends JFrame {
             setEstiloNodo(id, tipoEstilo);
     }
 
-    /*
+    /**
      * Aplica un estilo a varios arcos
      * 
      * @param pares de IDs de los equipos extremos de los arcos
@@ -366,7 +369,7 @@ public class RedVisual extends JFrame {
         }
     }
 
-    /*
+    /**
      * Aplica un estilo a un camino de arcos
      * 
      * @param lista de IDs de la secuencia de equipos. Deben estar conectados entre
@@ -385,7 +388,7 @@ public class RedVisual extends JFrame {
         }
     }
 
-    /*
+    /**
      * Aplica un estilo a todos los nodos
      * 
      * @param tipo de estilo
@@ -396,7 +399,7 @@ public class RedVisual extends JFrame {
         setEstiloNodos(ids, tipoEstilo);
     }
 
-    /*
+    /**
      * Aplica un estilo a todos los arcos
      * 
      * @param tipo de estilo
@@ -408,7 +411,7 @@ public class RedVisual extends JFrame {
         setEstiloArcos(paresIds, tipoEstilo);
     }
 
-    /*
+    /**
      * Inicializa los estilos, usando las configuraciones globales establecidas
      */
     public void inicializarEstilos() {

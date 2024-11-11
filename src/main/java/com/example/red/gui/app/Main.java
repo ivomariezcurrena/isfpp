@@ -29,17 +29,23 @@ import com.example.red.servicio.ServiceUsuario;
 
 import net.miginfocom.swing.MigLayout;
 
-//Esta clase es una ventana (JFrame) que contiene una interfaz de inicio de sesión y registro con animaciones suaves, utilizando componentes personalizados y la librería MigLayout para organizar los componentes dentro del formulario.
-
+/**
+ * Esta clase es una ventana (JFrame) que contiene una interfaz de inicio de
+ * sesión y registro con animaciones suaves, utilizando componentes
+ * personalizados y la librería MigLayout para organizar los componentes dentro
+ * del formulario.
+ */
 public class Main extends javax.swing.JFrame {
 
-    // idioma
+    /** idioma */
     private ResourceBundle idioma;
 
     private final DecimalFormat df = new DecimalFormat("##0.###", DecimalFormatSymbols.getInstance(Locale.US));
 
-    // se utiliza para organizar los componentes dentro del panel bg (la capa
-    // principal que contiene los otros componentes)
+    /**
+     * se utiliza para organizar los componentes dentro del panel bg (la capa
+     * principal que contiene los otros componentes)
+     */
     private MigLayout layout;
     private PanelCover cover;
     private PanelLoading loading;
@@ -170,7 +176,8 @@ public class Main extends javax.swing.JFrame {
                     }
                 } catch (SQLException e) {
 
-                    showMessage(Message.MessageType.ERROR, idioma.getStringArray("label_error")+": " + e.getMessage());
+                    showMessage(Message.MessageType.ERROR,
+                            idioma.getStringArray("label_error") + ": " + e.getMessage());
                 }
             }
         });
@@ -190,7 +197,8 @@ public class Main extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Esto imprimirá el error en la consola.
-            showMessage(Message.MessageType.ERROR, idioma.getString("label_crearCuenta_errorRegistro")+": " + e.getMessage());
+            showMessage(Message.MessageType.ERROR,
+                    idioma.getString("label_crearCuenta_errorRegistro") + ": " + e.getMessage());
         }
     }
 

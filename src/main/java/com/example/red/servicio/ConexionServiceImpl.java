@@ -1,14 +1,19 @@
 package com.example.red.servicio;
 
 import java.util.TreeMap;
-
 import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Conexion;
 
+/**
+ * Implementación de la interfaz ConexionService
+ */
 public class ConexionServiceImpl implements ConexionService {
+
+    /** DAO para las conexiones */
     private GenericDAO<String, Conexion> conexionDAO;
 
+    /** Constructor */
     public ConexionServiceImpl() {
         conexionDAO = Factory.getInstancia("CONEXION");
     }

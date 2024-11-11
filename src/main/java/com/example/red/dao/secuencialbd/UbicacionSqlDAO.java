@@ -10,11 +10,15 @@ import java.util.TreeMap;
 import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Ubicacion;
-
+/**
+ * DAO para las ubicaciones en base de datos
+ */
 public class UbicacionSqlDAO implements GenericDAO<String, Ubicacion> {
 
+    /** Conexion con la base de datos */
     private Connection conexion;
 
+    /** Constructor */
     public UbicacionSqlDAO() {
         this.conexion = ConexionBD.getInstance().getConnection();
     }

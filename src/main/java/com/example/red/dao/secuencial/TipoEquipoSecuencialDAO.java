@@ -12,17 +12,34 @@ import java.util.TreeMap;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoEquipo;
 
+
+/**
+ * DAO para los tipos de equipos en archivos de texto
+ */
 public class TipoEquipoSecuencialDAO implements GenericDAO<String, TipoEquipo> {
+
+    /** Mapa de tipos de equipos */
     private TreeMap<String, TipoEquipo> map;
+
+    /** Nombre del archivo de texto */
     private String name;
+
+    /** Bandera de actualización */
     private boolean actualizar;
 
+    /** Constructor */
     public TipoEquipoSecuencialDAO() {
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
         name = rb.getString("tipoEquipo");
         actualizar = true;
     }
 
+    /**
+     * Lee los tipos de equipos desde el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @return mapa de tipos de equipos
+     */
     private TreeMap<String, TipoEquipo> readFromFile(String file) {
         TreeMap<String, TipoEquipo> map = new TreeMap<>();
         Scanner inFile = null;
@@ -50,6 +67,12 @@ public class TipoEquipoSecuencialDAO implements GenericDAO<String, TipoEquipo> {
         return map;
     }
 
+    /**
+     * Escribe los tipos de equipos en el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @param map  mapa de tipos de equipos
+     */
     private void writeToFile(TreeMap<String, TipoEquipo> map, String file) {
         Formatter outFile = null;
         try {

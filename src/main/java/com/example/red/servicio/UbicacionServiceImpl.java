@@ -1,14 +1,19 @@
 package com.example.red.servicio;
 
 import java.util.TreeMap;
-
 import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Ubicacion;
 
+/**
+ * Implementación de la interfaz UbicacionService
+ */
 public class UbicacionServiceImpl implements UbicacionService {
+
+    /** DAO para las ubicaciones */
     private GenericDAO<String, Ubicacion> UbicacionDAO;
 
+    /** Constructor */
     public UbicacionServiceImpl() {
         UbicacionDAO = Factory.getInstancia("UBICACION");
     }

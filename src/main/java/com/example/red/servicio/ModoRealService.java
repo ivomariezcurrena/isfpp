@@ -1,6 +1,5 @@
 package com.example.red.servicio;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,8 +18,13 @@ import com.example.red.modelo.Equipo;
  */
 public class ModoRealService {
 
+    /** Objeto para obtener la entrada del archivo de configuraciones */
     private static InputStream input;
+
+    /** Objeto para leer las propiedades del archivo de configuraciones */
     private static Properties prop;
+
+    /** Cadena que indica el modo actual de la aplicación */
     private static String modo;
 
     /**
@@ -56,8 +60,6 @@ public class ModoRealService {
      * @param todos true para cambiar todos, false para cambiar solo los indicados en los ids
      * @param ids lista de ids de equipos a modificar
      */
-    // Genera un hilo por cada consulta de ping
-    // el parametro se modifica por referencia
     public static void cargarEstadosReales(List<Equipo> equipos, boolean todos, List<String> ids) {
         // executor
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -81,20 +83,6 @@ public class ModoRealService {
         } else {
             
         }
-
-        // Esperar unos segundos hasta que terminen todos los hilos de executor
-        try {
-            executor.shutdown();
-            executor.awaitTermination(Constantes.PINGWORKER_TIMEOUT, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void cargarEstadoReal(Equipo equipo) {
-        // executor
-        ExecutorService executor = Executors.newCachedThreadPool();
-        executor.execute(new PingWorker("PingWorker 1", equipo));
 
         // Esperar unos segundos hasta que terminen todos los hilos de executor
         try {

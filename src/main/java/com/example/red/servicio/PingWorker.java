@@ -6,22 +6,26 @@ import com.example.red.modelo.Equipo;
 
 /**
  * Se encarga de realizar un ping a una dirección IP u Host y esperar el
- * resultado
+ * resultado.
  * La dirección IP que se usa, se obtiene del equipo brindado al crear una
- * instancia
- * Es un hilo, implementa la interfaz Runnable por ello se recomienda usarlo en
- * un ExecutorService
+ * instancia.
+ * Es un hilo que implementa la interfaz Runnable, por ello se recomienda usarlo
+ * en un ExecutorService.
  */
 public class PingWorker implements Runnable {
+
+    /** Nombre de la instancia */
     private String nombre;
+
+    /** Referencia del equipo a actualizar */
     private Equipo equipo;
 
     /**
      * Crea un PingWorker con un nombre personalizado y el equipo cuyo estado se
      * verificará
      * 
-     * @param nombre 
-     * @param equipo
+     * @param nombre cadena
+     * @param equipo referencia
      */
     public PingWorker(String nombre, Equipo equipo) {
         this.nombre = nombre;

@@ -15,16 +15,36 @@ import com.example.red.controlador.Coordinador;
 import com.example.red.modelo.Conexion;
 import com.example.red.modelo.Equipo;
 
+/** 
+ * Provee métodos para realizar operaciones de cálculo en la red
+ * 
+ */
 public class Calculo {
-	private Coordinador coordinador;
-	private Graph<Equipo, DefaultWeightedEdge> red; // red para hacer los cálculos
-	private Map<String, Equipo> tablaEquipos; // "ID" -> Equipo
 
+	/** La referencia al objeto Coordinador */
+	private Coordinador coordinador;
+
+	/** El grafo de cálculo Graph de JGraphT*/
+	private Graph<Equipo, DefaultWeightedEdge> red;
+
+	/** Mapa de equipos por ID */
+	private Map<String, Equipo> tablaEquipos;
+
+	/**
+	 * Asigna la referencia de la instancia de Coordinador a esta instancia
+	 * 
+	 * @param coordinador
+	 */
 	public void setCoordinador(Coordinador coordinador) {
 		this.coordinador = coordinador;
 	}
 
-	// Se cargan los equipos y conexiones a una red que se usará para los cálculos
+	/**
+	 * Carga los equipos y conexiones al grafo de cálculo
+	 * 
+	 * @param tablaEquipos mapa de equipos por ID
+	 * @param conexiones lista de conexiones entre equipos
+	 */
 	public void cargarDatos(Map<String, Equipo> tablaEquipos, List<Conexion> conexiones) {
 		red = new SimpleWeightedGraph<>(DefaultWeightedEdge.class);
 		this.tablaEquipos = tablaEquipos;
@@ -50,15 +70,13 @@ public class Calculo {
 		}
 	}
 
-	/*
+	/**
 	 * Dado dos equipos mostrar todos los equipos intermedios y sus conexiones.
 	 * Calcular la velocidad máxima de acuerdo al tipo de puerto y cables por donde
 	 * se transmiten los datos.
 	 * 
 	 * @param ID del equipo origen
-	 * 
 	 * @param ID del equipo destino
-	 * 
 	 * @return lista de IDs de los equipos que forman el camino, null si no existe
 	 * camino
 	 */
@@ -91,11 +109,10 @@ public class Calculo {
 		return resultado;
 	}
 
-	/*
+	/**
 	 * Realizar un ping a un equipo
 	 * 
 	 * @param ID del equipo
-	 * 
 	 * @return true si está activo, false si está inactivo
 	 */
 	public boolean ping(String destino) {
@@ -105,11 +122,10 @@ public class Calculo {
 		return false;
 	}
 
-	/*
+	/**
 	 * Realizar un ping a una lista de equipos
 	 * 
 	 * @param lista de "ID" de equipos
-	 * 
 	 * @return Mapa con entries "ID" -> true/false segun su actividad
 	 */
 	public Map<String, Boolean> rangoPing(List<String> ids) {

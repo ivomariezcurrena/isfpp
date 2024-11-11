@@ -17,24 +17,44 @@ import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoCable;
 import com.example.red.modelo.TipoPuerto;
 
+/**
+ * DAO para las conexiones en archivos de texto
+ */
 public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
+    /** Lista de conexiones */
     private List<Conexion> list;
+
+    /** Nombre del archivo de texto */
     private String name;
+
+    /** Mapa de equipos */
     private TreeMap<String, Equipo> equipos;
+
+    /** Mapa de tipos de cables */
     private TreeMap<String, TipoCable> cables;
+
+    /** Mapa de tipos de puertos */
     private TreeMap<String, TipoPuerto> puertos;
+
+    /** Bandera de actualización */
     private boolean actualizar;
 
+    /** Constructor */
     public ConexionSecuancialDAO() {
         equipos = cargarEquipos();
         cables = cargarCables();
-        puertos= cargarPuertos();
+        puertos = cargarPuertos();
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
         name = rb.getString("conexion");
         actualizar = true;
     }
 
-
+    /**
+     * Lee las conexiones entre equipos desde el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @return lista de conexiones
+     */
     private List<Conexion> readFromFile(String file) {
         List<Conexion> list = new ArrayList<>();
         Scanner inFile = null;
@@ -47,7 +67,7 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
                 e.setTipoPuerto1(puertos.get(inFile.next()));
                 e.setEquipo2(equipos.get(inFile.next()));
                 e.setTipoPuerto2(puertos.get(inFile.next()));
-                e.setTipocable(cables.get(inFile.next()));    
+                e.setTipocable(cables.get(inFile.next()));
                 list.add(e);
             }
         } catch (FileNotFoundException fileNotFoundException) {
@@ -66,12 +86,19 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
         return list;
     }
 
+    /**
+     * Escribe las conexiones entre equipos en el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @param list lista de conexiones
+     */
     private void writeToFile(List<Conexion> list, String file) {
         Formatter outFile = null;
         try {
             outFile = new Formatter(name);
             for (Conexion e : list) {
-                outFile.format("%s;%s;\n", e.getEquipo1(), e.getEquipo2(), e.getTipocable(), e.getTipoPuerto1(),e.getTipoPuerto2());
+                outFile.format("%s;%s;\n", e.getEquipo1(), e.getEquipo2(), e.getTipocable(), e.getTipoPuerto1(),
+                        e.getTipoPuerto2());
             }
         } catch (FileNotFoundException fileNotFoundException) {
             System.err.println("Error creating file.");
@@ -120,19 +147,33 @@ public class ConexionSecuancialDAO implements GenericDAO<String, Conexion> {
         return map;
     }
 
+    /**
+     * Carga los equipos
+     * 
+     * @return mapa de equipos
+     */
     private TreeMap<String, Equipo> cargarEquipos() {
         EquipoSecuencialDAO equipoDAO = new EquipoSecuencialDAO();
         TreeMap<String, Equipo> ds = equipoDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga los tipos de cables
+     * 
+     * @return mapa de tipos de cables
+     */
     private TreeMap<String, TipoCable> cargarCables() {
         TipoCableSecuencialDAO cableDAO = new TipoCableSecuencialDAO();
         TreeMap<String, TipoCable> ds = cableDAO.buscarTodos();
         return ds;
     }
 
-    
+    /**
+     * Carga los tipos de puertos
+     * 
+     * @return mapa de tipos de puertos
+     */
     private TreeMap<String, TipoPuerto> cargarPuertos() {
         TipoPuertoSecuencialDAO puertoDAO = new TipoPuertoSecuencialDAO();
         TreeMap<String, TipoPuerto> ds = puertoDAO.buscarTodos();

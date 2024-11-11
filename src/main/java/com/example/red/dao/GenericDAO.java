@@ -2,12 +2,36 @@ package com.example.red.dao;
 
 import java.util.TreeMap;
 
+/**
+ * Interfaz que declara los métodos de forma genérica, que deben implementar los
+ * DAO
+ */
 public interface GenericDAO<T, K> {
-    void insertar(K entidad); // Inserta una entidad
+    /**
+     * Insertar un objeto
+     * 
+     * @param entidad
+     */
+    void insertar(K entidad); 
 
-    void actualizar(K entidad); // Actualiza una entidad
+    /**
+     * Actualizar un objeto
+     * 
+     * @param entidad
+     */
+    void actualizar(K entidad);
 
-    void borrar(K entidad); // Borra una entidad
+    /**
+     * Borrar un objeto
+     * 
+     * @param entidad
+     */
+    void borrar(K entidad); 
 
-    TreeMap<T, K> buscarTodos(); // Busca y devuelve todas las entidades en un TreeMap
+    /**
+     * Buscar y retornar todos los objetos en un mapa
+     * 
+     * @return mapa de objetos
+     */
+    TreeMap<T, K> buscarTodos();
 }

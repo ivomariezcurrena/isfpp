@@ -8,22 +8,36 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.TreeMap;
-
 import com.example.red.dao.GenericDAO;
-
 import com.example.red.modelo.Ubicacion;
 
+/**
+ * DAO para las ubicaciones en archivos de texto
+ */
 public class UbicacionSecuencialDAO implements GenericDAO<String, Ubicacion> {
+
+    /** Mapa de ubicaciones */
     private TreeMap<String, Ubicacion> map;
+
+    /** Nombre del archivo de texto */
     private String name;
+
+    /** Bandera de actualización */
     private boolean actualizar;
 
+    /** Constructor */
     public UbicacionSecuencialDAO() {
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
         name = rb.getString("ubicacion");
         actualizar = true;
     }
 
+    /**
+     * Lee las ubicaciones desde el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @return mapa de ubicaciones
+     */
     private TreeMap<String, Ubicacion> readFromFile(String file) {
         TreeMap<String, Ubicacion> map = new TreeMap<>();
         Scanner inFile = null;
@@ -51,6 +65,12 @@ public class UbicacionSecuencialDAO implements GenericDAO<String, Ubicacion> {
         return map;
     }
 
+    /**
+     * Escribe ubicaciones en el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @param map  mapa de ubicaciones
+     */
     private void writeToFile(TreeMap<String, Ubicacion> map, String file) {
         Formatter outFile = null;
         try {

@@ -6,9 +6,15 @@ import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoCable;
 
+/**
+ * Implementación de la interfaz TipoCableService
+ */
 public class TipoCableServiceImpl implements TipoCableService {
+
+    /** DAO para los tipos de cable */
     private GenericDAO<String, TipoCable> tipoCableDAO;
 
+    /** Constructor */
     public TipoCableServiceImpl() {
         tipoCableDAO =Factory.getInstancia("TIPOCABLE");
     }

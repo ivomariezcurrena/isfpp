@@ -13,12 +13,23 @@ import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
 
+/**
+ * DAO para los equipos en base de datos
+ */
 public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
+    /** Conexion con la base de datos */
     private Connection conexion;
+
+    /** Mapa de tipos de puertos */
     private TreeMap<String, TipoPuerto> puertos;
+
+    /** Mapa de tipos de equipos */
     private TreeMap<String, TipoEquipo> tipoEquipos;
+
+    /** Mapa de ubicaciones */
     private TreeMap<String, Ubicacion> ubicaciones;
 
+    /** Constructor */
     public EquipoSqlDAO() {
         puertos = cargarPuertos();
         tipoEquipos = cargarEquipos();
@@ -26,73 +37,73 @@ public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
         this.conexion = ConexionBD.getInstance().getConnection();
     }
 
-   public void insertar(Equipo equipo) {
-    String sqlEquipo = "INSERT INTO poo2024.Equipo_ivoma (codigo, descripcion, marca, modelo, tipoequipo_codigo, ubicacion_codigo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    String sqlPuerto = "INSERT INTO poo2024.Puerto_ivoma (equipo_codigo, tipopuerto_id, cantidad) VALUES (?, ?, ?)";
-    String sqlIP = "INSERT INTO poo2024.DireccionIP_ivoma (equipo_codigo, direccion_ip) VALUES (?, ?)";
-    
-    try {
-        // Inicia una transacción
-        conexion.setAutoCommit(false);
-        
-        // Inserta en la tabla Equipo
-        try (PreparedStatement pstEquipo = conexion.prepareStatement(sqlEquipo)) {
-            pstEquipo.setString(1, equipo.getCodigo());
-            pstEquipo.setString(2, equipo.getDescripcion());
-            pstEquipo.setString(3, equipo.getMarca());
-            pstEquipo.setString(4, equipo.getModelo());
-            pstEquipo.setString(5, equipo.getTipoEquipo().getCodigo());
-            pstEquipo.setString(6, equipo.getUbicacion().getCodigo());
-            pstEquipo.setBoolean(7, equipo.isActivo());
-            pstEquipo.executeUpdate();
-        }
+    public void insertar(Equipo equipo) {
+        String sqlEquipo = "INSERT INTO poo2024.Equipo_ivoma (codigo, descripcion, marca, modelo, tipoequipo_codigo, ubicacion_codigo, activo) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sqlPuerto = "INSERT INTO poo2024.Puerto_ivoma (equipo_codigo, tipopuerto_id, cantidad) VALUES (?, ?, ?)";
+        String sqlIP = "INSERT INTO poo2024.DireccionIP_ivoma (equipo_codigo, direccion_ip) VALUES (?, ?)";
 
-        // Inserta en la tabla Puerto
-        try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlPuerto)) {
-            for (Object[] puertoInfo : equipo.getPuertosInfo()) {
-                TipoPuerto tipoPuertoId = (TipoPuerto) puertoInfo[0];
-                int cantidad = (int) puertoInfo[1];
-                pstPuerto.setString(1, equipo.getCodigo());
-                pstPuerto.setString(2, tipoPuertoId.getCodigo());
-                pstPuerto.setInt(3, cantidad);
-                pstPuerto.addBatch();
-            }
-            pstPuerto.executeBatch(); // Ejecuta el batch insert para puertos
-        }
-
-        // Inserta en la tabla Direccion IP
-        try (PreparedStatement pstIP = conexion.prepareStatement(sqlIP)) {
-            for (String ip : equipo.getDireccionesIP()) {
-                pstIP.setString(1, equipo.getCodigo());
-                pstIP.setString(2, ip);
-                pstIP.addBatch();
-            }
-            pstIP.executeBatch(); // Ejecuta el batch insert para IPs
-        }
-
-        // Commit de la transacción
-        conexion.commit();
-    } catch (SQLException e) {
-        e.printStackTrace();
         try {
-            // Rollback en caso de error
-            if (conexion != null) {
-                conexion.rollback();
+            // Inicia una transacción
+            conexion.setAutoCommit(false);
+
+            // Inserta en la tabla Equipo
+            try (PreparedStatement pstEquipo = conexion.prepareStatement(sqlEquipo)) {
+                pstEquipo.setString(1, equipo.getCodigo());
+                pstEquipo.setString(2, equipo.getDescripcion());
+                pstEquipo.setString(3, equipo.getMarca());
+                pstEquipo.setString(4, equipo.getModelo());
+                pstEquipo.setString(5, equipo.getTipoEquipo().getCodigo());
+                pstEquipo.setString(6, equipo.getUbicacion().getCodigo());
+                pstEquipo.setBoolean(7, equipo.isActivo());
+                pstEquipo.executeUpdate();
             }
-        } catch (SQLException rollbackEx) {
-            rollbackEx.printStackTrace();
-            throw new RuntimeException("Error al realizar rollback de la transacción", rollbackEx);
-        }
-        throw new RuntimeException("Error al insertar equipo y sus datos asociados", e);
-    } finally {
-        try {
-            // Restaurar el auto-commit
-            conexion.setAutoCommit(true);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+
+            // Inserta en la tabla Puerto
+            try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlPuerto)) {
+                for (Object[] puertoInfo : equipo.getPuertosInfo()) {
+                    TipoPuerto tipoPuertoId = (TipoPuerto) puertoInfo[0];
+                    int cantidad = (int) puertoInfo[1];
+                    pstPuerto.setString(1, equipo.getCodigo());
+                    pstPuerto.setString(2, tipoPuertoId.getCodigo());
+                    pstPuerto.setInt(3, cantidad);
+                    pstPuerto.addBatch();
+                }
+                pstPuerto.executeBatch(); // Ejecuta el batch insert para puertos
+            }
+
+            // Inserta en la tabla Direccion IP
+            try (PreparedStatement pstIP = conexion.prepareStatement(sqlIP)) {
+                for (String ip : equipo.getDireccionesIP()) {
+                    pstIP.setString(1, equipo.getCodigo());
+                    pstIP.setString(2, ip);
+                    pstIP.addBatch();
+                }
+                pstIP.executeBatch(); // Ejecuta el batch insert para IPs
+            }
+
+            // Commit de la transacción
+            conexion.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                // Rollback en caso de error
+                if (conexion != null) {
+                    conexion.rollback();
+                }
+            } catch (SQLException rollbackEx) {
+                rollbackEx.printStackTrace();
+                throw new RuntimeException("Error al realizar rollback de la transacción", rollbackEx);
+            }
+            throw new RuntimeException("Error al insertar equipo y sus datos asociados", e);
+        } finally {
+            try {
+                // Restaurar el auto-commit
+                conexion.setAutoCommit(true);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
-}
 
     @Override
     public void actualizar(Equipo equipo) {
@@ -116,13 +127,13 @@ public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
             for (Object[] puertoInfo : equipo.getPuertosInfo()) {
                 TipoPuerto tipoPuerto = (TipoPuerto) puertoInfo[0];
                 int cantidad = (int) puertoInfo[1]; // Usamos la cantidad del equipo
-            
+
                 // Verificar si el puerto ya existe en la base de datos
                 try (PreparedStatement pstSelect = conexion.prepareStatement(sqlSelectPuerto)) {
                     pstSelect.setString(1, equipo.getCodigo());
                     pstSelect.setString(2, tipoPuerto.getCodigo());
                     ResultSet rs = pstSelect.executeQuery();
-            
+
                     if (rs.next()) {
                         // Actualizar si ya existe
                         try (PreparedStatement pstPuerto = conexion.prepareStatement(sqlUpdatePuerto)) {
@@ -245,18 +256,33 @@ public class EquipoSqlDAO implements GenericDAO<String, Equipo> {
         return map;
     }
 
+    /**
+     * Carga los tipos de puertos
+     * 
+     * @return mapa de tipos de puertos
+     */
     private TreeMap<String, TipoPuerto> cargarPuertos() {
         TipoPuertoSqlDAO tipoPuertosqlDAO = new TipoPuertoSqlDAO();
         TreeMap<String, TipoPuerto> ds = tipoPuertosqlDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga los tipos de equipos
+     * 
+     * @return mapa de equipos
+     */
     private TreeMap<String, TipoEquipo> cargarEquipos() {
         TipoEquipoSqlDAO tipoEquipoSqlDAO = new TipoEquipoSqlDAO();
         TreeMap<String, TipoEquipo> ds = tipoEquipoSqlDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga las ubicaciones
+     * 
+     * @return mapa de ubicaciones
+     */
     private TreeMap<String, Ubicacion> cargarUbicaciones() {
         UbicacionSqlDAO ubicacionesSqlDAO = new UbicacionSqlDAO();
         TreeMap<String, Ubicacion> ds = ubicacionesSqlDAO.buscarTodos();

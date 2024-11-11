@@ -11,21 +11,36 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.TreeMap;
-
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.Equipo;
 import com.example.red.modelo.TipoEquipo;
 import com.example.red.modelo.TipoPuerto;
 import com.example.red.modelo.Ubicacion;
 
+/**
+ * DAO para los equipos en archivos de texto
+ */
 public class EquipoSecuencialDAO implements GenericDAO<String, Equipo> {
+
+    /** Lista de equipos */
     private List<Equipo> list;
+
+    /** Nombre del archivo de texto */
     private String name;
+
+    /** Mapa de tipos de puertos */
     private TreeMap<String, TipoPuerto> puertos;
+
+    /** Mapa de tipos de equipos */
     private TreeMap<String, TipoEquipo> equipos;
+
+    /** Mapa de ubicaciones */
     private TreeMap<String, Ubicacion> ubicaciones;
+
+    /** Bandera de actualización */
     private boolean actualizar;
 
+    /** Constructor */
     public EquipoSecuencialDAO() {
         puertos = cargarPuertos();
         equipos = cargarEquipos();
@@ -35,6 +50,12 @@ public class EquipoSecuencialDAO implements GenericDAO<String, Equipo> {
         actualizar = true;
     }
 
+    /**
+     * Lee los equipos desde el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @return lista de equipos
+     */
     private List<Equipo> readFromFile(String file) {
         List<Equipo> list = new ArrayList<>();
         Scanner inFile = null;
@@ -80,6 +101,12 @@ public class EquipoSecuencialDAO implements GenericDAO<String, Equipo> {
         return list;
     }
 
+    /**
+     * Escribe los equipos en el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @param list lista de equipos
+     */
     private void writeToFile(List<Equipo> list, String file) {
         Formatter outFile = null;
         try {
@@ -133,18 +160,33 @@ public class EquipoSecuencialDAO implements GenericDAO<String, Equipo> {
         return map;
     }
 
+    /**
+     * Carga los tipos de puertos
+     * 
+     * @return mapa de tipos de puertos
+     */
     private TreeMap<String, TipoPuerto> cargarPuertos() {
         TipoPuertoSecuencialDAO tipoPuertoDAO = new TipoPuertoSecuencialDAO();
         TreeMap<String, TipoPuerto> ds = tipoPuertoDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga los tipos de equipos
+     * 
+     * @return mapa de equipos
+     */
     private TreeMap<String, TipoEquipo> cargarEquipos() {
         TipoEquipoSecuencialDAO tipoEquipoDAO = new TipoEquipoSecuencialDAO();
         TreeMap<String, TipoEquipo> ds = tipoEquipoDAO.buscarTodos();
         return ds;
     }
 
+    /**
+     * Carga las ubicaciones
+     * 
+     * @return mapa de ubicaciones
+     */
     private TreeMap<String, Ubicacion> cargarUbicaciones() {
         UbicacionSecuencialDAO ubicacionesDAO = new UbicacionSecuencialDAO();
         TreeMap<String, Ubicacion> ds = ubicacionesDAO.buscarTodos();

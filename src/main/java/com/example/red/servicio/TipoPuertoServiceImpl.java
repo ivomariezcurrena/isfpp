@@ -1,14 +1,19 @@
 package com.example.red.servicio;
 
 import java.util.TreeMap;
-
 import com.example.red.conexion.Factory;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoPuerto;
 
+/**
+ * Implementación de la interfaz TipoPuertoService
+ */
 public class TipoPuertoServiceImpl implements TipoPuertoService {
+
+    /** DAO para los tipos de puertos */
     private GenericDAO<String, TipoPuerto> tipoPuertoDAO;
 
+    /** Constructor */
     public TipoPuertoServiceImpl() {
         tipoPuertoDAO =Factory.getInstancia("TIPOPUERTO");
     }

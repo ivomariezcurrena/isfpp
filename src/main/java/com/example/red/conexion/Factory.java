@@ -2,10 +2,24 @@ package com.example.red.conexion;
 
 import java.util.Hashtable;
 import java.util.ResourceBundle;
-
+/**
+ * Instancia y retorna los DAO para cada tipo de componente de la
+ * red. creándolos en caso de no existir
+ */
 public class Factory {
+		/** Tabla de referencias de las instancias */
 	private static Hashtable<String, Object> instancias = new Hashtable<>();
 
+		/**
+	 * Permite obtener las referencias de los DAO. Si se le pide un
+	 * objeto que no existe, intenta agregarlo usando un constructor sin
+	 * parámetros
+	 * 
+	 * @param <T>
+	 * @param objName nombre del objeto
+	 * @return referencia
+	 */
+	@SuppressWarnings({ "unchecked" })
 	public static <T> T getInstancia(String objName) {
 		try {
 			// Verifico si existe un objeto relacionado a objName en la hashtable

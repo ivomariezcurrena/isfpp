@@ -11,9 +11,15 @@ import com.example.red.conexion.ConexionBD;
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoPuerto;
 
+/**
+ * DAO para los tipos de puertos en base de datos
+ */
 public class TipoPuertoSqlDAO implements GenericDAO<String, TipoPuerto> {
-    private Connection conexion;
 
+    /** Conexion con la base de datos */
+    private Connection conexion;
+    
+    /** Constructor */
     public TipoPuertoSqlDAO() {
         this.conexion = ConexionBD.getInstance().getConnection();
     }

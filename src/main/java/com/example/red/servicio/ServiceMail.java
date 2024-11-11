@@ -1,7 +1,6 @@
 package com.example.red.servicio;
 
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -12,7 +11,20 @@ import javax.mail.internet.MimeMessage;
 
 import com.example.red.modelo.ModelMessage;
 
+/**
+ * Provee métodos para enviar emails a direcciones de correo
+ * 
+ */
 public class ServiceMail {
+
+    /**
+     * Permite enviar un email a una dirección de correo, con un código de
+     * verificación para el inicio de sesión
+     * 
+     * @param toEmail dirección de correo
+     * @param code    código de verificación
+     * @return estado del envio
+     */
     public ModelMessage sendMain(String toEmail, String code) {
         ModelMessage ms = new ModelMessage(false, "");
         String from = "reduniversidadpsjb@gmail.com";
@@ -24,8 +36,8 @@ public class ServiceMail {
 
         // Credenciales del correo
 
-        String username = "reduniversidadpsjb@gmail.com"; 
-        String password = "igqzqukgxerlgjgx"; 
+        String username = "reduniversidadpsjb@gmail.com";
+        String password = "igqzqukgxerlgjgx";
 
         // Crear la sesión de correo
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {

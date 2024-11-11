@@ -8,21 +8,36 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.TreeMap;
-
 import com.example.red.dao.GenericDAO;
 import com.example.red.modelo.TipoCable;
 
+/**
+ * DAO para los tipos de cables en archivos de texto
+ */
 public class TipoCableSecuencialDAO implements GenericDAO<String, TipoCable> {
+
+    /** Mapa de tipos de cables */
     private TreeMap<String, TipoCable> map;
+
+    /** Nombre del archivo de texto */
     private String name;
+
+    /** Bandera de actualización */
     private boolean actualizar;
 
+    /** Constructor */
     public TipoCableSecuencialDAO() {
         ResourceBundle rb = ResourceBundle.getBundle("secuencial");
         name = rb.getString("tipoCable");
         actualizar = true;
     }
 
+    /**
+     * Lee los tipos de cables desde el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @return mapa de tipos de cables
+     */
     private TreeMap<String, TipoCable> readFromFile(String file) {
         TreeMap<String, TipoCable> map = new TreeMap<>();
         Scanner inFile = null;
@@ -51,6 +66,12 @@ public class TipoCableSecuencialDAO implements GenericDAO<String, TipoCable> {
         return map;
     }
 
+    /**
+     * Escribe los tipos de cables en el archivo de texto
+     * 
+     * @param file nombre del archivo
+     * @param map mapa de tipos de cables
+     */
     private void writeToFile(TreeMap<String, TipoCable> map, String file) {
         Formatter outFile = null;
         try {
@@ -101,5 +122,4 @@ public class TipoCableSecuencialDAO implements GenericDAO<String, TipoCable> {
         }
         return map;
     }
-
 }

@@ -114,6 +114,8 @@
             <groupId>FlatLaf</groupId>
             <artifactId>FlatLaf</artifactId>
             <version>3.5.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/flatlaf-3.5.2.jar</systemPath>
         </dependency>
     </dependencies>
     <build>
