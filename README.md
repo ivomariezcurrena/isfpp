@@ -1,6 +1,6 @@
 # 🖧 Sistema de Detección y Gestión de Redes
 
-📄 [Descargar Manual de Usuario y Desarrollo (PDF)](docs/Alcance,%20Manual%20de%20Desarrollo%20y%20Usuario.pdf)
+📄 [Descargar Manual de Usuario y Desarrollo (PDF)](Alcance%2C%20Manual%20de%20Desarrollo%20y%20Usuario.pdf)
 
 Proyecto desarrollado como parte de la **Instancia Supervisada de Formación Práctica Profesional** de la carrera **Licenciatura en Informática** en la Facultad de Ingeniería, UNPSJB.
 
